@@ -16,7 +16,7 @@ class IndexerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             doc = root / "sample.html"
-            doc.write_text('<title> Sample Resource </title><meta name="description" content="A useful guide."><meta name="tags" content="Planning, Research; planning"><meta name="keywords" content="Corps, formulation">', encoding="utf-8")
+            doc.write_text('<title> Sample Resource </title><meta name="description" content="A useful guide."><meta name="tags" content="Planning, Research; planning"><meta name="keywords" content="Corps, formulation"><svg><title>Decorative graphic title</title></svg>', encoding="utf-8")
             data = extract_metadata(doc, "nested/sample.html")
             self.assertEqual(data["title"], "Sample Resource")
             self.assertEqual(data["description"], "A useful guide.")
