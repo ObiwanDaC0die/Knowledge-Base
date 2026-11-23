@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A searchable, automatically indexed knowledge library.">
+  <title>Knowledge Library</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fbfbfc;
+      --surface: #ffffff;
+      --text: #1d2430;
+      --muted: #667085;
+      --line: #d9dee7;
+      --accent: #2457a6;
+      --accent-soft: #e9f0fb;
+      --tag: #eef2f7;
+      --focus: #e77b15;
+      --danger: #a32d2d;
+      --radius: .45rem;
+      --shadow: 0 1px 2px rgba(16, 24, 40, .05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #11151c;
+        --surface: #171d26;
+        --text: #eef2f8;
+        --muted: #aeb8c7;
+        --line: #313b4b;
+        --accent: #94baff;
+        --accent-soft: #223a61;
+        --tag: #273140;
+        --focus: #ffc66d;
+        --danger: #ffaaa4;
+        --shadow: none;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 20rem;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    .skip-link {
+      position: absolute; left: .75rem; top: -4rem; z-index: 10;
+      background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius);
+      padding: .5rem .75rem;
+    }
+    .skip-link:focus { top: .75rem; }
+    .page { width: min(100% - 2rem, 72rem); margin-inline: auto; padding: 2.5rem 0 4rem; }
+    .masthead { display: flex; gap: 1rem; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+    h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.025em; }
+    .count { color: var(--muted); font-size: .95rem; white-space: nowrap; }
+    .count strong { color: var(--text); font-variant-numeric: tabular-nums; }
+    .controls { display: grid; gap: .75rem; margin-bottom: 1rem; }
+    .search-wrap { position: relative; }
+    .search-wrap input {
+      width: 100%; min-height: 2.85rem; padding: .65rem 2.8rem .65rem .8rem;
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .clear-search {
+      position: absolute; top: 50%; right: .35rem; transform: translateY(-50%);
+      display: none; border: 0; border-radius: .3rem; background: transparent; padding: .35rem .5rem; cursor: pointer;
+    }
+    .clear-search.visible { display: block; }
+    .clear-search:hover { background: var(--tag); }
+    .toolbar { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+    .button, .view-button, .letter, .tag-button, .favorite-button {
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); cursor: pointer;
+    }
+    .button, .view-button { min-height: 2.35rem; padding: .38rem .7rem; }
+    .button:hover, .view-button:hover, .letter:hover, .tag-button:hover { border-color: var(--accent); }
+    .button:disabled { cursor: wait; opacity: .65; }
+    .view-button[aria-pressed="true"], .tag-button[aria-pressed="true"], .mode-button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+    .toolbar-spacer { flex: 1 1 auto; }
+    .filter-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: .8rem; }
+    .filter-panel[hidden] { display: none; }
+    .filter-top { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .filter-title { margin: 0; font-size: .95rem; }
+    .match-options { display: inline-flex; gap: .25rem; align-items: center; font-size: .85rem; color: var(--muted); }
+    .mode-button { border: 1px solid var(--line); background: var(--surface); padding: .25rem .45rem; border-radius: .3rem; cursor: pointer; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .7rem; }
+    .tag-button { padding: .25rem .5rem; font-size: .85rem; background: var(--tag); }
+    .reset-filters { border: 0; background: transparent; color: var(--accent); text-decoration: underline; padding: .25rem; cursor: pointer; }
+    .az-nav { display: flex; flex-wrap: wrap; gap: .25rem; align-items: center; padding: .75rem 0 1rem; border-bottom: 1px solid var(--line); }
+    .letter { min-width: 2rem; min-height: 2rem; padding: .2rem; font-weight: 650; background: transparent; }
+    .letter:disabled { color: var(--muted); border-color: transparent; cursor: not-allowed; opacity: .55; }
+    .letter-symbol { min-width: 2.4rem; }
+    .library-status { min-height: 1.5rem; margin: .7rem 0; color: var(--muted); font-size: .9rem; }
+    .library-status.error { color: var(--danger); }
+    .active-summary { margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
+    .active-summary:empty { display: none; }
+    .directory { min-height: 15rem; }
+    .section { scroll-margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.2rem; }
+    .section:first-child { margin-top: 0; }
+    .section-heading { margin: 0 0 .35rem; font-size: 1.1rem; }
+    .entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; padding: .78rem 0; border-bottom: 1px solid var(--line); }
+    .entry-main { min-width: 0; }
+    .document-link { font-weight: 650; text-decoration: none; }
+    .document-link:hover, .document-link:focus-visible { color: var(--accent); text-decoration: underline; }
+    .description { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
+    .entry-tags { display: flex; gap: .3rem; flex-wrap: wrap; margin-top: .4rem; }
+    .tag { display: inline-block; background: var(--tag); border-radius: 999px; padding: .08rem .45rem; color: var(--muted); font-size: .78rem; }
+    .favorite-button { align-self: start; width: 2.35rem; height: 2.35rem; padding: 0; font-size: 1.25rem; background: transparent; }
+    .favorite-button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+    .empty-state, .loading-state { margin: 2rem 0; padding: 1.1rem; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); }
+    .empty-state h2 { color: var(--text); font-size: 1.05rem; margin: 0 0 .25rem; }
+    .empty-state p { margin: 0 0 .75rem; }
+    .updated { margin-top: 1.75rem; color: var(--muted); font-size: .8rem; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    @media (max-width: 36rem) {
+      .page { width: min(100% - 1.25rem, 72rem); padding-top: 1.35rem; }
+      .masthead { align-items: flex-start; flex-direction: column; gap: .1rem; }
+      .toolbar-spacer { display: none; }
+      .refresh { margin-left: auto; }
+      .letter { min-width: 1.82rem; }
+      .entry { gap: .4rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#directory">Skip to directory</a>
+  <main class="page">
+    <header class="masthead">
+      <h1>Knowledge Library</h1>
+      <div class="count" id="document-count" aria-live="polite">Loading library…</div>
+    </header>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <label class="sr-only" for="search-input">Search library documents</label>
+        <input id="search-input" type="search" autocomplete="off" placeholder="Search topics, tags, keywords…" aria-describedby="search-help">
+        <button class="clear-search" id="clear-search" type="button" aria-label="Clear search">Clear</button>
+        <span class="sr-only" id="search-help">Searches document titles, descriptions, tags, and keywords as you type.</span>
+      </div>
+
+      <div class="toolbar" aria-label="Library controls">
+        <button class="view-button" id="all-topics" type="button" aria-pressed="true">All Topics</button>
+        <button class="view-button" id="favorites-view" type="button" aria-pressed="false">Favorites</button>
+        <button class="view-button" id="tags-toggle" type="button" aria-expanded="false" aria-controls="tag-filters">Tags</button>
+        <span class="toolbar-spacer"></span>
+        <button class="button refresh" id="refresh-library" type="button">Refresh Library</button>
+      </div>
+
+      <section class="filter-panel" id="tag-filters" hidden aria-labelledby="filter-title">
+        <div class="filter-top">
+          <h2 class="filter-title" id="filter-title">Filter by tag</h2>
+          <div class="match-options" role="group" aria-label="Tag matching mode">
+            <span>Match:</span>
+            <button class="mode-button" id="or-mode" type="button" aria-pressed="true">Any</button>
+            <button class="mode-button" id="and-mode" type="button" aria-pressed="false">All</button>
+            <button class="reset-filters" id="reset-filters" type="button">Reset filters</button>
+          </div>
+        </div>
+        <div class="tag-list" id="tag-list" aria-label="Available tags"></div>
+      </section>
+    </div>
+
+    <nav class="az-nav" id="az-nav" aria-label="Jump to alphabetical section"></nav>
+    <p class="library-status" id="library-status" role="status" aria-live="polite"></p>
+    <p class="active-summary" id="active-summary"></p>
+    <section class="directory" id="directory" aria-live="polite" aria-busy="true"></section>
+    <footer class="updated" id="updated-at"></footer>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const INDEX_URL = 'index.json';
+      const FAVORITES_KEY = 'knowledge-library:favorites';
+      const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+      const ui = {
+        count: document.getElementById('document-count'), search: document.getElementById('search-input'),
+        clearSearch: document.getElementById('clear-search'), allTopics: document.getElementById('all-topics'),
+        favoritesView: document.getElementById('favorites-view'), tagsToggle: document.getElementById('tags-toggle'),
+        filterPanel: document.getElementById('tag-filters'), tagList: document.getElementById('tag-list'),
+        orMode: document.getElementById('or-mode'), andMode: document.getElementById('and-mode'),
+        reset: document.getElementById('reset-filters'), refresh: document.getElementById('refresh-library'),
+        azNav: document.getElementById('az-nav'), status: document.getElementById('library-status'),
+        summary: document.getElementById('active-summary'), directory: document.getElementById('directory'), updated: document.getElementById('updated-at')
+      };
+      const state = {
+        documents: [], favorites: loadFavorites(), search: '', selectedTags: new Set(), favoritesOnly: false,
+        matchMode: 'or', generatedAt: '', fingerprint: '', loaded: false
+      };
+
+      function loadFavorites() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+          return new Set(Array.isArray(saved) ? saved.filter(item => typeof item === 'string') : []);
+        } catch { return new Set(); }
+      }
+      function saveFavorites() { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...state.favorites])); }
+      function normalizeText(value) { return typeof value === 'string' ? value.trim().replace(/\s+/g, ' ') : ''; }
+      function normalizeTerms(value) {
+        const raw = Array.isArray(value) ? value : (typeof value === 'string' ? value.split(',') : []);
+        const seen = new Set();
+        return raw.map(normalizeText).filter(Boolean).filter(term => {
+          const key = term.toLocaleLowerCase();
+          if (seen.has(key)) return false;
+          seen.add(key); return true;
+        });
+      }
+      function isSafeRelativePath(path) {
+        if (typeof path !== 'string' || !path.trim() || /^[a-z][a-z0-9+.-]*:/i.test(path) || path.startsWith('//')) return false;
+        try {
+          const url = new URL(path, document.baseURI);
+          return url.origin === location.origin && /\.html?$/i.test(url.pathname);
+        } catch { return false; }
+      }
+      function validateIndex(payload) {
+        const source = Array.isArray(payload) ? { documents: payload } : payload;
+        if (!source || typeof source !== 'object' || !Array.isArray(source.documents)) throw new Error('The published index is missing a documents array.');
+        const ids = new Set(), paths = new Set();
+        const documents = source.documents.map((entry, position) => {
+          if (!entry || typeof entry !== 'object') throw new Error(`Document ${position + 1} is not a valid object.`);
+          const id = normalizeText(entry.id), title = normalizeText(entry.title), path = normalizeText(entry.path);
+          if (!id || !title || !isSafeRelativePath(path)) throw new Error(`Document ${position + 1} has an invalid id, title, or path.`);
+          if (ids.has(id)) throw new Error(`The published index contains duplicate document id: ${id}.`);
+          if (paths.has(path)) throw new Error(`The published index contains duplicate document path: ${path}.`);
+          ids.add(id); paths.add(path);
+          const tags = normalizeTerms(entry.tags), keywords = normalizeTerms(entry.keywords);
+          return { id, title, path, tags, keywords, description: normalizeText(entry.description) };
+        });
+        documents.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', numeric: true }) || a.path.localeCompare(b.path));
+        return { documents, generatedAt: normalizeText(source.generatedAt || source.generated_at), fingerprint: JSON.stringify(documents) };
+      }
+      async function fetchIndex(forceRefresh = false) {
+        const requestUrl = forceRefresh ? `${INDEX_URL}${INDEX_URL.includes('?') ? '&' : '?'}_=${Date.now()}` : INDEX_URL;
+        const response = await fetch(requestUrl, { cache: forceRefresh ? 'no-store' : 'no-cache', headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`The published index could not be loaded (HTTP ${response.status}).`);
+        let payload;
+        try { payload = await response.json(); } catch { throw new Error('The published index is not valid JSON.'); }
+        return validateIndex(payload);
+      }
+      function applyIndex(index) {
+        const validIds = new Set(index.documents.map(doc => doc.id));
+        state.favorites = new Set([...state.favorites].filter(id => validIds.has(id)));
+        saveFavorites();
+        state.documents = index.documents;
+        state.generatedAt = index.generatedAt;
+        state.fingerprint = index.fingerprint;
+        state.selectedTags = new Set([...state.selectedTags].filter(tag => allTags().some(candidate => candidate.key === tag)));
+        state.loaded = true;
+        render();
+      }
+      function allTags() {
+        const map = new Map();
+        state.documents.forEach(doc => doc.tags.forEach(tag => {
+          const key = tag.toLocaleLowerCase();
+          if (!map.has(key)) map.set(key, tag);
+        }));
+        return [...map].map(([key, label]) => ({ key, label })).sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: 'base' }));
+      }
+      function visibleDocuments() {
+        const query = state.search.toLocaleLowerCase();
+        return state.documents.filter(doc => {
+          if (state.favoritesOnly && !state.favorites.has(doc.id)) return false;
+          const matchesSearch = !query || [doc.title, doc.description, ...doc.tags, ...doc.keywords].join(' ').toLocaleLowerCase().includes(query);
+          if (!matchesSearch) return false;
+          if (!state.selectedTags.size) return true;
+          const docTags = new Set(doc.tags.map(tag => tag.toLocaleLowerCase()));
+          return state.matchMode === 'and'
+            ? [...state.selectedTags].every(tag => docTags.has(tag))
+            : [...state.selectedTags].some(tag => docTags.has(tag));
+        });
+      }
+      function sectionKey(title) {
+        const first = title.trim().charAt(0).toLocaleUpperCase();
+        return /^[A-Z]$/.test(first) ? first : '#';
+      }
+      function setStatus(message, isError = false) {
+        ui.status.textContent = message;
+        ui.status.classList.toggle('error', isError);
+      }
+      function renderTags() {
+        const tags = allTags();
+        ui.tagList.replaceChildren();
+        if (!tags.length) { ui.tagList.textContent = 'No tags are available in the current index.'; return; }
+        tags.forEach(({ key, label }) => {
+          const button = document.createElement('button');
+          button.type = 'button'; button.className = 'tag-button'; button.textContent = label;
+          button.setAttribute('aria-pressed', String(state.selectedTags.has(key)));
+          button.addEventListener('click', () => {
+            state.selectedTags.has(key) ? state.selectedTags.delete(key) : state.selectedTags.add(key);
+            render();
+          });
+          ui.tagList.append(button);
+        });
+      }
+      function renderAZ(visible) {
+        const present = new Set(visible.map(doc => sectionKey(doc.title)));
+        ui.azNav.replaceChildren();
+        [...LETTERS, '#'].forEach(letter => {
+          const button = document.createElement('button');
+          button.type = 'button'; button.className = `letter${letter === '#' ? ' letter-symbol' : ''}`; button.textContent = letter;
+          const enabled = present.has(letter); button.disabled = !enabled;
+          button.setAttribute('aria-label', enabled ? `Jump to ${letter === '#' ? 'numbers and symbols' : letter}` : `No visible documents under ${letter}`);
+          if (enabled) button.addEventListener('click', () => document.getElementById(`section-${letter === '#' ? 'other' : letter}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+          ui.azNav.append(button);
+        });
+      }
+      function favoriteButton(doc) {
+        const button = document.createElement('button');
+        const isFavorite = state.favorites.has(doc.id);
+        button.type = 'button'; button.className = 'favorite-button'; button.textContent = isFavorite ? '★' : '☆';
+        button.setAttribute('aria-pressed', String(isFavorite));
+        button.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${doc.title} ${isFavorite ? 'from' : 'to'} favorites`);
+        button.addEventListener('click', () => {
+          isFavorite ? state.favorites.delete(doc.id) : state.favorites.add(doc.id);
+          saveFavorites(); render();
+        });
+        return button;
+      }
+      function createEntry(doc) {
+        const article = document.createElement('article'); article.className = 'entry';
+        const main = document.createElement('div'); main.className = 'entry-main';
+        const link = document.createElement('a'); link.className = 'document-link'; link.href = doc.path; link.textContent = doc.title;
+        main.append(link);
+        if (doc.description) { const description = document.createElement('p'); description.className = 'description'; description.textContent = doc.description; main.append(description); }
+        if (doc.tags.length) {
+          const tagRow = document.createElement('div'); tagRow.className = 'entry-tags'; tagRow.setAttribute('aria-label', 'Document tags');
+          doc.tags.forEach(tag => { const chip = document.createElement('span'); chip.className = 'tag'; chip.textContent = tag; tagRow.append(chip); });
+          main.append(tagRow);
+        }
+        article.append(main, favoriteButton(doc)); return article;
+      }
+      function renderDirectory(visible) {
+        ui.directory.replaceChildren(); ui.directory.setAttribute('aria-busy', 'false');
+        if (!state.loaded) { const loading = document.createElement('p'); loading.className = 'loading-state'; loading.textContent = 'Loading library…'; ui.directory.append(loading); return; }
+        if (!visible.length) {
+          const empty = document.createElement('div'); empty.className = 'empty-state';
+          const heading = document.createElement('h2'); heading.textContent = 'No matching documents';
+          const text = document.createElement('p'); text.textContent = 'Try changing your search, tags, or Favorites view.';
+          const reset = document.createElement('button'); reset.type = 'button'; reset.className = 'button'; reset.textContent = 'Reset directory filters'; reset.addEventListener('click', resetFilters);
+          empty.append(heading, text, reset); ui.directory.append(empty); return;
+        }
+        const groups = new Map();
+        visible.forEach(doc => { const key = sectionKey(doc.title); if (!groups.has(key)) groups.set(key, []); groups.get(key).push(doc); });
+        [...LETTERS, '#'].forEach(key => {
+          const docs = groups.get(key); if (!docs) return;
+          const section = document.createElement('section'); section.className = 'section'; section.id = `section-${key === '#' ? 'other' : key}`; section.setAttribute('aria-labelledby', `heading-${key === '#' ? 'other' : key}`);
+          const heading = document.createElement('h2'); heading.className = 'section-heading'; heading.id = `heading-${key === '#' ? 'other' : key}`; heading.textContent = key === '#' ? 'Numbers & Symbols' : key;
+          section.append(heading); docs.forEach(doc => section.append(createEntry(doc))); ui.directory.append(section);
+        });
+      }
+      function updateSummary(visible) {
+        const descriptors = [];
+        if (state.search) descriptors.push(`search: “${state.search}”`);
+        if (state.favoritesOnly) descriptors.push('Favorites');
+        if (state.selectedTags.size) {
+          const labels = allTags().filter(tag => state.selectedTags.has(tag.key)).map(tag => tag.label);
+          descriptors.push(`${state.matchMode === 'and' ? 'all tags' : 'any tag'}: ${labels.join(', ')}`);
+        }
+        ui.summary.textContent = descriptors.length ? `Showing ${visible.length} result${visible.length === 1 ? '' : 's'} — ${descriptors.join('; ')}.` : '';
+      }
+      function render() {
+        const visible = visibleDocuments();
+        const total = state.documents.length;
+        ui.count.innerHTML = `<strong>${state.loaded ? visible.length : '—'}</strong> ${state.loaded ? (visible.length === total ? `topic${total === 1 ? '' : 's'}` : `of ${total} topic${total === 1 ? '' : 's'}`) : ''}`;
+        ui.clearSearch.classList.toggle('visible', Boolean(state.search));
+        ui.allTopics.setAttribute('aria-pressed', String(!state.favoritesOnly));
+        ui.favoritesView.setAttribute('aria-pressed', String(state.favoritesOnly));
+        ui.orMode.setAttribute('aria-pressed', String(state.matchMode === 'or'));
+        ui.andMode.setAttribute('aria-pressed', String(state.matchMode === 'and'));
+        renderTags(); renderAZ(visible); updateSummary(visible); renderDirectory(visible);
+        ui.updated.textContent = state.generatedAt ? `Index generated: ${formatDate(state.generatedAt)}` : '';
+      }
+      function formatDate(value) { const date = new Date(value); return Number.isNaN(date.valueOf()) ? value : date.toLocaleString(); }
+      function resetFilters() {
+        state.search = ''; ui.search.value = ''; state.selectedTags.clear(); state.favoritesOnly = false; state.matchMode = 'or'; render();
+      }
+      async function loadInitialIndex() {
+        ui.directory.setAttribute('aria-busy', 'true');
+        try { applyIndex(await fetchIndex(false)); setStatus(''); }
+        catch (error) {
+          state.loaded = true; render();
+          setStatus(`${error.message} Check that index.json has been generated and published with this page.`, true);
+        }
+      }
+      async function refreshLibrary() {
+        ui.refresh.disabled = true; ui.refresh.textContent = 'Refreshing…'; setStatus('Refreshing the published library…');
+        try {
+          const index = await fetchIndex(true);
+          const unchanged = state.loaded && index.fingerprint === state.fingerprint;
+          applyIndex(index);
+          setStatus(unchanged ? 'Library is up to date.' : 'Library Updated');
+          ui.refresh.textContent = unchanged ? 'Refresh Library' : 'Library Updated';
+          window.setTimeout(() => { if (!ui.refresh.disabled) ui.refresh.textContent = 'Refresh Library'; }, 1800);
+        } catch (error) {
+          setStatus(`Unable to Refresh: ${error.message}`, true); ui.refresh.textContent = 'Unable to Refresh';
+          window.setTimeout(() => { if (!ui.refresh.disabled) ui.refresh.textContent = 'Refresh Library'; }, 2200);
+        } finally { ui.refresh.disabled = false; }
+      }
+      ui.search.addEventListener('input', event => { state.search = event.target.value.trim(); render(); });
+      ui.clearSearch.addEventListener('click', () => { state.search = ''; ui.search.value = ''; render(); ui.search.focus(); });
+      ui.allTopics.addEventListener('click', () => { state.favoritesOnly = false; render(); });
+      ui.favoritesView.addEventListener('click', () => { state.favoritesOnly = true; render(); });
+      ui.tagsToggle.addEventListener('click', () => {
+        const expanded = ui.tagsToggle.getAttribute('aria-expanded') === 'true';
+        ui.tagsToggle.setAttribute('aria-expanded', String(!expanded)); ui.filterPanel.hidden = expanded;
+      });
+      ui.orMode.addEventListener('click', () => { state.matchMode = 'or'; render(); });
+      ui.andMode.addEventListener('click', () => { state.matchMode = 'and'; render(); });
+      ui.reset.addEventListener('click', resetFilters);
+      ui.refresh.addEventListener('click', refreshLibrary);
+      loadInitialIndex();
+    })();
+  </script>
+  <style>.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }</style>
+</body>
+</html>
