@@ -33,7 +33,7 @@ jobs:
       - name: Generate index.json
         run: python scripts/build_index.py
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
       - name: Deploy to GitHub Pages
