@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USACE Silver Jackets Program: Progressive Learning Resource</title>
+<meta name="tags" content="USACE Silver Jackets, flood risk management, interagency coordination, hazard mitigation, risk communication, emergency management">
+<meta name="prompt-type" content="general-knowledge">
+<style>
+:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.58 var(--sans);
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blue2);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: .6rem;
+  background: #fff;
+  border: 2px solid var(--blue);
+}
+
+.site {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 var(--space-4);
+}
+
+.header {
+  background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%);
+  color: white;
+  padding: var(--space-6) 0 var(--space-5);
+  border-bottom: 6px solid var(--gold);
+}
+
+.eyebrow, .meta-label {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-weight: 800;
+}
+
+.eyebrow {
+  color: #cce7eb;
+  margin: 0 0 .5rem;
+}
+
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 950px;
+  letter-spacing: -.02em;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  max-width: 840px;
+  margin: 1rem 0 1.35rem;
+  color: #e2f2f4;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 1rem;
+  font-size: .88rem;
+}
+
+.metadata strong {
+  display: block;
+  color: #b9e1e3;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.toolbar {
+  background: #102f43;
+  color: #fff;
+  padding: .55rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .16);
+}
+
+.toolbar .site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar a {
+  color: #e8f5f5;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.toolbar a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid #bfe3e2;
+  background: #fff;
+  color: #123d59;
+  border-radius: 7px;
+  padding: .42rem .68rem;
+  font: 700 .83rem var(--sans);
+}
+
+.btn:hover {
+  background: #dff2f1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: var(--space-5) auto;
+}
+
+.toc {
+  position: sticky;
+  top: 3.6rem;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.toc h2 {
+  font-size: .84rem;
+  margin: 0 0 .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.toc li {
+  margin: .34rem 0;
+}
+
+.toc a {
+  font-size: .84rem;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  min-width: 0;
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: 4.2rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--pale);
+  line-height: 1.15;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin: 1.55rem 0 .6rem;
+  color: #173f57;
+}
+
+.section h4 {
+  font-size: .98rem;
+  margin: 1.1rem 0 .3rem;
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font: 800 .83rem var(--sans);
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.lead {
+  font-size: 1.08rem;
+}
+
+.callout {
+  border-left: 5px solid var(--blue2);
+  padding: 1rem 1.1rem;
+  background: var(--pale);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+
+.callout.warn {
+  border-color: var(--gold);
+  background: var(--pale3);
+}
+
+.callout strong {
+  color: #133d55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.stat .n {
+  font: 800 1.75rem/1 var(--serif);
+  color: var(--blue);
+}
+
+.stat .k {
+  font-size: .78rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-top: .4rem;
+}
+
+.tag, .ev {
+  display: inline-block;
+  border-radius: 999px;
+  padding: .18rem .55rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+.tag {
+  background: #dceff3;
+  color: #145a78;
+}
+
+.tag.green {
+  background: #ddf0e9;
+  color: #176353;
+}
+
+.tag.gold {
+  background: #f6e8cb;
+  color: #795312;
+}
+
+.tag.red {
+  background: #f5dee0;
+  color: #8a303a;
+}
+
+.ev.high {
+  background: #dcefe8;
+  color: #14604e;
+}
+
+.ev.med {
+  background: #f8ecd4;
+  color: #795312;
+}
+
+.ev.low {
+  background: #f5e0e1;
+  color: #8b333a;
+}
+
+.definition {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: .85rem 1rem;
+  margin: .65rem 0;
+}
+
+.definition strong {
+  color: var(--blue);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.1rem;
+  background: #f8fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 800;
+  color: #163d54;
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+}
+
+.card summary:after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.card[open] summary:after {
+  content: '–';
+}
+
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.theory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .3rem 0 .8rem;
+}
+
+.theory-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+}
+
+.theory-grid dt {
+  font-weight: 800;
+  color: #31556b;
+}
+
+.theory-grid dd {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 1rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+  min-width: 760px;
+}
+
+.matrix th, .matrix td {
+  padding: .7rem .75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.matrix th {
+  background: #eaf3f6;
+  color: #183e54;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.matrix tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrix tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+
+.figure {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fff;
+  overflow: auto;
+}
+
+.figure h3 {
+  margin: .1rem 0 .55rem;
+}
+
+.figure figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: .75rem;
+  padding-top: .65rem;
+}
+
+.svgwide {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--muted);
+  margin: .3rem 0;
+}
+
+.legend i {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -.08rem;
+  margin-right: .25rem;
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+}
+
+.evidence-row:last-child {
+  border: 0;
+}
+
+.small {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.footnote {
+  font-size: .79rem;
+  color: var(--muted);
+}
+
+.refs {
+  padding-left: 1.2rem;
+}
+
+.refs li {
+  margin: .8rem 0;
+}
+
+.recommend {
+  counter-reset: recommend;
+}
+
+.recommend li {
+  list-style: none;
+  position: relative;
+  padding: .85rem 1rem .85rem 3.1rem;
+  background: #f8fbfc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: .65rem 0;
+}
+
+.recommend li:before {
+  counter-increment: recommend;
+  content: counter(recommend);
+  position: absolute;
+  left: .8rem;
+  top: .78rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  font: 800 .76rem var(--sans);
+}
+
+.print-note {
+  display: none;
+}
+
+@media(max-width:900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    position: relative;
+    top: auto;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:620px) {
+  .site {
+    padding: 0 1rem;
+  }
+  .header {
+    padding: 2.5rem 0 2rem;
+  }
+  .layout {
+    margin: 1.25rem auto;
+  }
+  .section {
+    padding: 1.15rem;
+  }
+  .grid, .grid.three {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+  .metadata {
+    gap: .8rem 1.2rem;
+  }
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+  .toolbar .site {
+    padding: 0 1rem;
+  }
+  .toolbar a {
+    display: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+  .header {
+    padding: 1.5rem 0;
+    background: #fff !important;
+    color: #000;
+    border-bottom: 3px solid #000;
+  }
+  .header .eyebrow, .header .subtitle, .metadata strong {
+    color: #222;
+  }
+  .toolbar, .toc, .btn {
+    display: none;
+  }
+  .layout {
+    display: block;
+    margin: 0;
+  }
+  .section {
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    break-inside: avoid;
+  }
+  .section h2 {
+    break-after: avoid;
+  }
+  .card {
+    break-inside: avoid;
+  }
+  .card summary {
+    background: #fff;
+  }
+  .card:not([open]) .card-body {
+    display: block;
+  }
+  .figure {
+    break-inside: avoid;
+  }
+  .print-note {
+    display: block;
+  }
+  .content {
+    width: 100%;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .matrix {
+    min-width: 0;
+    font-size: 8pt;
+  }
+  .svgwide {
+    min-width: 0;
+  }
+}
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to learning content</a>
+<header class="header"><div class="site"><p class="eyebrow">Progressive Learning Resource</p><h1>USACE Silver Jackets Program</h1><p class="subtitle">Learn how state-led, interagency Silver Jackets teams coordinate practical flood-risk-reduction work across preparedness, mitigation, response, and recovery.</p><div class="metadata"><span><strong>Topic</strong> USACE Silver Jackets Program</span><span><strong>Knowledge Level</strong> Beginner</span><span><strong>Purpose</strong> General understanding</span><span><strong>Depth</strong> Comprehensive</span><span><strong>Prepared</strong> November 23, 2026</span><span><strong>Evidence</strong> Official USACE and FEMA sources reviewed</span></div></div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout">
+<nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol><li><a href="#executive-summary">Executive Summary</a></li><li><a href="#core-idea">The Core Idea</a></li><li><a href="#progressive-levels">Progressive Levels</a></li><li><a href="#visual-learning-aids">Visual Learning Aids</a></li><li><a href="#interactive-learning">Interactive Learning</a></li><li><a href="#worked-examples">Worked Examples</a></li><li><a href="#prerequisites">Prerequisite Knowledge</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#related-concepts">Related Concepts</a></li><li><a href="#misunderstandings">Common Misunderstandings</a></li><li><a href="#practical-applications">Practical Applications</a></li><li><a href="#knowledge-check">Knowledge Check</a></li><li><a href="#final-summary">Final Summary</a></li></ol></nav>
+<div class="content">
+<section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">1</span>Executive Summary</h2></summary><div class="section-body">
+<div class="callout"><p><strong>Silver Jackets</strong> is a U.S. Army Corps of Engineers (USACE) initiative that supports state-led, interagency teams working on priorities for flood-risk management. Rather than being a response force or a grant program with one standard project, each team is a standing forum that connects organizations with different authorities, information, programs, and resources. Teams may work on activities such as hazard-mitigation planning, inundation mapping, exercises, emergency-action planning, risk communication, and post-event data coordination. The program matters because flood risk crosses jurisdictional and organizational boundaries that no single agency can usually address alone. <strong>Indispensable takeaway:</strong> Silver Jackets is chiefly a coordination mechanism for turning a state’s flood-risk priorities into more integrated, complementary action.</p></div>
+<p class="small"><strong>Assumption:</strong> This resource provides a national, introductory view. The membership, charter, projects, and operating practices of a particular state or territory team can differ; consult that team’s current materials for local details.</p>
+</div></details></section>
+
+<section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body">
+<p class="lead">Flooding is not just a water problem. It can involve forecasting, mapping, land use, infrastructure, emergency operations, insurance, public communication, environmental management, recovery funding, and community decisions. Silver Jackets gives organizations a recurring place to connect those pieces.</p>
+<div class="definition"><strong>Plain-language definition:</strong> A Silver Jackets team is a state-led group of agencies and partners that works together on flood-risk priorities and, in some cases, related natural-hazard issues.</div>
+<p><strong>Analogy:</strong> Think of a community flood challenge as a complicated repair that requires several trades. One person may understand the electrical system, another the plumbing, another permits, and another the building’s occupants. Silver Jackets is the coordination table where those specialists agree on the problem, identify gaps, and sequence compatible work. The analogy breaks down because public agencies retain their own legal authorities, budgets, and decision processes; a team cannot simply direct all members as one contractor.</p>
+<p><strong>Concrete illustration:</strong> A state may identify that communities need clearer information about areas that could flood. One partner may contribute hydrologic or mapping expertise, another may connect the work to hazard-mitigation planning, another may support public messaging, and local officials may explain what residents need to decide. The useful output is not merely a map: it is a shared path for using the information.</p>
+<p><strong>Central mechanism:</strong> state priorities + recurring interagency coordination + each participant’s existing authorities and resources → more coherent flood-risk-reduction work, with fewer avoidable gaps or duplicative efforts.</p>
+</div></details></section>
+
+<section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary><div class="section-body">
+<details class="card"><summary>Beginner — What is it for?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Orientation</span><span class="ev high">Official program description</span></div><dl class="theory-grid"><dt>Definition</dt><dd>Silver Jackets teams are interagency teams that facilitate collaborative solutions to state flood-risk priorities.</dd><dt>Purpose</dt><dd>They help partners work continuously across the flood-risk-management life cycle instead of meeting only after a disaster.</dd><dt>Example</dt><dd>A team convenes agencies to align a tabletop exercise, flood-risk information, and community outreach around a state-identified need.</dd><dt>Takeaway</dt><dd>The team is a forum for coordination and shared problem-solving, not a replacement for any member agency.</dd></dl></div></details>
+<details class="card"><summary>Foundational — What parts make the program work?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Key distinctions</span></div><dl class="theory-grid"><dt>State-led priorities</dt><dd>The state or territory determines its team’s priorities; local context shapes what work is useful.</dd><dt>Participants</dt><dd>Common participants include state agencies and federal partners such as USACE, the Federal Emergency Management Agency (FEMA), National Weather Service (NWS), U.S. Geological Survey (USGS), and Natural Resources Conservation Service (NRCS). Tribes, local governments, academia, nonprofits, and others may participate.</dd><dt>Mechanism</dt><dd>Regular communication reveals overlapping programs, unmet needs, data limitations, and practical opportunities to combine effort.</dd><dt>Misconception to avoid</dt><dd>“Interagency” does not mean that authority, funding, or accountability is pooled automatically. Participants still act within their own authorities and available resources.</dd></dl></div></details>
+<details class="card"><summary>Intermediate — How does coordination change decisions?</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Application and tradeoffs</span></div><dl class="theory-grid"><dt>Life-cycle thinking</dt><dd>Teams can connect preparedness, mitigation, response, and recovery so that lessons or information from one phase improve the next.</dd><dt>Variables</dt><dd>Useful work depends on the flood problem, state priorities, participating organizations, data availability, timing, community capacity, authorities, and funding.</dd><dt>Realistic case pattern</dt><dd>After repeated flooding, partners may compare what information exists, identify a communication gap, choose a technical or planning product, and connect that product to agencies that can use it.</dd><dt>Tradeoff</dt><dd>Broad participation can improve perspective and leverage, but it takes time to establish common language, schedules, and a feasible scope.</dd></dl></div></details>
+<details class="card"><summary>Advanced — What are the boundaries and uncertainties?</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Context-dependent</span></div><dl class="theory-grid"><dt>Governance boundary</dt><dd>Silver Jackets is a collaborative mechanism, not a universal governance authority. A team’s influence depends on voluntary participation, relationships, decisions by responsible officials, and the authorities of member organizations.</dd><dt>Risk boundary</dt><dd>Flood-risk reduction does not eliminate all flood risk. Maps, models, forecasts, and plans inform decisions but contain assumptions and uncertainty.</dd><dt>Different interpretations</dt><dd>Partners may prioritize technical analysis, planning integration, public communication, or project implementation differently. Productive teams make those differences visible and seek complementary roles rather than assuming one metric decides everything.</dd><dt>Edge case</dt><dd>Some team activities address related hazards such as drought or wildfire when that supports state priorities, but flooding remains the central program focus.</dd></dl></div></details>
+<details class="card"><summary>Expert Perspective — What does mastery look like?</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Professional practice</span></div><dl class="theory-grid"><dt>Framework</dt><dd>Frame work around a specific state priority, a shared problem statement, the risk-management life cycle, participating authorities, an implementable output, and named users of that output.</dd><dt>Decision quality</dt><dd>Strong coordination distinguishes who can decide, who can fund, who can provide technical support, who must be consulted, and how a result will be maintained.</dd><dt>Adjacent disciplines</dt><dd>Floodplain management, emergency management, hydrology, engineering, land-use planning, public communication, environmental stewardship, and social vulnerability analysis all may matter.</dd><dt>Sign of mastery</dt><dd>You can explain not only what a product is, but why it is needed, who will use it, what assumptions constrain it, and what follow-on action is required.</dd></dl></div></details>
+</div></details></section>
+
+<section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary><div class="section-body">
+<figure class="figure"><h3>How a Silver Jackets team connects a state priority to action</h3>
+<svg class="svgwide" viewBox="0 0 930 350" role="img" aria-labelledby="flow-title flow-desc" xmlns="http://www.w3.org/2000/svg"><title id="flow-title">Conceptual flow of Silver Jackets coordination</title><desc id="flow-desc">A state flood-risk priority leads to a recurring Silver Jackets coordination forum. Partner agencies contribute information, authorities, programs, and resources. The forum identifies gaps, aligns work, and produces coordinated actions across preparedness, mitigation, response, and recovery. Feedback from results and events returns to state priorities.</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#145a78"/></marker></defs><rect x="35" y="115" width="165" height="95" rx="12" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="118" y="151" text-anchor="middle" font-family="Arial" font-weight="700" fill="#173f57">State or territory</text><text x="118" y="176" text-anchor="middle" font-family="Arial" fill="#17212b">flood-risk priority</text><path d="M200 162 H285" stroke="#145a78" stroke-width="3" marker-end="url(#arrow)"/><rect x="290" y="85" width="225" height="155" rx="12" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="403" y="125" text-anchor="middle" font-family="Arial" font-weight="700" fill="#176353">Silver Jackets forum</text><text x="403" y="150" text-anchor="middle" font-family="Arial" fill="#17212b">recurring coordination</text><text x="403" y="176" text-anchor="middle" font-family="Arial" fill="#17212b">shared problem framing</text><text x="403" y="202" text-anchor="middle" font-family="Arial" fill="#17212b">gap and opportunity review</text><path d="M515 162 H600" stroke="#145a78" stroke-width="3" marker-end="url(#arrow)"/><rect x="605" y="45" width="270" height="235" rx="12" fill="#fbf4e7" stroke="#b57922" stroke-width="2"/><text x="740" y="84" text-anchor="middle" font-family="Arial" font-weight="700" fill="#795312">Coordinated, state-relevant work</text><text x="740" y="113" text-anchor="middle" font-family="Arial" fill="#17212b">• planning and mitigation</text><text x="740" y="139" text-anchor="middle" font-family="Arial" fill="#17212b">• mapping and technical information</text><text x="740" y="165" text-anchor="middle" font-family="Arial" fill="#17212b">• exercises and preparedness</text><text x="740" y="191" text-anchor="middle" font-family="Arial" fill="#17212b">• risk communication</text><text x="740" y="217" text-anchor="middle" font-family="Arial" fill="#17212b">• response/recovery coordination</text><path d="M740 280 C740 325 118 325 118 210" fill="none" stroke="#625b9c" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/><text x="430" y="337" text-anchor="middle" font-family="Arial" font-size="14" fill="#625b9c">Lessons, needs, and new information inform the next priority cycle</text></svg>
+<div class="legend"><span><i style="background:#145a78"></i>Blue: state priority and structure</span><span><i style="background:#188d88"></i>Teal: coordination process</span><span><i style="background:#b57922"></i>Gold: work and cautions</span><span><i style="background:#625b9c"></i>Purple: learning feedback</span></div>
+<figcaption><strong>Classification:</strong> conceptual diagram, not a chart of measured performance. <strong>What to notice:</strong> the team sits between a state priority and action; it makes connections but does not erase separate agency authorities. <strong>Source basis:</strong> USACE’s national description of state-led interagency teams and their focal activities. <strong>Limitation:</strong> actual workflows, membership, and products vary by team.</figcaption></figure>
+<div class="table-wrap"><table class="matrix"><caption>Flood-risk-management life cycle: examples of where a team may add coordination value</caption><thead><tr><th scope="col">Phase</th><th scope="col">Guiding question</th><th scope="col">Illustrative coordination activity</th><th scope="col">What a learner should notice</th></tr></thead><tbody><tr><td>Preparedness and training</td><td>Are people, plans, and information ready before flooding?</td><td>Tabletop exercise or emergency-action-plan support.</td><td>Preparation is not only equipment; it includes relationships and shared understanding.</td></tr><tr><td>Mitigation</td><td>What can reduce future consequences?</td><td>Hazard-mitigation-plan update or floodplain information support.</td><td>Mitigation connects technical risk information to long-term decisions.</td></tr><tr><td>Response</td><td>How can partners share timely, usable information during an event?</td><td>Coordination around perishable-data collection or information needs.</td><td>Response work benefits from relationships and protocols built beforehand.</td></tr><tr><td>Recovery</td><td>How can recovery decisions avoid recreating known risk?</td><td>Joint lessons review and linkage to mitigation planning.</td><td>Recovery can become the starting point for the next preparedness cycle.</td></tr></tbody></table></div>
+<p class="footnote"><strong>Classification:</strong> illustrative table based on USACE-listed activity types; it does not mean every team performs every activity or that a phase has a fixed sequence.</p>
+</div></details></section>
+
+<section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body">
+<p>Use the prediction exercise below to practice identifying when a problem needs coordination rather than a single technical answer. It works without JavaScript because each reveal is a native disclosure.</p>
+<details class="card"><summary>Prediction / reveal: A community wants “a flood solution.” What should the team ask first?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Think before revealing</span></div><p><strong>Scenario:</strong> A county reports repeated road closures and asks partners to “fix flooding.” Before choosing a product or project, predict three questions that would make the request actionable.</p><details class="card"><summary>Reveal a strong starting set of questions</summary><div class="card-body"><ul><li><strong>Define the consequence:</strong> Which roads, populations, facilities, or functions are affected, and during what kind of event?</li><li><strong>Identify existing information:</strong> What mapping, observations, plans, forecasts, and prior studies already exist—and what decisions do they support?</li><li><strong>Clarify users and authorities:</strong> Who can act on the result, who owns or operates the affected assets, and what authorities or programs could support next steps?</li></ul><p><strong>Why this changes the answer:</strong> “Flooding” may describe different problems: warning time, evacuation routes, drainage, development patterns, infrastructure vulnerability, or public understanding. A coordination forum helps distinguish them before duplicating work.</p><p class="small"><strong>Limit:</strong> Asking good questions does not guarantee funding, authority, or agreement on a solution.</p></div></details></div></details>
+<details class="card"><summary>Mini-quiz: Is this a Silver Jackets coordination opportunity?</summary><div class="card-body"><p><strong>Choose mentally before opening the feedback:</strong> A state wants to make flood-risk information easier for local officials and residents to use. The relevant data exist in several agencies, the state hazard-mitigation office is updating planning guidance, and local officials need plain-language communication. Is this likely a coordination opportunity?</p><details class="card"><summary>Feedback</summary><div class="card-body"><p><strong>Yes—likely.</strong> The scenario has a state-defined need, multiple information holders and users, and an implementation connection to planning and communication. A Silver Jackets team could help align the problem statement, data roles, a usable product, and the organizations that can carry the work forward.</p><p><strong>Do not overread this conclusion:</strong> it does not establish that the team must lead, that a project is approved, or that the information is sufficient for any regulatory or engineering decision.</p></div></details></div></details>
+</div></details></section>
+
+<section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">6</span>Worked Examples</h2></summary><div class="section-body">
+<details class="card"><summary>Example 1 — Aligning a flood-risk communication workshop</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical, introductory</span></div><dl class="theory-grid"><dt>Situation</dt><dd>Residents receive technical flood information but do not understand what actions it implies.</dd><dt>Inputs and assumptions</dt><dd>Hypothetical: a state emergency-management office, USACE district staff, NWS staff, and local floodplain managers can participate; no new funding is assumed.</dd><dt>Stepwise application</dt><dd>1) Define the audience and decisions they face. 2) Inventory current messages and tools. 3) Identify contradictory terms or missing explanations. 4) Convene a workshop that explains risk, uncertainty, and protective actions consistently. 5) Capture follow-on owners for materials and outreach.</dd><dt>Result</dt><dd>A shared communication approach and a clearer handoff to organizations that own ongoing outreach.</dd><dt>Key lesson</dt><dd>Coordination can create value by making existing expertise and messages more usable together.</dd><dt>Limitations / alternatives</dt><dd>A workshop is not proof that risk understanding or behavior changed. Evaluation, accessibility review, and local outreach capacity may still be needed.</dd></dl></div></details>
+<details class="card"><summary>Example 2 — Preparing a tabletop exercise around a levee-related concern</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical, intermediate</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A state wants to improve coordination for a potential flood event affecting a community near a levee.</dd><dt>Inputs and assumptions</dt><dd>Hypothetical: participants have existing emergency plans and technical information, but have not recently exercised roles together.</dd><dt>Stepwise application</dt><dd>1) Agree on a scenario and the decisions to test. 2) Identify representatives from emergency management, floodplain management, weather/forecasting, infrastructure, and local government. 3) Walk through information sharing, warning, evacuation, and documentation decisions. 4) Record gaps, dependencies, and corrective actions. 5) Assign owners and review progress later.</dd><dt>Result</dt><dd>An exercise-based list of realistic coordination improvements rather than a generic emergency plan.</dd><dt>Key lesson</dt><dd>Standing relationships make it easier to discover coordination gaps before an actual event.</dd><dt>Limitations / alternatives</dt><dd>An exercise does not validate all real-world capabilities. Field drills, plan updates, and decision-maker review may be required.</dd></dl></div></details>
+<details class="card"><summary>Example 3 — Making inundation information decision-relevant</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Hypothetical, advanced</span></div><dl class="theory-grid"><dt>Situation</dt><dd>Several communities need flood-inundation information, but they differ in data quality, mapping needs, and capacity to use the information.</dd><dt>Inputs and assumptions</dt><dd>Hypothetical: some technical data exist; participants must operate within separate agency authorities and resource constraints.</dd><dt>Stepwise application</dt><dd>1) Define intended uses—emergency routing, public awareness, planning, or another purpose. 2) Identify the technical assumptions and uncertainty that users need to understand. 3) Prioritize a feasible pilot area with committed users. 4) Determine which partner can supply or maintain each input. 5) Pair the information product with guidance, training, and a maintenance plan.</dd><dt>Result</dt><dd>A scoped, user-oriented effort that links technical information to decisions rather than treating a map as the endpoint.</dd><dt>Key lesson</dt><dd>The best technical product depends on the decision it must support and the capacity to sustain it.</dd><dt>Limitations / alternatives</dt><dd>Inundation information is not a guarantee of conditions at a specific time or location. Qualified technical review is needed for operational, engineering, or regulatory use.</dd></dl></div></details>
+</div></details></section>
+
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary><div class="section-body">
+<p>No technical prerequisites are required for an entry-level understanding. Deeper mastery benefits from knowing how flood risk, public programs, and interagency coordination interact.</p>
+<div class="table-wrap"><table class="matrix"><caption>Prerequisites for learning about Silver Jackets</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite topic</th><th scope="col">Why it helps</th><th scope="col">Recommended starting point</th></tr></thead><tbody><tr><td>Essential</td><td>Basic flood risk</td><td>Clarifies the difference between a flood hazard, exposure, vulnerability, and consequences.</td><td>Learn that flood risk is more than the presence of water; it includes who and what may be affected.</td></tr><tr><td>Essential</td><td>Roles of government and partners</td><td>Explains why several organizations may each hold part of the solution.</td><td>Identify the difference between federal, state, Tribal, and local roles without assuming any one is in charge of all work.</td></tr><tr><td>Helpful</td><td>Emergency-management cycle</td><td>Supports life-cycle thinking across preparedness, mitigation, response, and recovery.</td><td>Compare what must happen before, during, and after an event.</td></tr><tr><td>Helpful</td><td>Risk communication</td><td>Shows why technically correct information must also be understandable and actionable.</td><td>Practice translating a technical statement into a decision-focused message.</td></tr><tr><td>Optional / Advanced</td><td>Hydrology, hydraulics, GIS, and floodplain management</td><td>Helps assess data, models, mapping products, and limitations.</td><td>Start with the relationship between rainfall, runoff, waterways, and mapped flood conditions.</td></tr></tbody></table></div>
+</div></details></section>
+
+<section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">8</span>Glossary</h2></summary><div class="section-body">
+<div class="table-wrap"><table class="matrix"><caption>Key terms in context</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language definition</th><th scope="col">Connection to Silver Jackets</th></tr></thead><tbody><tr><td>Flood risk</td><td>The chance of harmful flood consequences, shaped by hazard, people and assets exposed, and vulnerability.</td><td>The central problem area teams seek to reduce or manage more effectively.</td></tr><tr><td>Flood-risk management</td><td>The continuing work of understanding, communicating, avoiding, reducing, preparing for, responding to, and recovering from flood consequences.</td><td>Frames work across the full life cycle rather than a single project.</td></tr><tr><td>Interagency</td><td>Involving more than one government organization or program.</td><td>Describes the team’s core collaborative structure.</td></tr><tr><td>Mitigation</td><td>Actions that reduce future disaster risk or consequences.</td><td>One major area that can be connected to planning, communication, recovery, and technical information.</td></tr><tr><td>Inundation mapping</td><td>Mapping that depicts areas expected to be covered by water under stated conditions or scenarios.</td><td>One listed type of team activity; its value depends on assumptions, intended use, and communication.</td></tr><tr><td>Risk communication</td><td>Sharing risk information in ways that support understanding and decisions, including limits and uncertainty.</td><td>Helps turn technical knowledge into usable action.</td></tr><tr><td>Tabletop exercise</td><td>A discussion-based session that tests roles, information flow, and decisions using a scenario.</td><td>Can expose coordination gaps before a real event.</td></tr><tr><td>Perishable data</td><td>Event-related information that may be lost or become much harder to collect if not documented promptly.</td><td>Teams may help coordinate collection needs and relationships around an event.</td></tr></tbody></table></div>
+</div></details></section>
+
+<section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary><div class="section-body">
+<div class="grid"><div class="stat"><div class="n">Shared responsibility</div><div class="k">Connection</div><p>Flood risk is shaped by many decisions and conditions. The program’s collaborative model reflects that no agency—or community member—can usually manage all parts alone.</p></div><div class="stat"><div class="n">Integrated risk management</div><div class="k">Connection</div><p>Technical, planning, communication, and response work are stronger when they are designed to reinforce each other across the life cycle.</p></div><div class="stat"><div class="n">Whole-community practice</div><div class="k">Connection</div><p>Local governments, Tribes, communities, academia, nonprofits, and other partners may bring essential context and implementation capacity, though participation varies.</p></div><div class="stat"><div class="n">Boundary-spanning</div><div class="k">Connection</div><p>Silver Jackets crosses organizational boundaries by linking people who use different vocabularies, data, timelines, and authorities. This is a coordination skill as much as a technical one.</p></div></div>
+<h3>Why these connections matter</h3><p>A technically sound flood product can still fail to reduce risk if it is not connected to a decision, a responsible user, understandable communication, or a feasible implementation path. Conversely, a well-coordinated team cannot substitute for sound technical analysis, legal authorities, or community consent. Effective practice needs both coordination and discipline-specific expertise.</p>
+</div></details></section>
+
+<section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body">
+<div class="table-wrap"><table class="matrix"><caption>Misconceptions and corrections</caption><thead><tr><th scope="col">Likely misconception</th><th scope="col">Accurate correction</th><th scope="col">Why the difference matters</th><th scope="col">Counterexample or qualifier</th></tr></thead><tbody><tr><td>“Silver Jackets is a USACE response team.”</td><td>USACE supports the initiative, but the teams are state-led, interagency forums focused on collaborative solutions.</td><td>It prevents confusion between coordination and a deployable response organization.</td><td>A team may support preparedness or recovery coordination without conducting response operations itself.</td></tr><tr><td>“Every state team has the same members and projects.”</td><td>Teams are unique and prioritize state or territory needs; participation and focal areas vary.</td><td>It avoids copying another state’s model without considering local conditions.</td><td>Some teams include Tribal, academic, local, or nonprofit participation; others may differ.</td></tr><tr><td>“A map is the solution.”</td><td>A map is information. It becomes useful only when linked to an intended decision, users, communication, and maintenance.</td><td>It focuses attention on outcomes rather than products alone.</td><td>Communities may need training or planning changes as much as a new technical layer.</td></tr><tr><td>“Coordination removes funding and authority limits.”</td><td>Participants continue to act within their own authorities, budgets, and processes.</td><td>It sets realistic expectations and supports credible scoping.</td><td>A team can identify a funding path, but it does not automatically award funds.</td></tr><tr><td>“Flood risk reduction means zero risk.”</td><td>Risk can often be reduced or better managed, but residual risk and uncertainty remain.</td><td>It supports honest communication and sound decisions.</td><td>Even a well-prepared community can face flooding beyond a plan’s assumptions.</td></tr></tbody></table></div>
+<p class="small">A harmless introductory simplification is to call Silver Jackets “a partnership.” The fuller explanation is that it is a state-led, ongoing interagency coordination mechanism with locally variable membership and activities.</p>
+</div></details></section>
+
+<section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body">
+<details class="card"><summary>State and local planning</summary><div class="card-body"><div class="theory-meta"><span class="tag">Planning application</span></div><p><strong>Situation:</strong> Agencies are updating hazard-mitigation or floodplain-management plans. <strong>How this informs action:</strong> the team can compare priorities, data, program timelines, and implementation responsibilities. <strong>Potential benefit:</strong> fewer disconnected plans and clearer use of existing resources. <strong>Risks and tradeoffs:</strong> coordination can slow early scoping if roles are unclear; planning still requires responsible agency review and public/Tribal engagement as applicable. <strong>Evidence status:</strong> USACE lists state hazard-mitigation-plan updates among team activities, but outcomes vary by project and state.</p></div></details>
+<details class="card"><summary>Emergency preparedness and exercises</summary><div class="card-body"><div class="theory-meta"><span class="tag">Preparedness application</span></div><p><strong>Situation:</strong> Partners need to test how information and responsibilities connect before a flood. <strong>How this informs action:</strong> a tabletop exercise can examine decision points, information flow, and unresolved dependencies. <strong>Potential benefit:</strong> improved shared understanding and a practical corrective-action list. <strong>Risks and tradeoffs:</strong> an exercise may create false confidence if actions are not tracked, funded, and retested. <strong>Evidence status:</strong> USACE identifies tabletop exercises and emergency-action-plan development as examples of activities.</p></div></details>
+<details class="card"><summary>Technical information and public communication</summary><div class="card-body"><div class="theory-meta"><span class="tag">Information-to-action application</span></div><p><strong>Situation:</strong> Technical flood information is available but underused. <strong>How this informs action:</strong> partners can identify who needs the information, what decisions it supports, how uncertainty should be communicated, and who maintains the product. <strong>Potential benefit:</strong> more usable, consistent risk communication. <strong>Risks and ethics:</strong> oversimplifying uncertainty, excluding communities with accessibility or language needs, or using information outside its intended purpose can cause harm. <strong>Evidence status:</strong> risk-communication workshops and inundation mapping are listed activities; no universal effectiveness claim is made here.</p></div></details>
+<div class="callout warn"><p><strong>Professional-use boundary:</strong> This resource is educational. It does not determine flood hazards, approve a project, interpret a regulation, establish an emergency procedure, or substitute for qualified technical, legal, emergency-management, or community decision-making review.</p></div>
+</div></details></section>
+
+<section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body">
+<ol><li>In one sentence, what is the core purpose of a Silver Jackets team?</li><li>Why is “state-led” an important part of the program’s design?</li><li>Name two kinds of organizations that may participate and explain why different roles are useful.</li><li>How is an interagency coordination forum different from a single agency’s response unit?</li><li>Why should a team define intended users and decisions before developing a technical product?</li><li><strong>Application:</strong> A state has good flood data but weak local use of it. Outline a three-step coordination approach that does not assume new funding.</li><li><strong>Analysis:</strong> A proposed activity is popular but has no identified owner, user, authority, or maintenance plan. What concerns should the team raise?</li></ol>
+<details class="card"><summary>Answer Key</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Model answers; reasonable alternatives accepted</span></div><ol><li><strong>Core purpose:</strong> A Silver Jackets team helps partners collaboratively address state flood-risk priorities by connecting their knowledge, programs, resources, and roles.</li><li><strong>State-led:</strong> The state or territory sets priorities, helping ensure that the team focuses on locally relevant needs rather than imposing a one-size-fits-all agenda.</li><li><strong>Participants:</strong> For example, a state hazard-mitigation office can connect work to statewide planning; USACE can provide relevant technical or program expertise; FEMA, NWS, USGS, NRCS, local governments, Tribes, and others may contribute different information or implementation pathways. Any two well-explained roles are acceptable.</li><li><strong>Difference from a response unit:</strong> The forum coordinates planning and problem-solving across organizations and phases. It does not itself replace the operational authorities, command structures, or responsibilities of participating agencies.</li><li><strong>Users and decisions:</strong> A product has value only if someone can interpret and use it for a defined decision. Identifying this early helps set suitable scope, assumptions, format, communication, and maintenance responsibility.</li><li><strong>Application model:</strong> (1) Convene data holders, local users, and planning/communication partners to define the use gap. (2) Inventory existing materials and choose a simple priority use case, such as local planning or public outreach. (3) Assign owners for translation, dissemination, and follow-up training. Alternatives that establish a clear problem, link available resources, and create accountable follow-through are acceptable.</li><li><strong>Analysis model:</strong> Raise feasibility and sustainability concerns: Who needs the outcome? Who is authorized to act? Who will maintain it? What resources and approvals are required? The team should either identify these elements or rescope the activity. Popularity alone does not make a project implementable.</li></ol></div></details>
+</div></details></section>
+
+<section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body">
+<p class="lead"><strong>Central idea:</strong> The USACE Silver Jackets Program supports state-led teams that bring organizations together to turn shared flood-risk priorities into more coordinated, practical work.</p>
+<ul><li>Silver Jackets is a standing interagency coordination mechanism, not a single operational force or universal funding source.</li><li>The state or territory sets priorities, so team membership and activities differ by location.</li><li>Teams can support work throughout preparedness, mitigation, response, and recovery.</li><li>Useful coordination starts with a defined problem, intended users, available information, roles, authorities, and follow-on actions.</li><li>Technical products such as maps matter most when they are connected to decisions, communication, and maintenance.</li><li>Coordination improves alignment but does not remove legal, budget, technical, or community-engagement requirements.</li></ul>
+<p><strong>Next learning step:</strong> Locate the current Silver Jackets page or charter for the state or territory of interest and compare its stated priorities, members, and recent activities with the framework in this resource.</p>
+<div class="callout"><p><strong>If you remember only one thing:</strong> Silver Jackets creates a recurring “many agencies, one solution” forum so that flood-risk work is more connected to the real decisions and partners needed to make it useful.</p></div>
+<h3>Sources and verification notes</h3>
+<p class="small">Verification note: Sources below were reviewed on November 23, 2026. They establish the national program description and examples of activities; local team structures and current projects can change. This resource uses hypothetical examples and does not claim measured outcomes for any specific team.</p>
+<ul class="refs"><li>U.S. Army Corps of Engineers, Institute for Water Resources, <em>About Silver Jackets</em>. Describes Silver Jackets as state-led interagency teams, common participants, team activities, and the reported nationwide team footprint. Available at <code>https://www.iwr.usace.army.mil/Silver-Jackets/About-Silver-Jackets/</code>.</li><li>U.S. Army Corps of Engineers, St. Paul District, <em>Silver Jackets Fact Sheet</em>, published March 24, 2025. Describes state-led collaboration, life-cycle flood-risk reduction goals, and resource leverage. Available at <code>https://www.mvp.usace.army.mil/Media/Fact-Sheets/Fact-Sheet-Article-View/Article/588150/fact-sheet-12-silver-jackets/</code>.</li><li>Federal Emergency Management Agency, <em>Silver Jackets: Bringing Agencies Together for the Benefit of Communities</em>. Provides a historical case-study perspective on the early Silver Jackets concept and interagency participation. Available at <code>https://www.fema.gov/case-study/silver-jackets-bringing-agencies-together-benefit-communities</code>.</li><li>U.S. Army Corps of Engineers, Institute for Water Resources, <em>A New Silver Jackets Logo</em>, March 24, 2022. Explains the program’s relationship to the National Flood Risk Management Program and the state-priority model. Available at <code>https://www.iwr.usace.army.mil/Silver-Jackets/Newsroom/A-New-Silver-Jackets-Logo/</code>.</li></ul>
+</div></details></section>
+</div></main>
+<script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script>
+</body>
+</html>
