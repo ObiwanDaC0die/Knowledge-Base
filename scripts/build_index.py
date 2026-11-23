@@ -24,6 +24,7 @@ class DocumentMetadata(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.title_parts: list[str] = []
+        self.title_seen = False
         self.in_title = False
         self.description = ""
         self.tags: list[str] = []
@@ -31,7 +32,8 @@ class DocumentMetadata(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key.lower(): (value or "").strip() for key, value in attrs}
-        if tag.lower() == "title":
+        if tag.lower() == "title" and not self.title_seen:
+            self.title_seen = True
             self.in_title = True
         if tag.lower() == "meta":
             key = (values.get("name") or values.get("property") or "").lower()
@@ -44,7 +46,7 @@ class DocumentMetadata(HTMLParser):
                 self.keywords.extend(split_terms(content))
 
     def handle_endtag(self, tag: str) -> None:
-        if tag.lower() == "title":
+        if tag.lower() == "title" and self.in_title:
             self.in_title = False
 
     def handle_data(self, data: str) -> None:
@@ -73,8 +75,10 @@ def extract_metadata(path: Path, relative_path: str) -> dict[str, Any]:
     parser = DocumentMetadata()
     parser.feed(path.read_text(encoding="utf-8", errors="replace"))
     title = " ".join(" ".join(parser.title_parts).split()) or filename_title(path.name)
-    return {"id": stable_id(relative_path), "title": title, "path": relative_path,
-            "tags": parser.tags, "keywords": parser.keywords, "description": parser.description}
+    return {
+        "id": stable_id(relative_path), "title": title, "path": relative_path,
+        "tags": parser.tags, "keywords": parser.keywords, "description": parser.description,
+    }
 
 
 def discover_documents(root: Path = ROOT) -> list[dict[str, Any]]:
@@ -89,8 +93,10 @@ def discover_documents(root: Path = ROOT) -> list[dict[str, Any]]:
 
 
 def build_index(root: Path = ROOT, generated_at: str | None = None) -> dict[str, Any]:
-    return {"generatedAt": generated_at or datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-            "documents": discover_documents(root)}
+    return {
+        "generatedAt": generated_at or datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "documents": discover_documents(root),
+    }
 
 
 def main() -> None:
