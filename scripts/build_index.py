@@ -85,7 +85,7 @@ def discover_documents(root: Path = ROOT) -> list[dict[str, Any]]:
     documents = []
     for path in sorted(root.rglob("*.html")):
         relative = path.relative_to(root)
-        if any(part.startswith(".") for part in relative.parts) or relative.name.lower() == "index.html":
+        if any(part.startswith(".") for part in relative.parts) or relative.name.lower() in {"index.html", "analysis.html"}:
             continue
         documents.append(extract_metadata(path, relative.as_posix()))
     documents.sort(key=lambda item: (item["title"].casefold(), item["path"].casefold()))
