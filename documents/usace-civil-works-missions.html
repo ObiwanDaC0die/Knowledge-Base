@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USACE Civil Works Missions — Progressive Learning Resource</title>
+<meta name="tags" content="USACE, Civil Works, navigation, flood risk management, ecosystem restoration, hydropower, regulatory program, water resources">
+<meta name="prompt-type" content="general-knowledge">
+<style>
+:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.58 var(--sans);
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blue2);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: .6rem;
+  background: #fff;
+  border: 2px solid var(--blue);
+}
+
+.site {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 var(--space-4);
+}
+
+.header {
+  background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%);
+  color: white;
+  padding: var(--space-6) 0 var(--space-5);
+  border-bottom: 6px solid var(--gold);
+}
+
+.eyebrow, .meta-label {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-weight: 800;
+}
+
+.eyebrow {
+  color: #cce7eb;
+  margin: 0 0 .5rem;
+}
+
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 950px;
+  letter-spacing: -.02em;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  max-width: 840px;
+  margin: 1rem 0 1.35rem;
+  color: #e2f2f4;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 1rem;
+  font-size: .88rem;
+}
+
+.metadata strong {
+  display: block;
+  color: #b9e1e3;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.toolbar {
+  background: #102f43;
+  color: #fff;
+  padding: .55rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .16);
+}
+
+.toolbar .site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar a {
+  color: #e8f5f5;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.toolbar a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid #bfe3e2;
+  background: #fff;
+  color: #123d59;
+  border-radius: 7px;
+  padding: .42rem .68rem;
+  font: 700 .83rem var(--sans);
+}
+
+.btn:hover {
+  background: #dff2f1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: var(--space-5) auto;
+}
+
+.toc {
+  position: sticky;
+  top: 3.6rem;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.toc h2 {
+  font-size: .84rem;
+  margin: 0 0 .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.toc li {
+  margin: .34rem 0;
+}
+
+.toc a {
+  font-size: .84rem;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  min-width: 0;
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: 4.2rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--pale);
+  line-height: 1.15;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin: 1.55rem 0 .6rem;
+  color: #173f57;
+}
+
+.section h4 {
+  font-size: .98rem;
+  margin: 1.1rem 0 .3rem;
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font: 800 .83rem var(--sans);
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.lead {
+  font-size: 1.08rem;
+}
+
+.callout {
+  border-left: 5px solid var(--blue2);
+  padding: 1rem 1.1rem;
+  background: var(--pale);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+
+.callout.warn {
+  border-color: var(--gold);
+  background: var(--pale3);
+}
+
+.callout strong {
+  color: #133d55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.stat .n {
+  font: 800 1.75rem/1 var(--serif);
+  color: var(--blue);
+}
+
+.stat .k {
+  font-size: .78rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-top: .4rem;
+}
+
+.tag, .ev {
+  display: inline-block;
+  border-radius: 999px;
+  padding: .18rem .55rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+.tag {
+  background: #dceff3;
+  color: #145a78;
+}
+
+.tag.green {
+  background: #ddf0e9;
+  color: #176353;
+}
+
+.tag.gold {
+  background: #f6e8cb;
+  color: #795312;
+}
+
+.tag.red {
+  background: #f5dee0;
+  color: #8a303a;
+}
+
+.ev.high {
+  background: #dcefe8;
+  color: #14604e;
+}
+
+.ev.med {
+  background: #f8ecd4;
+  color: #795312;
+}
+
+.ev.low {
+  background: #f5e0e1;
+  color: #8b333a;
+}
+
+.definition {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: .85rem 1rem;
+  margin: .65rem 0;
+}
+
+.definition strong {
+  color: var(--blue);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.1rem;
+  background: #f8fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 800;
+  color: #163d54;
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+}
+
+.card summary:after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.card[open] summary:after {
+  content: '–';
+}
+
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.theory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .3rem 0 .8rem;
+}
+
+.theory-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+}
+
+.theory-grid dt {
+  font-weight: 800;
+  color: #31556b;
+}
+
+.theory-grid dd {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 1rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+  min-width: 760px;
+}
+
+.matrix th, .matrix td {
+  padding: .7rem .75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.matrix th {
+  background: #eaf3f6;
+  color: #183e54;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.matrix tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrix tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+
+.figure {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fff;
+  overflow: auto;
+}
+
+.figure h3 {
+  margin: .1rem 0 .55rem;
+}
+
+.figure figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: .75rem;
+  padding-top: .65rem;
+}
+
+.svgwide {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--muted);
+  margin: .3rem 0;
+}
+
+.legend i {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -.08rem;
+  margin-right: .25rem;
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+}
+
+.evidence-row:last-child {
+  border: 0;
+}
+
+.small {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.footnote {
+  font-size: .79rem;
+  color: var(--muted);
+}
+
+.refs {
+  padding-left: 1.2rem;
+}
+
+.refs li {
+  margin: .8rem 0;
+}
+
+.recommend {
+  counter-reset: recommend;
+}
+
+.recommend li {
+  list-style: none;
+  position: relative;
+  padding: .85rem 1rem .85rem 3.1rem;
+  background: #f8fbfc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: .65rem 0;
+}
+
+.recommend li:before {
+  counter-increment: recommend;
+  content: counter(recommend);
+  position: absolute;
+  left: .8rem;
+  top: .78rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  font: 800 .76rem var(--sans);
+}
+
+.print-note {
+  display: none;
+}
+
+@media(max-width:900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    position: relative;
+    top: auto;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:620px) {
+  .site {
+    padding: 0 1rem;
+  }
+  .header {
+    padding: 2.5rem 0 2rem;
+  }
+  .layout {
+    margin: 1.25rem auto;
+  }
+  .section {
+    padding: 1.15rem;
+  }
+  .grid, .grid.three {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+  .metadata {
+    gap: .8rem 1.2rem;
+  }
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+  .toolbar .site {
+    padding: 0 1rem;
+  }
+  .toolbar a {
+    display: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+  .header {
+    padding: 1.5rem 0;
+    background: #fff !important;
+    color: #000;
+    border-bottom: 3px solid #000;
+  }
+  .header .eyebrow, .header .subtitle, .metadata strong {
+    color: #222;
+  }
+  .toolbar, .toc, .btn {
+    display: none;
+  }
+  .layout {
+    display: block;
+    margin: 0;
+  }
+  .section {
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    break-inside: avoid;
+  }
+  .section h2 {
+    break-after: avoid;
+  }
+  .card {
+    break-inside: avoid;
+  }
+  .card summary {
+    background: #fff;
+  }
+  .card:not([open]) .card-body {
+    display: block;
+  }
+  .figure {
+    break-inside: avoid;
+  }
+  .print-note {
+    display: block;
+  }
+  .content {
+    width: 100%;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .matrix {
+    min-width: 0;
+    font-size: 8pt;
+  }
+  .svgwide {
+    min-width: 0;
+  }
+}
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to learning content</a>
+<header class="header"><div class="site">
+<p class="eyebrow">Progressive Learning Resource</p>
+<h1>USACE Civil Works Missions</h1>
+<p class="subtitle">Understand how the U.S. Army Corps of Engineers plans, delivers, operates, stewards, and regulates water-resources activities—and how its mission areas connect in real decisions.</p>
+<div class="metadata">
+<span><strong>Topic</strong> USACE Civil Works Missions</span>
+<span><strong>Knowledge Level</strong> Beginner</span>
+<span><strong>Purpose</strong> General understanding</span>
+<span><strong>Depth</strong> Comprehensive</span>
+<span><strong>Prepared</strong> 24 November 2026</span>
+<span><strong>Evidence</strong> Official USACE sources checked 24 November 2026</span>
+</div></div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout">
+<nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#core-idea">The Core Idea</a></li>
+<li><a href="#progressive-levels">Progressive Levels</a></li>
+<li><a href="#visual-learning-aids">Visual Learning Aids</a></li>
+<li><a href="#interactive-learning">Interactive Learning</a></li>
+<li><a href="#worked-examples">Worked Examples</a></li>
+<li><a href="#prerequisites">Prerequisite Knowledge</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#related-concepts">Related Concepts</a></li>
+<li><a href="#misunderstandings">Common Misunderstandings</a></li>
+<li><a href="#practical-applications">Practical Applications</a></li>
+<li><a href="#knowledge-check">Knowledge Check</a></li>
+<li><a href="#final-summary">Final Summary</a></li>
+</ol></nav>
+<div class="content">
+
+<section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">1</span>Executive Summary</h2></summary><div class="section-body">
+<div class="callout"><p class="lead"><strong>U.S. Army Corps of Engineers (USACE) Civil Works</strong> is the federal water-resources program through which USACE plans, designs, constructs, operates, and stewards infrastructure and carries out related regulatory responsibilities. Its current headquarters mission-area presentation centers on aquatic ecosystem restoration, flood and coastal storm risk management, hydropower, navigation, recreation, and regulatory work, supported by cross-cutting functions such as planning and dam and levee safety. People encounter Civil Works through harbors, inland waterways, levees, dams, reservoirs, beaches, restored habitats, recreation sites, permits, technical assistance, and disaster response. The program matters because a single water system can affect life safety, commerce, ecosystems, energy, public access, and community resilience at the same time. <strong>Indispensable takeaway:</strong> Civil Works is not a collection of isolated construction projects; it is a lifecycle, partnership-based system for managing public water-resources problems under specific authorities, funding, and operating constraints.</p></div>
+<div class="callout warn"><p><strong>Scope assumption.</strong> This resource provides a national, beginner-level overview. Exact authorities, cost shares, eligibility, procedures, and project purposes vary by program, location, authorization, and current policy; use the responsible USACE district and current official guidance for an actual decision.</p></div>
+</div></details></section>
+
+<section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body">
+<p>Start with a familiar problem: a river is too shallow for dependable cargo movement, a neighborhood floods, a wetland has lost function, or a dam serves several competing purposes. Civil Works is one way the federal government—usually working with non-federal partners—turns that kind of water-resources problem into a studied, authorized, funded, delivered, and maintained public action.</p>
+<div class="definition"><strong>Plain-language definition.</strong> USACE Civil Works is the part of USACE focused on the Nation’s water-resources infrastructure and associated public services, rather than its separate military construction mission.</div>
+<h3>An analogy: a shared watershed “operating system”</h3>
+<p>Think of Civil Works as part engineer, part infrastructure operator, part risk manager, part environmental steward, and part public regulator for shared water systems. Like an operating system, it coordinates many functions that must work together: moving vessels, storing and releasing water, reducing flood consequences, producing hydropower, providing recreation, supporting habitat, and reviewing certain activities in regulated waters.</p>
+<p class="small"><strong>Where the analogy breaks down:</strong> USACE does not control every river, shoreline, wetland, dam, or water decision. Responsibilities are distributed among Congress, federal agencies, tribes, states, local governments, sponsors, private owners, and the public. USACE action depends on legal authority, jurisdiction, funding, partnerships, environmental review, technical feasibility, and the authorized purposes of each project.</p>
+<h3>Concrete illustration</h3>
+<p>At a multipurpose reservoir, operators may preserve empty storage for future floods, release water for downstream needs or navigation, generate power when water passes through turbines, support recreation access, and protect environmental resources. These purposes can reinforce one another in some conditions and compete in others. The work is therefore not merely “build a dam”; it includes ongoing monitoring, risk-informed decisions, maintenance, communication, and adaptation within established authorities.</p>
+<h3>The central relationship</h3>
+<p><strong>Public water-resources need → authority and partnership → analysis of alternatives → delivery or regulatory decision → long-term operation and stewardship → public outcomes and residual risk.</strong></p>
+<ul>
+<li><strong>Need:</strong> What problem or opportunity exists, for whom, and at what scale?</li>
+<li><strong>Authority:</strong> What may USACE legally study, construct, operate, assist with, or regulate?</li>
+<li><strong>Alternatives:</strong> What structural, nonstructural, natural, operational, or “no action” choices exist?</li>
+<li><strong>Tradeoffs:</strong> How do cost, safety, reliability, environmental effects, social effects, and uncertainty compare?</li>
+<li><strong>Lifecycle:</strong> Who operates, maintains, repairs, replaces, funds, and monitors the solution?</li>
+</ul>
+</div></details></section>
+
+<section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary><div class="section-body">
+<details class="card"><summary>Beginner — Recognize the mission areas</summary><div class="card-body"><div class="theory-meta"><span class="tag">Orientation</span><span class="ev high">Official mission framing</span></div><dl class="theory-grid">
+<dt>Definition</dt><dd>Civil Works is USACE’s national water-resources infrastructure and public-service portfolio.</dd>
+<dt>Purpose</dt><dd>To address public needs involving waterways, flooding and coastal storms, aquatic ecosystems, hydropower, recreation, regulated waters, and related water management.</dd>
+<dt>Example</dt><dd>Dredging a federal navigation channel helps maintain an authorized depth for vessels; operating the same waterway may also require environmental compliance and sediment-management decisions.</dd>
+<dt>Takeaway</dt><dd>Ask “Which public outcome and authority are involved?” rather than assuming every activity is simply construction.</dd>
+</dl></div></details>
+
+<details class="card"><summary>Foundational — Separate missions, functions, and project purposes</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Concept building</span></div>
+<p><strong>Mission areas</strong> describe public outcomes or responsibilities: navigation, flood and coastal storm risk management, aquatic ecosystem restoration, hydropower, recreation, and regulatory work. <strong>Functions and programs</strong> describe how work is executed across missions: planning, engineering, construction, operations and maintenance, dam safety, levee safety, real estate, environmental compliance, contracting, and partnership coordination. <strong>Authorized project purposes</strong> are the legally established purposes of a specific project; not every project has every purpose.</p>
+<dl class="theory-grid">
+<dt>Mechanism</dt><dd>Congressional and statutory authorities establish what can be done; studies compare alternatives; appropriations and agreements enable delivery; operations and maintenance sustain performance.</dd>
+<dt>Key distinction</dt><dd>A regulatory permit decision is not the same as USACE constructing a Civil Works project. The regulator reviews a proposed private or public activity under applicable authorities.</dd>
+<dt>Misconception</dt><dd>“A levee prevents flooding.” More accurately, a levee can reduce risk under certain conditions but cannot eliminate the hazard or all consequences.</dd>
+</dl></div></details>
+
+<details class="card"><summary>Intermediate — Analyze systems, alternatives, and tradeoffs</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Applied reasoning</span></div>
+<p>At this level, treat the problem as a system. Define the geographic scale, stakeholders, baseline condition, future conditions, performance objectives, constraints, and uncertainties. Compare combinations of measures—not just one preferred structure.</p>
+<dl class="theory-grid">
+<dt>Principles</dt><dd>Risk-informed decisions; lifecycle management; economic, environmental, and social effects; public safety; environmental compliance; partnership; and transparent comparison of alternatives.</dd>
+<dt>Variables</dt><dd>Hydrology, coastal processes, sediment, vessel demand, asset condition, land use, population, ecosystem response, cost, schedule, operations, and climate or other future-condition uncertainty.</dd>
+<dt>Realistic case</dt><dd>A coastal community may compare a floodwall, elevation or acquisition of vulnerable structures, beach and dune measures, wetland restoration, warning and evacuation improvements, and combinations of these actions.</dd>
+<dt>Tradeoff</dt><dd>A measure can reduce one risk while transferring cost, environmental effect, maintenance burden, or residual risk elsewhere.</dd>
+</dl></div></details>
+
+<details class="card"><summary>Advanced — Understand governance, uncertainty, and edge cases</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Technical and policy context</span></div>
+<p>Advanced understanding requires tracing the chain from authority to project purpose to budget and implementation. Civil Works decisions occur within a federal system: Congress authorizes and funds many activities; the Assistant Secretary of the Army for Civil Works has civilian oversight responsibilities; USACE headquarters, divisions, and districts execute; non-federal sponsors and other agencies have defined roles.</p>
+<dl class="theory-grid">
+<dt>Historical dimension</dt><dd>The program grew from early federal navigation work into flood risk management, multipurpose water infrastructure, environmental restoration, recreation, regulatory work, and emergency support.</dd>
+<dt>Technical dimension</dt><dd>Models estimate future conditions and consequences, but uncertainty remains in hazards, asset performance, behavior, ecosystem response, costs, and future development.</dd>
+<dt>Competing views</dt><dd>Stakeholders may value national economic efficiency, regional development, life safety, environmental quality, cultural resources, distributional effects, or local preferences differently.</dd>
+<dt>Edge case</dt><dd>The same physical action—such as dredging—may be a federal navigation maintenance activity in one setting, a regulated private proposal in another, or a source of material for ecosystem or coastal benefits in a third.</dd>
+</dl></div></details>
+
+<details class="card"><summary>Expert Perspective — Frame decisions across the full lifecycle</summary><div class="card-body"><div class="theory-meta"><span class="tag">Professional synthesis</span></div>
+<p>Experts do not begin with a favored project type. They frame the decision, identify governing authorities and owners, characterize risk and uncertainty, define measurable objectives, formulate a broad range of alternatives, evaluate effects, plan for operations and maintenance, and identify who bears costs, benefits, and residual risks.</p>
+<dl class="theory-grid">
+<dt>Frameworks</dt><dd>Integrated water-resources management, risk-informed planning, systems and watershed analysis, asset management, adaptive management, and lifecycle project delivery.</dd>
+<dt>Decision quality</dt><dd>A strong recommendation is technically sound, legally supportable, implementable, explainable to stakeholders, and robust enough for plausible future conditions.</dd>
+<dt>Adjacent disciplines</dt><dd>Hydrology, hydraulics, coastal engineering, geotechnical and structural engineering, ecology, economics, planning, law, public administration, emergency management, operations research, and risk communication.</dd>
+<dt>Signs of mastery</dt><dd>Can distinguish mission from authority, identify cross-mission effects, explain residual risk, challenge hidden assumptions, and state what must be verified for the specific district and project.</dd>
+</dl></div></details>
+</div></details></section>
+
+<section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary><div class="section-body">
+<figure class="figure"><h3>Civil Works lifecycle and decision chain</h3>
+<div class="legend"><span><i style="background:#145a78"></i>Structure and authority</span><span><i style="background:#188d88"></i>Processes and interactions</span><span><i style="background:#b57922"></i>Conditions and cautions</span><span><i style="background:#a83f46"></i>Risk or constraint</span></div>
+<svg class="svgwide" viewBox="0 0 1040 330" role="img" aria-labelledby="life-title life-desc">
+<title id="life-title">Conceptual Civil Works lifecycle</title><desc id="life-desc">A flow from public need through authority and partnership, planning and alternatives, delivery or regulatory decision, operation and stewardship, and public outcomes. Feedback arrows show monitoring and changed conditions returning information to earlier decisions.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#188d88"/></marker><marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#b57922"/></marker></defs>
+<rect x="20" y="75" width="140" height="90" rx="12" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="90" y="108" text-anchor="middle" font-weight="700" fill="#17212b">Public need</text><text x="90" y="134" text-anchor="middle" font-size="14" fill="#586875">Problem or</text><text x="90" y="154" text-anchor="middle" font-size="14" fill="#586875">opportunity</text>
+<rect x="195" y="75" width="150" height="90" rx="12" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="270" y="105" text-anchor="middle" font-weight="700">Authority &amp;</text><text x="270" y="127" text-anchor="middle" font-weight="700">partnership</text><text x="270" y="151" text-anchor="middle" font-size="13" fill="#586875">Jurisdiction, sponsor, funds</text>
+<rect x="380" y="75" width="150" height="90" rx="12" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="455" y="105" text-anchor="middle" font-weight="700">Planning &amp;</text><text x="455" y="127" text-anchor="middle" font-weight="700">alternatives</text><text x="455" y="151" text-anchor="middle" font-size="13" fill="#586875">Effects and tradeoffs</text>
+<rect x="565" y="65" width="155" height="110" rx="12" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="642" y="99" text-anchor="middle" font-weight="700">Delivery or</text><text x="642" y="121" text-anchor="middle" font-weight="700">permit decision</text><text x="642" y="145" text-anchor="middle" font-size="13" fill="#586875">Build, modify, assist,</text><text x="642" y="163" text-anchor="middle" font-size="13" fill="#586875">operate, or regulate</text>
+<rect x="755" y="75" width="135" height="90" rx="12" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="822" y="106" text-anchor="middle" font-weight="700">Operate &amp;</text><text x="822" y="128" text-anchor="middle" font-weight="700">steward</text><text x="822" y="151" text-anchor="middle" font-size="13" fill="#586875">Monitor and maintain</text>
+<rect x="925" y="65" width="95" height="110" rx="12" fill="#fbf4e7" stroke="#b57922" stroke-width="2"/><text x="972" y="100" text-anchor="middle" font-weight="700">Public</text><text x="972" y="122" text-anchor="middle" font-weight="700">outcomes</text><text x="972" y="148" text-anchor="middle" font-size="12" fill="#586875">Benefits +</text><text x="972" y="165" text-anchor="middle" font-size="12" fill="#a83f46">residual risk</text>
+<path d="M160 120 H190" stroke="#188d88" stroke-width="3" marker-end="url(#arrow)"/><path d="M345 120 H375" stroke="#188d88" stroke-width="3" marker-end="url(#arrow)"/><path d="M530 120 H560" stroke="#188d88" stroke-width="3" marker-end="url(#arrow)"/><path d="M720 120 H750" stroke="#188d88" stroke-width="3" marker-end="url(#arrow)"/><path d="M890 120 H920" stroke="#188d88" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M972 185 C960 270,720 290,640 190" fill="none" stroke="#b57922" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow2)"/><text x="815" y="285" text-anchor="middle" fill="#795312" font-size="14">Monitoring, changed conditions, lessons, and adaptation</text>
+<rect x="230" y="220" width="360" height="60" rx="10" fill="#f5dee0" stroke="#a83f46"/><text x="410" y="244" text-anchor="middle" font-weight="700" fill="#8a303a">Gate conditions throughout the lifecycle</text><text x="410" y="266" text-anchor="middle" font-size="13" fill="#586875">Safety • environmental compliance • budget • schedule • stakeholder commitments</text>
+</svg>
+<p><strong>What to notice:</strong> Construction is only one possible activity in the middle of a longer chain. A sound solution requires authority, analysis, implementation capacity, and continuing stewardship.</p>
+<p><strong>Text equivalent:</strong> A public need enters a decision process. Authority, jurisdiction, partnership, and funding determine whether and how USACE can act. Alternatives are formulated and evaluated. The result may be a project, technical assistance, an operational change, a permit decision, or no federal action. Monitoring and changed conditions feed back into future decisions.</p>
+<figcaption><span class="tag">Conceptual</span> Based on the official USACE Civil Works description and planning/lifecycle framing. Not a statutory process map; individual programs use specific requirements and decision milestones.</figcaption></figure>
+
+<figure class="figure"><h3>How the major mission areas differ—and connect</h3>
+<div class="table-wrap"><table class="matrix"><caption>National-level comparison of Civil Works mission areas</caption><thead><tr><th scope="col">Mission area</th><th scope="col">Primary question</th><th scope="col">Typical activities</th><th scope="col">Common connection</th><th scope="col">Important limit</th></tr></thead><tbody>
+<tr><td><strong>Navigation</strong></td><td>How can authorized waterways support safe, reliable, efficient waterborne transportation?</td><td>Channels, harbors, locks, dams, dredging, breakwaters, jetties, sediment management</td><td>Dredged material may support habitat or coastal resilience.</td><td>USACE maintains federal navigation features; ports and terminals include other owners.</td></tr>
+<tr><td><strong>Flood and coastal storm risk management</strong></td><td>How can communities reduce threats to life, property, infrastructure, and natural resources?</td><td>Levees, dams, seawalls, floodproofing, acquisition, beach nourishment, dunes, wetlands, technical assistance</td><td>Natural and nature-based features may provide ecological or recreational benefits.</td><td>Measures reduce risk; they do not eliminate flooding or storm impacts.</td></tr>
+<tr><td><strong>Aquatic ecosystem restoration</strong></td><td>How can degraded aquatic structure, function, and dynamic processes be moved toward less-degraded conditions?</td><td>Hydrologic reconnection, habitat features, wetland or river restoration, sediment or geomorphic work</td><td>May connect with floodplain function, beneficial use, recreation, or navigation.</td><td>Restoration is not automatically mitigation or remediation; authority and objectives matter.</td></tr>
+<tr><td><strong>Hydropower</strong></td><td>How can authorized federal dams generate reliable renewable electricity while serving project purposes?</td><td>Turbine generation, plant operation, maintenance, modernization, coordination with power marketing agencies</td><td>Reservoir operations interact with flood storage, navigation, ecology, and recreation.</td><td>Generation is constrained by water availability, project authorization, safety, and system operations.</td></tr>
+<tr><td><strong>Recreation</strong></td><td>How can public access and outdoor use be provided at USACE lake and river projects?</td><td>Trails, parks, campsites, boat launches, water-safety programs, stewardship</td><td>Often a co-benefit of multipurpose projects.</td><td>Access and activities vary by site, season, water level, and operating conditions.</td></tr>
+<tr><td><strong>Regulatory</strong></td><td>Should a proposed activity affecting certain regulated waters receive authorization, and under what conditions?</td><td>Jurisdictional work, permit review, public-interest evaluation, compliance and enforcement</td><td>Coordinates with environmental laws and other federal, state, tribal, and local reviews.</td><td>A permit decision is distinct from a USACE-sponsored construction project.</td></tr>
+</tbody></table></div>
+<p><strong>What to notice:</strong> The mission areas have different decision questions, but the same river, coast, wetland, or reservoir can involve several of them.</p>
+<figcaption><span class="tag">Conceptual comparison</span> Categories reflect the USACE Headquarters Civil Works mission-area page. Examples are representative, not exhaustive, and actual applicability depends on authority and location.</figcaption></figure>
+
+<figure class="figure"><h3>Multipurpose reservoir: one asset, several authorized outcomes</h3>
+<svg class="svgwide" viewBox="0 0 900 380" role="img" aria-labelledby="res-title res-desc"><title id="res-title">Conceptual multipurpose reservoir diagram</title><desc id="res-desc">A dam and reservoir with unscaled storage zones and arrows to flood risk management, hydropower, navigation and downstream flows, water supply, recreation, and ecosystems. A caution states that actual priorities and storage allocations are project-specific.</desc>
+<path d="M70 275 Q230 155 435 245 Q610 315 780 225 L780 305 L70 305 Z" fill="#dceff3" stroke="#145a78" stroke-width="2"/>
+<path d="M600 90 L700 305 L760 305 L650 90 Z" fill="#d8e0e6" stroke="#586875" stroke-width="2"/><rect x="640" y="230" width="65" height="45" fill="#625b9c" opacity=".8"/><text x="672" y="257" text-anchor="middle" fill="white" font-size="13">Turbines</text>
+<line x1="85" y1="195" x2="580" y2="195" stroke="#b57922" stroke-width="2" stroke-dasharray="7 5"/><text x="100" y="186" fill="#795312" font-size="14">Conceptual flood-storage space</text>
+<line x1="125" y1="245" x2="575" y2="245" stroke="#188d88" stroke-width="2" stroke-dasharray="7 5"/><text x="140" y="236" fill="#176353" font-size="14">Conceptual conservation/operating storage</text>
+<path d="M760 305 C810 310 840 330 880 328" fill="none" stroke="#145a78" stroke-width="12"/>
+<rect x="35" y="25" width="180" height="70" rx="10" fill="#eaf3f6" stroke="#145a78"/><text x="125" y="52" text-anchor="middle" font-weight="700">Flood risk management</text><text x="125" y="75" text-anchor="middle" font-size="13">Preserve capacity; manage releases</text><path d="M180 95 L245 178" stroke="#145a78" stroke-width="2"/>
+<rect x="275" y="25" width="150" height="70" rx="10" fill="#eef7f5" stroke="#188d88"/><text x="350" y="52" text-anchor="middle" font-weight="700">Water supply</text><text x="350" y="75" text-anchor="middle" font-size="13">Storage and withdrawals</text><path d="M350 95 L350 178" stroke="#188d88" stroke-width="2"/>
+<rect x="470" y="25" width="160" height="70" rx="10" fill="#eef7f5" stroke="#188d88"/><text x="550" y="52" text-anchor="middle" font-weight="700">Recreation &amp; ecology</text><text x="550" y="75" text-anchor="middle" font-size="13">Access, habitat, flow needs</text><path d="M550 95 L520 178" stroke="#188d88" stroke-width="2"/>
+<rect x="690" y="25" width="180" height="70" rx="10" fill="#eeeaf8" stroke="#625b9c"/><text x="780" y="52" text-anchor="middle" font-weight="700">Hydropower &amp; downstream</text><text x="780" y="75" text-anchor="middle" font-size="13">Energy, navigation, flows</text><path d="M780 95 L700 220" stroke="#625b9c" stroke-width="2"/>
+<rect x="200" y="325" width="500" height="40" rx="8" fill="#fbf4e7" stroke="#b57922"/><text x="450" y="350" text-anchor="middle" fill="#795312">Actual storage zones, release rules, and priorities are project-specific—not shown to scale.</text>
+</svg>
+<p><strong>What to notice:</strong> The same water and infrastructure support multiple outcomes. An operating decision favorable to one purpose can constrain another, especially during flood, drought, maintenance, or ecological stress.</p>
+<p><strong>Text equivalent:</strong> A reservoir can reserve capacity for floods, store water for authorized uses, route releases through hydropower turbines, support downstream navigation or environmental flows, and host recreation. The authorized purposes and operating rules differ by project.</p>
+<figcaption><span class="tag gold">Illustrative, not to scale</span> No empirical storage volumes or operating priorities are implied. Source context: official USACE Civil Works, hydropower, and regional multipurpose-reservoir descriptions.</figcaption></figure>
+</div></details></section>
+
+<section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body">
+<h3>Mission-area matcher</h3>
+<p>Choose the dominant public need. The tool suggests a likely starting mission area and reminds you which adjacent areas or gate conditions to check. It is a learning aid—not a jurisdictional, program-eligibility, or project-approval determination.</p>
+<div class="definition">
+<label for="missionScenario"><strong>Dominant need:</strong></label>
+<select id="missionScenario">
+<option value="navigation">Cargo vessels cannot reliably use an authorized channel</option>
+<option value="flood">A community faces repeated inland flooding or coastal storm impacts</option>
+<option value="ecosystem">An aquatic system has degraded structure or ecological function</option>
+<option value="hydropower">A federal dam must sustain or modernize power generation</option>
+<option value="recreation">The issue concerns public outdoor use at a USACE lake or river project</option>
+<option value="regulatory">A proposed activity may affect navigable waters, wetlands, or other regulated waters</option>
+<option value="multi">A reservoir or watershed has several competing authorized purposes</option>
+<option value="emergency">A disaster creates urgent public works and engineering needs</option>
+</select>
+<button class="btn" id="matchMission" type="button">Show likely starting point</button>
+</div>
+<div id="missionResult" class="callout" aria-live="polite"><p><strong>Starting observation:</strong> Identify the dominant problem first, then check authority, location, ownership, project purpose, partners, and lifecycle effects.</p></div>
+<h3>Static worked illustration</h3>
+<p>If a harbor channel is too shallow, <strong>navigation</strong> is the likely starting mission. But the complete analysis also checks sediment quality and placement, potential beneficial use for habitat or beaches, environmental compliance, available dredging capacity, funding, and coordination with port and environmental partners. The “mission” names the primary outcome; it does not remove the cross-mission work.</p>
+<div class="table-wrap"><table class="matrix"><caption>Static mission-matching guide available without JavaScript</caption><thead><tr><th scope="col">Dominant need</th><th scope="col">Likely starting point</th><th scope="col">Check next</th></tr></thead><tbody>
+<tr><td>Waterborne transportation reliability</td><td>Navigation</td><td>Sediment, infrastructure condition, port interfaces, beneficial use, environmental compliance</td></tr>
+<tr><td>Flooding or coastal storm consequences</td><td>Flood and coastal storm risk management</td><td>Hazard, asset performance, consequences, residual risk, structural and nonstructural alternatives</td></tr>
+<tr><td>Degraded aquatic function</td><td>Aquatic ecosystem restoration</td><td>Reference condition, ecological objectives, hydrology, geomorphology, monitoring, regulatory needs</td></tr>
+<tr><td>Electricity from a federal water project</td><td>Hydropower</td><td>Dam safety, water availability, other project purposes, grid and power-marketing coordination</td></tr>
+<tr><td>Public access and outdoor use</td><td>Recreation</td><td>Water safety, natural-resource stewardship, operating levels, site-specific access and capacity</td></tr>
+<tr><td>Proposed work in regulated waters</td><td>Regulatory</td><td>Jurisdiction, permit type, alternatives, effects, other agency reviews, current rules</td></tr>
+<tr><td>Disaster public works need</td><td>Emergency operations or technical assistance</td><td>Requesting authority, mission assignment, urgency, life safety, state/local/FEMA roles</td></tr>
+</tbody></table></div>
+<p class="small"><strong>Expected observation:</strong> Most scenarios have one useful starting point but several adjacent considerations. <strong>Why:</strong> water systems and infrastructure create linked effects. <strong>Limit:</strong> the tool does not determine which office, authority, appropriation, or permit applies.</p>
+</div></details></section>
+
+<section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">6</span>Worked Examples</h2></summary><div class="section-body">
+<details class="card"><summary>Example 1 — Maintaining a shoaling harbor channel</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical scenario</span><span class="tag green">Navigation</span></div>
+<dl class="theory-grid"><dt>Situation</dt><dd>A federally authorized harbor channel is shoaling, causing draft restrictions and unreliable vessel schedules.</dd><dt>Inputs and assumptions</dt><dd>Assume surveys confirm reduced depth; the channel is a federal navigation project; no specific volume, cost, or schedule is asserted.</dd></dl>
+<h4>Stepwise application</h4><ol><li>Define the navigation performance problem: where, how often, and which vessels are affected.</li><li>Confirm authority, project dimensions, funding, environmental requirements, and responsible USACE district.</li><li>Evaluate dredging method, timing, placement capacity, safety, and effects.</li><li>Assess whether suitable dredged material can be used beneficially for habitat, beach nourishment, or other authorized purposes.</li><li>Coordinate execution with the port, regulators, resource agencies, contractors, and affected users.</li><li>Monitor channel condition and update future maintenance planning.</li></ol>
+<p><strong>Result:</strong> Navigation is the primary mission, while sediment management, ecosystem effects, coastal resilience opportunities, and regulation shape implementation.</p><p><strong>Key lesson:</strong> One physical activity can support several outcomes; the primary mission does not describe every requirement.</p><p class="small"><strong>Limitations/alternatives:</strong> Dredging may not be the only response; operational restrictions, channel modifications, sediment controls, or different maintenance cycles may be considered. Suitability and authority govern beneficial use.</p>
+</div></details>
+
+<details class="card"><summary>Example 2 — Reducing recurrent river flooding</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical scenario</span><span class="tag gold">Risk management</span></div>
+<dl class="theory-grid"><dt>Situation</dt><dd>A riverside community experiences recurring floods affecting homes, roads, utilities, and businesses.</dd><dt>Inputs and assumptions</dt><dd>Assume a willing public partner and an initial basis to explore USACE assistance; actual eligibility is not determined.</dd></dl>
+<h4>Stepwise application</h4><ol><li>Characterize hazards: depths, velocities, duration, frequency range, and future conditions.</li><li>Characterize consequences: life safety, critical services, property, environmental resources, and recovery time.</li><li>If infrastructure exists, evaluate its condition and likely performance under different events.</li><li>Formulate alternatives: levee or floodwall, building elevation or floodproofing, acquisition, floodplain reconnection, warning and evacuation improvements, and combinations.</li><li>Compare cost, benefits, environmental and social effects, constructability, operations and maintenance, and residual risk.</li><li>Communicate clearly that any selected measure changes risk rather than eliminating flooding.</li></ol>
+<p><strong>Result:</strong> A combined plan may outperform a single structure by reducing both probability and consequences.</p><p><strong>Key lesson:</strong> Flood risk depends on the hazard, how measures perform, and the consequences when water reaches people and assets.</p><p class="small"><strong>Limitations/alternatives:</strong> Local land-use decisions, insurance, evacuation, building codes, and private actions remain important. A federal project cannot substitute for community-wide shared responsibility.</p>
+</div></details>
+
+<details class="card"><summary>Example 3 — Restoring habitat while reviewing a proposed crossing</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical scenario</span><span class="tag green">Ecosystem restoration</span><span class="tag">Regulatory distinction</span></div>
+<dl class="theory-grid"><dt>Situation</dt><dd>A degraded stream-floodplain system could be reconnected, while a separate proposed utility crossing may affect regulated waters.</dd><dt>Inputs and assumptions</dt><dd>The restoration concept and the permit application have different proponents and decision pathways.</dd></dl>
+<h4>Stepwise application</h4><ol><li>For restoration, define measurable ecological objectives and a reference or desired condition.</li><li>Study hydrology, sediment, geomorphology, habitat connectivity, invasive species, and likely system response.</li><li>Formulate restoration alternatives and a monitoring/adaptive-management approach.</li><li>Separately, determine whether the proposed crossing requires a USACE permit and what information the regulator needs.</li><li>Evaluate avoidance, minimization, alternatives, effects, and any applicable compensatory mitigation requirements under the regulatory pathway.</li><li>Coordinate schedules and information where useful without merging the two legal decisions.</li></ol>
+<p><strong>Result:</strong> USACE could potentially be involved as a restoration partner and as a regulator, but those roles remain procedurally and legally distinct.</p><p><strong>Key lesson:</strong> “Environmental mission” is not one undifferentiated activity; restoration, project environmental compliance, and regulatory review answer different questions.</p><p class="small"><strong>Limitations/alternatives:</strong> Jurisdiction and current regulatory requirements must be verified. Restoration authority cannot be assumed, and a permit does not endorse the broader desirability of a project beyond the applicable decision.</p>
+</div></details>
+
+<details class="card"><summary>Example 4 — Operating a multipurpose reservoir during drought</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical scenario</span><span class="tag red">Competing constraints</span><span class="tag">Systems thinking</span></div>
+<dl class="theory-grid"><dt>Situation</dt><dd>Extended dry conditions reduce reservoir inflow while water supply, hydropower, downstream flows, recreation, and ecological needs remain.</dd><dt>Inputs and assumptions</dt><dd>The reservoir has multiple authorized purposes, but this example does not assign priorities, storage volumes, or release rules.</dd></dl>
+<h4>Stepwise application</h4><ol><li>Confirm authorized purposes, operating manuals, contracts or agreements, safety constraints, and decision authorities.</li><li>Update inflow forecasts, storage projections, downstream conditions, and uncertainty ranges.</li><li>Map how release options affect each purpose over time—not only today’s benefit.</li><li>Coordinate with water users, power partners, navigation interests where applicable, resource agencies, tribes, recreation managers, and emergency officials.</li><li>Compare operational scenarios, thresholds, triggers, and contingency measures.</li><li>Communicate decisions, assumptions, remaining uncertainty, and what would cause the plan to change.</li></ol>
+<p><strong>Result:</strong> The defensible choice may be a staged operating strategy that preserves flexibility rather than maximizing one short-term output.</p><p><strong>Key lesson:</strong> Expert Civil Works practice manages a portfolio of authorized outcomes under uncertainty and scarcity.</p><p class="small"><strong>Limitations/alternatives:</strong> Actual operations are governed by project-specific authorities and documents. Stakeholder preferences do not by themselves change legal responsibilities.</p>
+</div></details>
+</div></details></section>
+
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary><div class="section-body">
+<p><strong>No formal prerequisites are required</strong> for this beginner resource. The topics below make deeper study faster and more accurate.</p>
+<div class="table-wrap"><table class="matrix"><caption>Prerequisites for entry-level understanding and deeper mastery</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite Topic</th><th scope="col">Why It Helps</th><th scope="col">Recommended Starting Point</th></tr></thead><tbody>
+<tr><td><span class="tag green">Essential</span></td><td>Basic watershed and coast concepts</td><td>Explains how water, sediment, land, and infrastructure connect across locations.</td><td>Learn watershed, river basin, floodplain, estuary, harbor, and coastal storm basics.</td></tr>
+<tr><td><span class="tag green">Essential</span></td><td>Risk versus hazard</td><td>Prevents the error of treating a structure as complete protection.</td><td>Separate the physical event from performance, exposure, vulnerability, and consequences.</td></tr>
+<tr><td><span class="tag gold">Helpful</span></td><td>Federal roles and authorities</td><td>Clarifies why USACE cannot act on every water problem and why Congress, sponsors, and agencies matter.</td><td>Study authorization, appropriation, jurisdiction, non-federal sponsor, and interagency coordination.</td></tr>
+<tr><td><span class="tag gold">Helpful</span></td><td>Project lifecycle</td><td>Shows why planning, design, construction, operations, maintenance, repair, and replacement are connected.</td><td>Trace one local infrastructure project from identified need through long-term stewardship.</td></tr>
+<tr><td><span class="tag">Optional/Advanced</span></td><td>Hydrology, hydraulics, coastal processes, and sediment</td><td>Supports technical review of models, alternatives, and physical system behavior.</td><td>Introductory courses or official technical manuals appropriate to the mission.</td></tr>
+<tr><td><span class="tag">Optional/Advanced</span></td><td>Economics, ecology, planning, and environmental law</td><td>Supports evaluation of benefits, effects, tradeoffs, uncertainty, and compliance.</td><td>Use current agency guidance and discipline-specific references for the actual decision.</td></tr>
+</tbody></table></div>
+</div></details></section>
+
+<section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">8</span>Glossary</h2></summary><div class="section-body">
+<div class="table-wrap"><table class="matrix"><caption>Core Civil Works terms in plain language</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language definition</th><th scope="col">Connection to Civil Works</th></tr></thead><tbody>
+<tr><td><strong>USACE</strong></td><td>U.S. Army Corps of Engineers.</td><td>A federal engineering organization with Civil Works and separate military-support responsibilities.</td></tr>
+<tr><td><strong>Civil Works</strong></td><td>USACE activities involving national water-resources infrastructure and associated public services.</td><td>The umbrella for the mission areas taught here.</td></tr>
+<tr><td><strong>Authorization</strong></td><td>Legal permission to undertake a category of work or a specific project.</td><td>Answers whether USACE may act and for what purpose; it is not the same as having money available.</td></tr>
+<tr><td><strong>Appropriation</strong></td><td>Funding made available by law for specified uses.</td><td>Authorized work generally still requires applicable funding.</td></tr>
+<tr><td><strong>Non-federal sponsor</strong></td><td>An eligible state, local, tribal, public, or other qualifying entity that partners with USACE under a program.</td><td>May share study or project responsibilities, costs, lands, operations, or maintenance, depending on authority.</td></tr>
+<tr><td><strong>Navigation</strong></td><td>Movement of vessels through waterways.</td><td>USACE studies, constructs, operates, and maintains federal channels and related navigation infrastructure.</td></tr>
+<tr><td><strong>FRM/CSRM</strong></td><td>Flood Risk Management / Coastal Storm Risk Management.</td><td>Programs and projects that reduce inland flood and water-related coastal storm risks.</td></tr>
+<tr><td><strong>Residual risk</strong></td><td>Risk that remains after a measure is in place.</td><td>Essential when communicating what levees, dams, seawalls, dunes, or other measures can and cannot do.</td></tr>
+<tr><td><strong>Aquatic ecosystem restoration</strong></td><td>Actions intended to improve degraded aquatic structure, function, or dynamic processes.</td><td>A core mission area that may modify hydrology or geomorphology to support ecological objectives.</td></tr>
+<tr><td><strong>Hydropower</strong></td><td>Electricity generated from moving water.</td><td>At authorized federal dams, water passes through generating units while operations also account for safety and other project purposes.</td></tr>
+<tr><td><strong>Regulatory Program</strong></td><td>USACE review of certain proposed activities in regulated waters under applicable federal authorities.</td><td>Includes permit decisions under authorities such as Section 10 of the Rivers and Harbors Act and Section 404 of the Clean Water Act.</td></tr>
+<tr><td><strong>Beneficial use of dredged material</strong></td><td>Using dredged sediment productively rather than treating it only as waste.</td><td>Can connect navigation maintenance with habitat, beach, wetland, island, or risk-reduction outcomes when suitable and authorized.</td></tr>
+<tr><td><strong>Structural measure</strong></td><td>A physical engineered feature that changes hazard pathways or system performance.</td><td>Examples include levees, floodwalls, dams, gates, channels, and seawalls.</td></tr>
+<tr><td><strong>Nonstructural measure</strong></td><td>An action that reduces consequences without primarily blocking or rerouting water through a major structure.</td><td>Examples include elevation, floodproofing, acquisition, warning, evacuation, and land-use measures.</td></tr>
+<tr><td><strong>Natural and nature-based feature</strong></td><td>A feature using natural processes or landscape elements to provide services.</td><td>Examples may include dunes, wetlands, reefs, floodplains, and marshes, often combined with other measures.</td></tr>
+<tr><td><strong>Operations and maintenance (O&amp;M)</strong></td><td>Routine and recurring work needed to keep an asset functioning.</td><td>Performance depends on inspection, repair, sediment management, vegetation management, equipment work, and funding over time.</td></tr>
+<tr><td><strong>Project purpose</strong></td><td>A legally authorized outcome for a particular project.</td><td>Determines what that project may be operated or modified to accomplish.</td></tr>
+</tbody></table></div>
+</div></details></section>
+
+<section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary><div class="section-body">
+<div class="grid">
+<div class="definition"><strong>Integrated water-resources management.</strong><p>Connects water quantity, quality, infrastructure, ecosystems, land use, and human needs at an appropriate system scale. It matters because optimizing one site or mission can create unintended effects elsewhere.</p></div>
+<div class="definition"><strong>Watershed and systems planning.</strong><p>Expands analysis beyond a single structure or political boundary. It helps identify upstream/downstream effects, cumulative problems, and opportunities to combine measures.</p></div>
+<div class="definition"><strong>Asset management.</strong><p>Uses condition, performance, consequence, cost, and lifecycle information to prioritize inspection, maintenance, rehabilitation, modernization, or replacement. It connects mission outcomes to the reliability of physical infrastructure.</p></div>
+<div class="definition"><strong>Risk communication.</strong><p>Explains hazards, performance, uncertainty, consequences, actions, and residual risk in language people can use. It matters because communities can make poor choices if “protection” is misunderstood as certainty.</p></div>
+<div class="definition"><strong>Environmental compliance versus restoration.</strong><p>Compliance identifies and addresses legal environmental requirements for an action; restoration pursues ecological improvement as an objective. They may overlap in information and design, but they are not interchangeable.</p></div>
+<div class="definition"><strong>Emergency management.</strong><p>Preparedness, response, recovery, and mitigation can involve USACE engineering and public-works capabilities. Emergency support uses specific authorities or mission assignments and does not erase normal roles and eligibility rules.</p></div>
+<div class="definition"><strong>Public infrastructure governance.</strong><p>Authority, ownership, funding, cost sharing, operations, maintenance, and accountability are distributed. This explains why a technically attractive alternative may still be infeasible without a capable sponsor or durable management plan.</p></div>
+<div class="definition"><strong>Adaptive management.</strong><p>Uses monitoring and planned adjustment when system response is uncertain. It is especially relevant to ecosystem restoration and other long-lived projects facing changing conditions.</p></div>
+</div>
+</div></details></section>
+
+<section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body">
+<div class="table-wrap"><table class="matrix"><caption>Frequent misconceptions and accurate corrections</caption><thead><tr><th scope="col">Misconception</th><th scope="col">Accurate correction</th><th scope="col">Why it matters</th><th scope="col">Counterexample or nuance</th></tr></thead><tbody>
+<tr><td>“Civil Works means civilian buildings.”</td><td>It refers chiefly to USACE water-resources infrastructure, programs, operations, and regulatory responsibilities.</td><td>Avoids confusing Civil Works with general public-building construction or the military construction mission.</td><td>A lock, harbor channel, levee, ecosystem project, or permit action can be Civil Works.</td></tr>
+<tr><td>“USACE owns or controls all U.S. waters.”</td><td>Water governance and ownership are distributed; USACE has defined federal project and regulatory roles.</td><td>Prevents incorrect assumptions about jurisdiction or decision authority.</td><td>A state, local agency, tribe, port, utility, private owner, or another federal agency may control key assets or decisions.</td></tr>
+<tr><td>“A levee or dam eliminates flood risk.”</td><td>Such infrastructure can reduce risk but can be exceeded, fail, or face conditions beyond assumptions.</td><td>People behind a structure still need awareness, planning, insurance decisions, and evacuation capability.</td><td>A flood larger than the design range or a performance problem can produce severe consequences.</td></tr>
+<tr><td>“Environmental restoration and regulatory permitting are the same mission.”</td><td>Restoration seeks ecological outcomes; regulation evaluates proposed activities under legal authorities.</td><td>They use different objectives, roles, records, and decisions.</td><td>USACE may review a permit for a private project while separately partnering on an ecosystem restoration study.</td></tr>
+<tr><td>“Once Congress authorizes a project, construction begins.”</td><td>Authorization and appropriation are different; design, agreements, review, funding, and implementation steps remain.</td><td>Clarifies schedule and governance expectations.</td><td>An authorized project may wait for funding or require additional work before construction.</td></tr>
+<tr><td>“Every dam serves the same purposes and follows the same priorities.”</td><td>Purposes, storage, operating rules, ownership, and constraints are project-specific.</td><td>Generic assumptions can produce wrong operational conclusions.</td><td>Some projects have hydropower; others do not. Some support navigation or water supply; others have different authorized purposes.</td></tr>
+<tr><td>“Dredged material is always waste.”</td><td>Suitable dredged material can sometimes be used beneficially for environmental restoration or storm-risk reduction.</td><td>Opens cross-mission alternatives and reduces pressure on placement capacity.</td><td>Material suitability, logistics, cost, authority, timing, and environmental compliance may limit use.</td></tr>
+<tr><td>“More infrastructure is always the best answer.”</td><td>Structural, nonstructural, natural, operational, and no-action alternatives should be compared.</td><td>A large structure can shift risk, create effects, or impose maintenance burdens.</td><td>Elevating a small set of buildings or restoring floodplain storage may be more robust in some settings.</td></tr>
+</tbody></table></div>
+<p class="small"><strong>Harmless introductory simplification:</strong> Calling navigation, flood risk management, and ecosystem restoration “the core missions” can be useful historically and conceptually, but the current headquarters presentation also identifies hydropower, recreation, and regulatory work as mission areas. Always check the context and date of the source.</p>
+</div></details></section>
+
+<section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body">
+<div class="evidence-row"><div><strong>Community or regional planning</strong><p>Use the mission framework to determine whether a problem is primarily about navigation, flood/coastal storm risk, ecosystem condition, reservoir purposes, recreation, regulation, or emergency support.</p></div><div><strong>Benefit</strong><p>Improves early scoping and directs questions to the right office and authority.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>Early labels can oversimplify cross-mission effects. Evidence status: established organizational framing; project applicability requires official confirmation.</p></div></div>
+<div class="evidence-row"><div><strong>Project read-aheads and decision briefs</strong><p>Organize a brief around need, authority, sponsor, alternatives, effects, lifecycle owner, residual risk, decision, and next milestone.</p></div><div><strong>Benefit</strong><p>Makes the decision and unresolved dependencies visible.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>A concise brief may hide technical uncertainty unless assumptions and confidence are explicit. Evidence status: recommended staff practice, not a universal mandated format.</p></div></div>
+<div class="evidence-row"><div><strong>Infrastructure investment and maintenance</strong><p>Connect asset condition to mission consequences rather than prioritizing only by age or repair cost.</p></div><div><strong>Benefit</strong><p>Supports risk-informed use of limited funds.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>Consequence estimates and model assumptions can bias priorities; equity and low-frequency/high-consequence outcomes require review.</p></div></div>
+<div class="evidence-row"><div><strong>Flood-risk communication</strong><p>Explain what a project is expected to do, its limits, the conditions analyzed, who maintains it, and what actions remain for residents and officials.</p></div><div><strong>Benefit</strong><p>Reduces false confidence and supports preparedness.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>Technical probability language can confuse audiences; communication should be tested and updated as conditions change.</p></div></div>
+<div class="evidence-row"><div><strong>Permit and development planning</strong><p>Engage the appropriate USACE district early when proposed work may affect regulated waters.</p></div><div><strong>Benefit</strong><p>Can surface jurisdiction, information, avoidance, alternatives, and coordination needs before design is fixed.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>Rules and jurisdictional interpretations can change. Do not rely on this resource for a permit determination or legal conclusion.</p></div></div>
+<div class="evidence-row"><div><strong>Emergency preparedness</strong><p>Understand where USACE engineering, debris, power, infrastructure assessment, flood fight, or other public-works support may fit within a unified response.</p></div><div><strong>Benefit</strong><p>Improves pre-event coordination and realistic requests.</p></div><div><strong>Risk/tradeoff/evidence</strong><p>Actual support depends on authority, requests, mission assignments, eligibility, priority, and available capacity.</p></div></div>
+<div class="callout warn"><p><strong>Professional-use boundary.</strong> This educational resource does not determine jurisdiction, legal sufficiency, engineering design, project eligibility, emergency authority, funding, cost share, or operational priority. Verify consequential decisions with current official guidance and the responsible USACE district, counsel, technical authority, sponsor, and other required reviewers.</p></div>
+</div></details></section>
+
+<section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body">
+<h3>Foundational questions</h3><ol>
+<li>In one sentence, what is USACE Civil Works?</li>
+<li>Name the six mission areas presented on the current USACE Headquarters Civil Works page.</li>
+<li>What is the difference between a mission area, a cross-cutting function, and an authorized project purpose?</li>
+<li>Why is “flood risk reduction” more accurate than “flood prevention”?</li>
+<li>How does the Regulatory Program differ from USACE construction of a Civil Works project?</li>
+</ol>
+<h3>Application and analysis questions</h3><ol start="6">
+<li>A proposed harbor dredging action could also create marsh habitat. Identify the primary mission, one adjacent mission, and three gate conditions that must be checked.</li>
+<li>A reservoir faces drought while serving hydropower, recreation, water supply, and downstream needs. What information would you request before recommending an operating change?</li>
+</ol>
+<details class="card"><summary>Answer Key — model answers and reasoning</summary><div class="card-body"><div class="theory-meta"><span class="tag">Closed by default</span><span class="tag green">Reasoning emphasized</span></div>
+<ol>
+<li><strong>Model answer:</strong> USACE Civil Works is the national water-resources infrastructure and public-service program through which USACE plans, delivers, operates, stewards, assists, and regulates under defined authorities. <em>Acceptable alternatives</em> may be shorter if they distinguish water resources from military construction.</li>
+<li><strong>Model answer:</strong> Aquatic ecosystem restoration; flood and coastal storm risk management; hydropower; navigation; recreation; and regulatory. <em>Reasoning:</em> Emergency response and water management are important parts of broader delivery, while planning and dam/levee safety are shown as functions/programs on the headquarters page.</li>
+<li><strong>Model answer:</strong> A mission area describes a public outcome or responsibility; a cross-cutting function is a capability used across missions, such as planning or dam safety; an authorized project purpose is what a particular project is legally established to accomplish. <em>Why it matters:</em> Confusing them leads to incorrect assumptions about what any office or asset may do.</li>
+<li><strong>Model answer:</strong> Flooding cannot be eliminated. Measures can be exceeded, underperform, fail, or leave consequences elsewhere, so residual risk remains. <em>Acceptable alternative:</em> Any answer recognizing uncertainty and remaining risk.</li>
+<li><strong>Model answer:</strong> In regulation, USACE evaluates another party’s proposed activity under applicable permit authorities. In a Civil Works project, USACE may be a study, design, construction, operations, or stewardship partner under a project authority. A permit is not the same as federal sponsorship or construction.</li>
+<li><strong>Model answer:</strong> Primary mission: navigation. Adjacent mission: aquatic ecosystem restoration or coastal storm risk management, depending on the marsh objective. Gate conditions include authority, funding, material suitability, environmental compliance, permits, sponsor commitments, logistics, cost, schedule, and monitoring. <em>Reasoning:</em> The channel need defines the primary mission; the use of sediment creates a cross-mission opportunity.</li>
+<li><strong>Model answer:</strong> Request the project’s authorized purposes and operating documents; current storage and inflow forecasts; uncertainty; dam-safety limits; contracts and agreements; downstream conditions; water-supply demands; power and ecological constraints; navigation needs if applicable; recreation and access effects; stakeholder roles; decision authority; thresholds; and contingency options. <em>Reasoning:</em> A recommendation cannot be based on one purpose without understanding legal, physical, temporal, and institutional constraints.</li>
+</ol>
+</div></details>
+</div></details></section>
+
+<section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body">
+<div class="callout"><p><strong>Central idea in one sentence:</strong> USACE Civil Works converts authorized public water-resources needs into analyzed, partnered, delivered, regulated, operated, and stewarded actions across a connected lifecycle.</p></div>
+<h3>Key takeaways</h3><ul>
+<li>The current headquarters mission-area framework includes aquatic ecosystem restoration, flood and coastal storm risk management, hydropower, navigation, recreation, and regulatory work.</li>
+<li>Planning, engineering, construction, operations and maintenance, and dam and levee safety connect the mission areas.</li>
+<li>A single harbor, river, coast, wetland, dam, or reservoir can involve several missions and stakeholders.</li>
+<li>Authority, jurisdiction, appropriation, partnership, environmental requirements, and lifecycle responsibility constrain what can be done.</li>
+<li>Risk-reduction measures change risk; they do not erase uncertainty or residual consequences.</li>
+<li>Regulatory review is distinct from USACE sponsoring or constructing a project.</li>
+<li>The strongest analysis compares alternatives and makes tradeoffs, assumptions, uncertainty, and long-term responsibilities explicit.</li>
+</ul>
+<p><strong>Specific next learning step:</strong> Select the USACE district responsible for an area you know and review its Civil Works pages. Identify one local project or permit program, its authorized purpose or authority, the partner or applicant, the current phase, and who operates and maintains the outcome.</p>
+<p class="lead"><strong>If you remember only one thing:</strong> Begin every Civil Works question by linking the public need to the applicable authority and full lifecycle—not by jumping directly to a preferred structure or solution.</p>
+<h3>Sources and verification notes</h3>
+<p>Sources below were accessed and checked on <strong>24 November 2026</strong>. They are official public USACE materials. Web pages, policies, statistics, program names, and regulatory requirements can change; verify current details with the responsible office. The diagrams and scenarios in this resource are conceptual or hypothetical unless explicitly described otherwise.</p>
+<ol class="refs">
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/IIJA/">U.S. Army Corps of Engineers Headquarters, “Civil Works.”</a> Current national mission statement, mission areas, and cross-cutting functions/programs.</li>
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/Navigation/">U.S. Army Corps of Engineers Headquarters, “Civil Works Navigation.”</a> Navigation portfolio, infrastructure, dredging, and beneficial-use context.</li>
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/Flood-Risk-Management/">U.S. Army Corps of Engineers Headquarters, “Flood and Coastal Storm Risk Management.”</a> Mission framing, structural/nonstructural/natural approaches, and hazard-performance-consequence concepts.</li>
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/Hydropower/">U.S. Army Corps of Engineers Headquarters, “Hydropower Program.”</a> Federal hydropower mission and operational context.</li>
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/Recreation/">U.S. Army Corps of Engineers Headquarters, “Recreation.”</a> Recreation role at USACE lake and river projects.</li>
+<li><a href="https://www.usace.army.mil/Missions/Civil-Works/Regulatory-Program-and-Permits/">U.S. Army Corps of Engineers Headquarters, “Civil Works Regulatory Program and Permits.”</a> National regulatory entry point.</li>
+<li><a href="https://www.spl.usace.army.mil/Missions/Regulatory/">U.S. Army Corps of Engineers Los Angeles District, “Regulatory Mission.”</a> Plain-language descriptions of Section 10, Section 404, and Section 103 authorities.</li>
+<li><a href="https://www.usace.army.mil/Missions/Emergency-Operations/">U.S. Army Corps of Engineers Headquarters, “Emergency Operations.”</a> USACE disaster-response authorities and public works/engineering support context.</li>
+<li><a href="https://publibrary.sec.usace.army.mil/api/download?filename=EP%201105-2-62_PlanningStudiesReportsAndPrograms_18NOV2025_FINAL.pdf&amp;id=68650559-00fc-4fe7-d3a8-be4af3cf4188&amp;preview=true">Engineer Pamphlet 1105-2-62, “Planning Studies, Reports and Programs,” 2 December 2025.</a> Current public planning-report and milestone context; consult the publication itself for formal requirements.</li>
+<li><a href="https://www.usace.army.mil/About/History/Brief-History-of-the-Corps/Beginnings/">U.S. Army Corps of Engineers Headquarters, “Brief History of the Corps.”</a> Historical development of navigation, flood control, hydropower, recreation, disaster response, and the separate military construction mission.</li>
+</ol>
+</div></details></section>
+
+</div></main>
+<script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script>
+<script>
+(() => {
+  const select = document.getElementById('missionScenario');
+  const button = document.getElementById('matchMission');
+  const result = document.getElementById('missionResult');
+  if (!select || !button || !result) return;
+  const matches = {
+    navigation: ['Navigation', 'Check channel authorization, surveys, asset condition, sediment management, environmental compliance, partners, funding, and beneficial-use opportunities.'],
+    flood: ['Flood and Coastal Storm Risk Management', 'Characterize hazard, infrastructure performance, consequences, future conditions, structural and nonstructural alternatives, and residual risk.'],
+    ecosystem: ['Aquatic Ecosystem Restoration', 'Define measurable ecological objectives; assess hydrology, geomorphology, habitat, reference conditions, authority, monitoring, and regulatory needs.'],
+    hydropower: ['Hydropower', 'Check project authorization, dam safety, water availability, generating-unit condition, power coordination, and interactions with other project purposes.'],
+    recreation: ['Recreation', 'Check the site’s authorized purposes, access, water safety, stewardship, operating levels, seasonal conditions, and partner roles.'],
+    regulatory: ['Regulatory Program', 'Contact the responsible district to verify jurisdiction, current rules, permit pathway, required information, alternatives, and other agency coordination.'],
+    multi: ['Integrated, multipurpose Civil Works analysis', 'Start with each authorized purpose and the governing operating documents; compare scenarios, thresholds, time horizons, stakeholders, and residual consequences.'],
+    emergency: ['Emergency Operations / authorized technical assistance', 'Clarify the requesting authority, FEMA or state/local role, mission assignment or USACE authority, life-safety priority, scope, eligibility, and available capacity.']
+  };
+  button.addEventListener('click', () => {
+    const [name, guidance] = matches[select.value] || matches.multi;
+    result.replaceChildren();
+    const p1 = document.createElement('p');
+    const strong = document.createElement('strong');
+    strong.textContent = 'Likely starting point: ';
+    p1.append(strong, document.createTextNode(name));
+    const p2 = document.createElement('p');
+    p2.textContent = guidance;
+    const p3 = document.createElement('p');
+    p3.className = 'small';
+    p3.textContent = 'Learning-tool limit: This result does not establish authority, jurisdiction, eligibility, funding, or approval.';
+    result.append(p1, p2, p3);
+  });
+})();
+</script>
+</body>
+</html>
