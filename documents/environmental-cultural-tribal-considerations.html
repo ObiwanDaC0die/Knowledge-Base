@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Environmental, Cultural, and Tribal Considerations — Progressive Learning Resource</title><meta name="description" content="Explains how environmental, cultural, and Tribal considerations enter water-resources planning early enough to shape alternatives. It emphasizes specialist coordination, effects analysis, avoidance and minimization, and respect for the distinct legal and government-to-government context of Tribal Nations."><meta name="tags" content="environmental planning, NEPA, cultural resources, Tribal consultation, wetlands, mitigation, ecosystem restoration"><meta name="prompt-type" content="general-knowledge"><meta name="keywords" content="environmental review, National Environmental Policy Act, wetlands, habitat, historic properties, Tribal interests, government-to-government consultation, mitigation hierarchy"><script type="application/json" id="kb-analysis-metadata">{"schemaVersion":"1.0","promptType":"general-knowledge","documentType":"general-learning-resource","summary":"Explains how environmental, cultural, and Tribal considerations enter water-resources planning early enough to shape alternatives. It emphasizes specialist coordination, effects analysis, avoidance and minimization, and respect for the distinct legal and government-to-government context of Tribal Nations.","primaryTopics":["Environmental, Cultural, and Tribal Considerations","Environmental review","Cultural resources"],"concepts":[{"name":"Environmental review","category":"Environmental, Cultural, and Tribal Considerations","importance":"primary","sectionId":"core-idea"},{"name":"Cultural resources","category":"Environmental, Cultural, and Tribal Considerations","importance":"primary","sectionId":"glossary"},{"name":"Tribal consultation","category":"Environmental, Cultural, and Tribal Considerations","importance":"primary","sectionId":"glossary"},{"name":"Avoidance and minimization","category":"Environmental, Cultural, and Tribal Considerations","importance":"secondary","sectionId":"glossary"},{"name":"Mitigation","category":"Environmental, Cultural, and Tribal Considerations","importance":"secondary","sectionId":"glossary"}],"relationships":[{"from":"Environmental review","relation":"depends-on","to":"Cultural resources","evidenceType":"conceptual","confidence":"not-assessed","sectionId":"related-concepts"},{"from":"Cultural resources","relation":"influences","to":"Tribal consultation","evidenceType":"conceptual","confidence":"not-assessed","sectionId":"core-idea"},{"from":"Tribal consultation","relation":"depends-on","to":"Avoidance and minimization","evidenceType":"conceptual","confidence":"not-assessed","sectionId":"core-idea"},{"from":"Avoidance and minimization","relation":"influences","to":"Mitigation","evidenceType":"conceptual","confidence":"not-assessed","sectionId":"core-idea"}],"entities":{"people":[],"organizations":["U.S. Army Corps of Engineers"],"places":["United States"],"authorities":["USACE Civil Works planning guidance"]},"scope":{"geography":["United States"],"timePeriod":[]},"methods":["conceptual analysis","planning framework synthesis"],"evidenceTypes":["user-supplied topic framework","official agency webpages and publications"],"limitations":["Educational overview; not an official USACE competency standard or project-specific policy determination.","Authorities, policy, eligibility, and procedures can change; verify current requirements for the specific study.","The supplied topic list sets scope; it does not provide empirical datasets or case-specific findings."]}</script><style>
+:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.58 var(--sans);
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blue2);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: .6rem;
+  background: #fff;
+  border: 2px solid var(--blue);
+}
+
+.site {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 var(--space-4);
+}
+
+.header {
+  background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%);
+  color: white;
+  padding: var(--space-6) 0 var(--space-5);
+  border-bottom: 6px solid var(--gold);
+}
+
+.eyebrow, .meta-label {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-weight: 800;
+}
+
+.eyebrow {
+  color: #cce7eb;
+  margin: 0 0 .5rem;
+}
+
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 950px;
+  letter-spacing: -.02em;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  max-width: 840px;
+  margin: 1rem 0 1.35rem;
+  color: #e2f2f4;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 1rem;
+  font-size: .88rem;
+}
+
+.metadata strong {
+  display: block;
+  color: #b9e1e3;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.toolbar {
+  background: #102f43;
+  color: #fff;
+  padding: .55rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .16);
+}
+
+.toolbar .site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar a {
+  color: #e8f5f5;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.toolbar a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid #bfe3e2;
+  background: #fff;
+  color: #123d59;
+  border-radius: 7px;
+  padding: .42rem .68rem;
+  font: 700 .83rem var(--sans);
+}
+
+.btn:hover {
+  background: #dff2f1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: var(--space-5) auto;
+}
+
+.toc {
+  position: sticky;
+  top: 3.6rem;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.toc h2 {
+  font-size: .84rem;
+  margin: 0 0 .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.toc li {
+  margin: .34rem 0;
+}
+
+.toc a {
+  font-size: .84rem;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  min-width: 0;
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: 4.2rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--pale);
+  line-height: 1.15;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin: 1.55rem 0 .6rem;
+  color: #173f57;
+}
+
+.section h4 {
+  font-size: .98rem;
+  margin: 1.1rem 0 .3rem;
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font: 800 .83rem var(--sans);
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.lead {
+  font-size: 1.08rem;
+}
+
+.callout {
+  border-left: 5px solid var(--blue2);
+  padding: 1rem 1.1rem;
+  background: var(--pale);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+
+.callout.warn {
+  border-color: var(--gold);
+  background: var(--pale3);
+}
+
+.callout strong {
+  color: #133d55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.stat .n {
+  font: 800 1.75rem/1 var(--serif);
+  color: var(--blue);
+}
+
+.stat .k {
+  font-size: .78rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-top: .4rem;
+}
+
+.tag, .ev {
+  display: inline-block;
+  border-radius: 999px;
+  padding: .18rem .55rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+.tag {
+  background: #dceff3;
+  color: #145a78;
+}
+
+.tag.green {
+  background: #ddf0e9;
+  color: #176353;
+}
+
+.tag.gold {
+  background: #f6e8cb;
+  color: #795312;
+}
+
+.tag.red {
+  background: #f5dee0;
+  color: #8a303a;
+}
+
+.ev.high {
+  background: #dcefe8;
+  color: #14604e;
+}
+
+.ev.med {
+  background: #f8ecd4;
+  color: #795312;
+}
+
+.ev.low {
+  background: #f5e0e1;
+  color: #8b333a;
+}
+
+.definition {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: .85rem 1rem;
+  margin: .65rem 0;
+}
+
+.definition strong {
+  color: var(--blue);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.1rem;
+  background: #f8fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 800;
+  color: #163d54;
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+}
+
+.card summary:after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.card[open] summary:after {
+  content: '–';
+}
+
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.theory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .3rem 0 .8rem;
+}
+
+.theory-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+}
+
+.theory-grid dt {
+  font-weight: 800;
+  color: #31556b;
+}
+
+.theory-grid dd {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 1rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+  min-width: 760px;
+}
+
+.matrix th, .matrix td {
+  padding: .7rem .75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.matrix th {
+  background: #eaf3f6;
+  color: #183e54;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.matrix tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrix tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+
+.figure {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fff;
+  overflow: auto;
+}
+
+.figure h3 {
+  margin: .1rem 0 .55rem;
+}
+
+.figure figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: .75rem;
+  padding-top: .65rem;
+}
+
+.svgwide {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--muted);
+  margin: .3rem 0;
+}
+
+.legend i {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -.08rem;
+  margin-right: .25rem;
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+}
+
+.evidence-row:last-child {
+  border: 0;
+}
+
+.small {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.footnote {
+  font-size: .79rem;
+  color: var(--muted);
+}
+
+.refs {
+  padding-left: 1.2rem;
+}
+
+.refs li {
+  margin: .8rem 0;
+}
+
+.recommend {
+  counter-reset: recommend;
+}
+
+.recommend li {
+  list-style: none;
+  position: relative;
+  padding: .85rem 1rem .85rem 3.1rem;
+  background: #f8fbfc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: .65rem 0;
+}
+
+.recommend li:before {
+  counter-increment: recommend;
+  content: counter(recommend);
+  position: absolute;
+  left: .8rem;
+  top: .78rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  font: 800 .76rem var(--sans);
+}
+
+.print-note {
+  display: none;
+}
+
+@media(max-width:900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    position: relative;
+    top: auto;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:620px) {
+  .site {
+    padding: 0 1rem;
+  }
+  .header {
+    padding: 2.5rem 0 2rem;
+  }
+  .layout {
+    margin: 1.25rem auto;
+  }
+  .section {
+    padding: 1.15rem;
+  }
+  .grid, .grid.three {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+  .metadata {
+    gap: .8rem 1.2rem;
+  }
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+  .toolbar .site {
+    padding: 0 1rem;
+  }
+  .toolbar a {
+    display: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+  .header {
+    padding: 1.5rem 0;
+    background: #fff !important;
+    color: #000;
+    border-bottom: 3px solid #000;
+  }
+  .header .eyebrow, .header .subtitle, .metadata strong {
+    color: #222;
+  }
+  .toolbar, .toc, .btn {
+    display: none;
+  }
+  .layout {
+    display: block;
+    margin: 0;
+  }
+  .section {
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    break-inside: avoid;
+  }
+  .section h2 {
+    break-after: avoid;
+  }
+  .card {
+    break-inside: avoid;
+  }
+  .card summary {
+    background: #fff;
+  }
+  .card:not([open]) .card-body {
+    display: block;
+  }
+  .figure {
+    break-inside: avoid;
+  }
+  .print-note {
+    display: block;
+  }
+  .content {
+    width: 100%;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .matrix {
+    min-width: 0;
+    font-size: 8pt;
+  }
+  .svgwide {
+    min-width: 0;
+  }
+}
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style></head><body><a class="skip" href="#main">Skip to learning content</a><header class="header"><div class="site"><p class="eyebrow">Progressive Learning Resource</p><h1>Environmental, Cultural, and Tribal Considerations</h1><p class="subtitle">Explains how environmental, cultural, and Tribal considerations enter water-resources planning early enough to shape alternatives. It emphasizes specialist coordination, effects analysis, avoidance and minimization, and respect for the distinct legal and government-to-government context of Tribal Nations.</p><div class="metadata"><span><strong>Topic</strong> Environmental, Cultural, and Tribal Considerations</span><span><strong>Knowledge Level</strong> Beginner to advanced</span><span><strong>Purpose</strong> Professional learning</span><span><strong>Depth</strong> Comprehensive overview</span><span><strong>Prepared</strong> November 24, 2026</span><span><strong>Evidence</strong> Supplied framework and official agency sources</span></div></div></header><div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div><main id="main" class="site layout"><nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol><li><a href="#executive-summary">Executive Summary</a></li><li><a href="#core-idea">The Core Idea — Explain It Simply</a></li><li><a href="#progressive-levels">Progressive Levels of Understanding</a></li><li><a href="#visual-learning-aids">Visual Learning Aids</a></li><li><a href="#interactive-learning">Interactive or Dynamic Learning Elements</a></li><li><a href="#worked-examples">Worked Examples</a></li><li><a href="#prerequisites">Prerequisite Knowledge</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#related-concepts">Related Concepts and Connections</a></li><li><a href="#misunderstandings">Common Misunderstandings</a></li><li><a href="#practical-applications">Practical Applications</a></li><li><a href="#knowledge-check">Knowledge Check</a></li><li><a href="#final-summary">Final Summary</a></li></ol></nav><div class="content"><section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">01</span>Executive Summary</h2></summary><div class="section-body"><div class="callout"><p class="lead"><strong>Environmental, Cultural, and Tribal Considerations</strong> explains the ideas and practical judgments summarized in the attached professional-development framework. The central takeaway is that environmental and cultural analysis identifies resources, legal obligations, and effects that may change which plans are feasible or desirable. Treat this as an educational orientation; verify project-specific policy and authorities before relying on a requirement.</p></div><p>Explains how environmental, cultural, and Tribal considerations enter water-resources planning early enough to shape alternatives. It emphasizes specialist coordination, effects analysis, avoidance and minimization, and respect for the distinct legal and government-to-government context of Tribal Nations.</p></div></details></section><section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">02</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body"><p>Environmental and cultural analysis identifies resources, legal obligations, and effects that may change which plans are feasible or desirable. Early coordination helps a team avoid designing around a single solution and discovering key constraints late. Tribal consultation is a government-to-government responsibility conducted through the appropriate federal process; it is distinct from general public outreach.</p><p><strong>Coverage:</strong> this resource addresses the following topics from the supplied framework.</p><ul><li>Environmental review and documentation, including NEPA</li><li>Environmental laws and regulations applicable to a study</li><li>Wetlands, streams, floodplains, riparian areas, and aquatic ecosystems</li><li>Habitat evaluation and ecosystem-restoration planning</li><li>Cultural resources and historic properties</li><li>Tribal interests and consultation</li><li>Avoidance, minimization, mitigation, and environmental opportunities</li><li>Early specialist coordination</li></ul><div class="definition"><strong>Working principle</strong><p>Define the decision question, identify the evidence and assumptions, and state what remains uncertain before turning an analysis into a recommendation.</p></div></div></details></section><section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">03</span>Progressive Levels of Understanding</h2></summary><div class="section-body"><details class="card"><summary>Beginner</summary><div class="card-body"><p>The topic is about making a planning decision understandable and grounded in a defined problem. Start by identifying the people, places, resources, or responsibilities involved, then ask what evidence would change a decision.</p></div></details><details class="card"><summary>Foundational</summary><div class="card-body"><p>The key elements are Environmental review, Cultural resources, Tribal consultation. They connect because planning choices shape conditions, and those conditions determine what evidence and responsibilities matter.</p></div></details><details class="card"><summary>Intermediate</summary><div class="card-body"><p>Environmental and cultural analysis identifies resources, legal obligations, and effects that may change which plans are feasible or desirable. Early coordination helps a team avoid designing around a single solution and discovering key constraints late. Tribal consultation is a government-to-government responsibility conducted through the appropriate federal process; it is distinct from general public outreach. In practice, compare plausible alternatives, distinguish facts from assumptions, and describe who experiences each effect.</p><p><strong>Applied case:</strong> A proposed channel modification may reduce flood stages but affect wetlands, aquatic habitat, historic properties, or places of Tribal importance. Early resource screening and consultation can reveal alternatives that avoid sensitive areas or better meet multiple objectives; the study should not presume impacts or consultation outcomes.</p></div></details><details class="card"><summary>Advanced</summary><div class="card-body"><p>At advanced levels, examine uncertainty, distribution, boundary choices, institutional roles, and how the analysis changes under alternative assumptions. Avoid treating a single metric or model as a complete account.</p></div></details><details class="card"><summary>Expert Perspective</summary><div class="card-body"><p>A mature professional explanation links the technical result to the authority, decision, audience, and implementation pathway. It identifies which specialist owns the judgment and what follow-up evidence is needed.</p></div></details><p class="small">All five levels are included as a learning progression; depth is scaled to the supplied framework.</p></div></details></section><section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">04</span>Visual Learning Aids</h2></summary><div class="section-body"><figure class="figure"><h3>From question to action</h3><div class="table-wrap"><table class="matrix"><caption>Conceptual planning sequence for Environmental, Cultural, and Tribal Considerations</caption><thead><tr><th scope="col">Stage</th><th scope="col">Question</th><th scope="col">Output</th></tr></thead><tbody><tr><td>Frame</td><td>What condition and decision matter?</td><td>Problem and objectives</td></tr><tr><td>Understand</td><td>What is known, forecast, and uncertain?</td><td>Baseline and evidence record</td></tr><tr><td>Compare</td><td>How do options differ in effects and tradeoffs?</td><td>Alternative comparison</td></tr><tr><td>Act</td><td>What authority, partners, and follow-up are needed?</td><td>Recommendation and next steps</td></tr></tbody></table></div><figcaption>Conceptual illustration, not a prescribed process map. Notice that the sequence connects a defined question to evidence, comparison, and implementation. The exact steps and required products depend on the applicable authority and current guidance.</figcaption></figure><p><strong>Text equivalent:</strong> frame the problem, understand conditions, compare alternatives, and connect the decision to implementation.</p></div></details></section><section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">05</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body"><p>This page uses native HTML disclosures so readers can reveal material while keeping the essential lesson visible without JavaScript. Use the sequence below as a self-check; it is a teaching aid, not a scoring instrument.</p><details class="card"><summary>Prediction check: what should you verify before presenting a conclusion?</summary><div class="card-body"><p>Identify the source and date, the scale and assumptions, the alternatives or cases compared, who experiences the effect, and the uncertainty that could change interpretation.</p><p><strong>Why:</strong> those checks prevent a summary from sounding more certain or general than its evidence allows.</p></div></details><p class="small">No external scripts, APIs, or network-dependent interactive features are required.</p></div></details></section><section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">06</span>Worked Examples</h2></summary><div class="section-body"><h3>Example 1 — Define the question</h3><p><strong>Situation:</strong> A proposed channel modification may reduce flood stages but affect wetlands, aquatic habitat, historic properties, or places of Tribal importance. Early resource screening and consultation can reveal alternatives that avoid sensitive areas or better meet multiple objectives; the study should not presume impacts or consultation outcomes.</p><p><strong>Steps:</strong> Identify potentially affected environmental and cultural resources and applicable requirements; Coordinate early with qualified specialists, Tribal liaison staff, and counsel as appropriate; identify the relevant evidence; and state the limitation.</p><p><strong>Lesson:</strong> align the question and evidence before selecting an answer.</p><h3>Example 2 — Compare options</h3><p><strong>Situation:</strong> a study team must explain why multiple options remain under consideration.</p><p><strong>Steps:</strong> Compare alternatives for direct, indirect, and cumulative effects where required; Prioritize avoidance and minimization, then identify mitigation and monitoring needs.</p><p><strong>Lesson:</strong> describe the difference among options and the evidence behind the comparison.</p><p><strong>Limitations:</strong> these are illustrative scenarios, not project findings. No numerical or empirical data are invented.</p></div></details></section><section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">07</span>Prerequisite Knowledge</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Prerequisites for learning this topic</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite Topic</th><th scope="col">Why It Helps</th><th scope="col">Recommended Starting Point</th></tr></thead><tbody><tr><td>Essential</td><td>Basic distinction between a condition and a proposed action</td><td>Keeps problem definition separate from solution choice</td><td>Start with the Core Idea section.</td></tr><tr><td>Helpful</td><td>Ability to read a map, table, or short technical summary</td><td>Supports interpretation of evidence and scale</td><td>Review the Visual Learning Aids and Glossary.</td></tr><tr><td>Optional / Advanced</td><td>Familiarity with the applicable authority, models, and review procedures</td><td>Supports project-specific application</td><td>Consult current official guidance and subject-matter specialists.</td></tr></tbody></table></div></div></details></section><section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">08</span>Glossary</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Key terms</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language meaning and connection</th></tr></thead><tbody><tr><td>NEPA</td><td>The National Environmental Policy Act, a federal procedural framework for considering environmental effects and informing decisions; applicable requirements depend on current law and agency procedures.</td></tr><tr><td>Cultural resource</td><td>A place, property, object, or practice with historical, archaeological, or cultural significance under the relevant framework.</td></tr><tr><td>Government-to-government consultation</td><td>Formal engagement between the federal government and Tribal Nations consistent with applicable law, policy, and the Nation’s status as a sovereign government.</td></tr><tr><td>Mitigation</td><td>Actions to avoid, minimize, rectify, reduce, or compensate for adverse effects, as applicable under the governing framework.</td></tr></tbody></table></div></div></details></section><section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">09</span>Related Concepts and Connections</h2></summary><div class="section-body"><p>Environmental review intersects with plan formulation, engineering design, public involvement, real estate, and implementation. Environmental and cultural specialists determine applicable methods and requirements; planners coordinate rather than substitute for their expertise.</p><div class="table-wrap"><table class="matrix"><caption>Topic coverage from the supplied professional-development framework</caption><thead><tr><th scope="col">Area</th><th scope="col">Why it connects</th></tr></thead><tbody><tr><td>Environmental review and documentation, including NEPA</td><td>Frames the question and intended outcome.</td></tr><tr><td>Environmental laws and regulations applicable to a study</td><td>Supplies evidence or context for analysis.</td></tr><tr><td>Wetlands, streams, floodplains, riparian areas, and aquatic ecosystems</td><td>Shapes comparison, engagement, or interpretation.</td></tr><tr><td>Habitat evaluation and ecosystem-restoration planning</td><td>Affects feasibility, responsibilities, or implementation.</td></tr><tr><td>Cultural resources and historic properties</td><td>Helps communicate limits and follow-up needs.</td></tr></tbody></table></div></div></details></section><section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Common misunderstandings and corrections</caption><thead><tr><th scope="col">Misconception</th><th scope="col">Correction</th></tr></thead><tbody><tr><td>Environmental review happens after the plan is selected. Correction: early analysis can change objectives, measures, and alternatives.</td><td>Check the underlying evidence and applicable guidance.</td></tr><tr><td>Tribal consultation is the same as a public meeting. Correction: consultation has a distinct government-to-government relationship and applicable protocols.</td><td>Check the underlying evidence and applicable guidance.</td></tr><tr><td>Mitigation makes any impact acceptable. Correction: mitigation obligations and feasibility depend on law, policy, resource effects, and agency decisions.</td><td>Check the underlying evidence and applicable guidance.</td></tr></tbody></table></div></div></details></section><section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body"><p>Apply this framework in ways that fit the study’s authority, evidence, decision stage, and audience.</p><ul><li>Screen resources early and revisit them as alternatives change.</li><li>Do not treat absence of mapped data as proof a resource is absent.</li><li>Coordinate with Tribal Nations through the responsible federal process.</li><li>Record assumptions and identify where specialist judgment is required.</li></ul><p><strong>Ethics and tradeoffs:</strong> explain who benefits, who may bear costs or disruption, what is uncertain, and whose expertise or lived experience is missing. An educational overview does not replace professional judgment, legal review, or current policy verification.</p></div></details></section><section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body"><ol><li>Why should resource coordination begin early?</li><li>How is Tribal consultation distinct from general public involvement?</li><li>What is the planning value of avoiding an impact before considering mitigation?</li><li>What should a planner do when environmental requirements are unclear?</li></ol><details class="card"><summary>Answer Key</summary><div class="card-body"><ol><li>Early findings can shape alternatives and prevent late redesign or incomplete analysis.</li><li>It reflects a government-to-government relationship with Tribal Nations and follows distinct authorities and protocols.</li><li>Avoidance can prevent effects and reduce uncertainty, cost, and mitigation burden.</li><li>Consult environmental specialists and counsel, identify the applicable authority and procedure, and avoid presenting an assumption as settled law.</li></ol></div></details></div></details></section><section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body"><p><strong>Central idea:</strong> Environmental and cultural analysis identifies resources, legal obligations, and effects that may change which plans are feasible or desirable.</p><h3>Key takeaways</h3><ul><li>Integrate resource analysis into formulation.</li><li>Consult specialists and Tribal Nations through appropriate channels.</li><li>Distinguish public engagement from government-to-government consultation.</li><li>Check current legal and procedural requirements for each study.</li></ul><h3>Next learning step</h3><p>Choose one current study or planning product. Write its decision question, identify its main assumptions, and note what evidence would clarify the most important uncertainty.</p><div class="callout"><p><strong>If you remember only one thing:</strong> Integrate resource analysis into formulation.</p></div><h3>Sources and verification notes</h3><p>The supplied professional-development framework provided the topic scope. The sources below are official USACE materials for orientation; applicability, currency, and any governing requirement must be checked for the specific effort. No project data or independent case findings are asserted in this resource.</p><ul><li><a href="https://www.usace.army.mil/Missions/Civil-Works/">USACE Civil Works</a> — Environmental and Civil Works mission context</li><li><a href="https://www.publications.usace.army.mil/Portals/76/Publications/EngineerRegulations/ER_1105-2-100.pdf">ER 1105-2-100, Planning Guidance Notebook</a> — Planning reference; current environmental procedures may be separately updated</li></ul></div></details></section></div></main><script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script></body></html>
