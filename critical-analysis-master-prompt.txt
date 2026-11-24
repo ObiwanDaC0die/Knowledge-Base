@@ -1,0 +1,767 @@
+MASTER PROMPT
+Evidence-Based Community Critical Analysis: Research, Report, and Export System
+
+PURPOSE
+
+Use this prompt to research a user-defined community or geographic area and produce a detailed, evidence-based critical analysis for an interdisciplinary U.S. Army Corps of Engineers (USACE) planning team. The AI must independently discover and review relevant sources, compile and validate information, synthesize findings, create the report narrative and tables, and produce useful data visualizations when suitable data exist.
+
+The only deliverable file is one polished, fully populated, self-contained HTML report whose landing view reads like a detailed report of the area of interest—not a directory or empty template. The report contains the full research, narrative, tables, visualizations, styles, and export code. Readers can create PDF, Markdown, Excel workbook, or CSV downloads by deliberately selecting the corresponding export control inside the HTML report.
+
+Do not present the report as an official USACE determination or claim agency compliance unless the user provides the applicable requirements and they are explicitly evaluated.
+
+ROLE
+
+Act as an interdisciplinary community-planning researcher, sociological and demographic analyst, evidence reviewer, information designer, and front-end developer. Use clear professional language, define technical terms, explain the evidence behind conclusions, and avoid overstating precision.
+
+USER INPUTS AND SCOPE
+
+Use the project parameters the user provides:
+- Study area: [Name of community, county, watershed, region, or other geography]
+- Geographic boundaries: [Jurisdictions, census geographies, watershed boundaries, project footprint, map, or boundary description]
+- Planning purpose: [For example, flood-risk management, watershed planning, ecosystem restoration, or general assessment]
+- Hazards or stressors: [Specify, or state “not yet defined”]
+- Decision context: [What the planning team needs to understand or decide]
+- Time frame: [Current conditions, historical trends, and any future planning horizon]
+- Comparison areas: [County, state, nation, comparable communities, or analyst-selected benchmarks]
+- Desired depth and length: [Rapid screening, detailed assessment, or other]
+- Intended audience and release context: [Planning team, public-facing, or other]
+
+If a missing parameter would materially change the research or conclusions, ask only the essential clarifying question(s) before doing dependent work. If the user has provided enough information to proceed, state reasonable working assumptions and begin. Do not stop to ask about details that can be transparently handled as limitations or data gaps.
+
+RESEARCH AND REPORTING MODE
+
+This is an active research and report-production assignment, not a template-only assignment. Research the real study area and populate the report. Do not leave template placeholders or ask the user to collect sources that the AI can reasonably locate.
+
+Use available web search and source-access tools to find and inspect relevant information. Search across appropriate authoritative sources, retrieve source tables, reports, maps, records, and datasets, and compile a reproducible source register. Summarize and synthesize the evidence rather than merely listing links or pasting source descriptions.
+
+Conduct a systematic, decision-focused search: identify each analytical topic, the best source types and geographic scale for that topic, available periods and comparisons, and important gaps. Search for relevant primary and local sources as well as federal/state sources. Cross-check consequential claims against independent authoritative sources when feasible. Explain the scope of the search and any source limitations; do not claim to have found literally every possible source.
+
+For every material finding, provide an adjacent citation to the specific source, table, dataset, or record. Record source details and verification checks. Extract relevant values, compute clearly disclosed derived measures, write summaries and descriptions, and populate the required tables. Generate suitable charts, maps, and other visualizations from sourced data when they improve understanding. If reliable data or access are unavailable, clearly say so, create a prioritized data gap, and do not fabricate a substitute.
+
+If live research or a source cannot be accessed, state that limitation and provide the best supported analysis plus a targeted acquisition plan. Never imply that a source was opened or verified if it was not.
+
+INPUT REVIEW AND SOURCE OF REQUIREMENTS
+
+If the user supplies critical-analysis.txt or equivalent analytical framework, preserve its substantive requirements. If the user supplies critical-analysis-HTML.txt or another export specification, apply its export requirements. If an existing critical-analysis.html or the standardized design-system prompt is supplied, use its report structure and CSS system as the authoritative presentation standard. If inputs conflict, preserve the evidence and safety requirements, explain the consequential conflict, and use the user’s most recent explicit direction.
+
+PRIMARY DELIVERABLES
+
+Provide exactly one file artifact: a fully researched, populated, self-contained HTML report named for the study area or report title. The landing view must include report identity, assignment context, executive summary, key findings, evidence quality, major limitations, and a usable table of contents; the complete detailed analysis follows in the same file. Include a concise methods/source-validation summary and prioritized data-gap summary within the HTML and in the conversational response.
+
+The HTML file must embed the complete area-specific report, all CSS, all JavaScript, source citations, report data, tables, and any charts/maps that can be represented inline. Do not attach or create separate Markdown, PDF, XLSX, CSV, or ZIP files as part of the initial response. Those formats are available only when a reader deliberately activates an export control in the HTML report. Do not return a blank template, plan, source list, or webpage that links to an external report. Do not claim agency compliance or present the report as an official USACE determination.
+
+REPORT LANDING VIEW
+
+The opening screen must function as the executive front page of the detailed area report. It must show a high-contrast report title, study area, planning purpose, hazard/stressor scope, reference period, report date, a concise report-at-a-glance summary, up to five key takeaways with evidence labels, major uncertainty, priority planning implications, and clear contents navigation. The visible cover summary is not a separate “BLUF” section. Use “Executive Summary” as the sole heading for the summary; never use “BLUF” or “Bottom Line Up Front.” The report-at-a-glance block may remain visible as the cover summary. All detailed report sections, including the Executive Summary section, start collapsed and can be expanded individually. Do not make users navigate through a topic directory before they can understand the assessment.
+
+REPORT STRUCTURE
+
+Produce a fully populated, readable report with a linked table of contents and the following sections. Implement each top-level report section as a native, keyboard-accessible expandable disclosure that is collapsed by default (do not add the HTML open attribute). Give each section a clearly visible heading, section number, and expand/collapse indicator. Include individual expansion controls and accessible “Expand all sections” and “Collapse all sections” controls. Keep all relevant findings, evidence, and limitations in the document; collapse them visually, do not remove them. Include a section only when relevant; where evidence is unavailable or insufficient, explain the gap rather than inserting an empty section or fictional content. Combine or reorder sections only when readability improves and all substantive requirements remain represented.
+
+A. Report identity and assignment summary
+Populate the report identity using the user’s assignment and research: report title and subtitle; study area; geographic boundaries and boundary source; planning purpose; hazards or stressors; decision context; time frame; comparison areas and rationale; desired depth; report date; and working assumptions. If an input remains unknown, state that explicitly and explain its effect rather than leaving a bracketed placeholder.
+
+Do not silently substitute a municipality, county, ZIP code, census geography, or other convenient unit for the requested area. Explain mismatches between the study boundary and available statistical or hazard geographies, including implications for interpretation.
+
+B. Executive Summary
+Use exactly “Executive Summary” as the section heading. Write a concise synthesis, normally 150–250 words, of the most consequential evidence-supported findings, source quality and checks, uncertainty and limitations, planning implications, and priority information needs. Do not add a “BLUF” subheading, duplicate summary box, or second summary heading. Use a short paragraph and, if useful, no more than five distinct key-finding bullets/cards. Avoid repeating the same text again in nearby callouts.
+
+C. Study area and comparison areas
+Describe boundaries, settlement patterns, included jurisdictions and geographic units, and comparison rationale. Include a sourced map when suitable geographic data are available and it improves understanding.
+
+D. Methods, sources, assumptions, and limitations
+Document source selection, research/acquisition methods, reference periods, geographic crosswalks, calculations, validation checks, assumptions, and analytical limitations. Distinguish the period data describe from release, update, and access dates.
+
+E. Community and geographic context
+When relevant and supported, cover:
+- Study-area boundaries and settlement patterns.
+- Jurisdictions and governance.
+- Urban, suburban, and rural characteristics.
+- Historical development, land use, and community change.
+- Connections to surrounding communities, employment centers, and regional services.
+
+F. Population and demographics
+When relevant and supported, cover:
+- Total population and change.
+- Household count, size, and composition.
+- Age, including children and older adults.
+- Race and ethnicity using the source’s categories and explaining limitations.
+- Languages and English proficiency.
+- Disability status.
+- Other reliable characteristics relevant to the planning purpose.
+- Meaningful geographic differences within the study area rather than area-wide averages alone.
+
+G. Socioeconomic conditions
+When relevant and supported, cover:
+- Household income and distribution.
+- Poverty and financial hardship.
+- Employment, unemployment, labor-force participation, and major industries.
+- Educational attainment.
+- Housing tenure, vacancy, housing costs, housing-cost burden, and documented housing types/conditions.
+- Vehicle availability, transportation access, and digital access.
+- Documented barriers to services, participation, or recovery.
+
+Do not treat income, race, disability, age, or any single characteristic as a complete measure of vulnerability or resilience.
+
+H. Businesses and local economy
+Define “notable” using explicit criteria, such as employment, economic dependence, essential-service provision, cultural importance, or relevance to the planning purpose or hazard. For each selected entity, include where publicly available:
+- Name, category, and sector.
+- General location and service area.
+- Evidence of local or regional importance.
+- Employment or economic contribution and reporting year.
+- Dependencies and potential disruption consequences.
+- Whether the establishment is located within the study area or serves it from outside.
+- Operating-status check and date when feasible.
+
+Do not infer current employment from outdated announcements.
+
+I. Critical infrastructure and essential community services
+Select publicly documented facilities and systems relevant to the planning purpose, including as appropriate:
+- Hospitals, clinics, long-term care, and emergency medical services.
+- Fire, law enforcement, emergency management, and publicly designated shelters.
+- Drinking-water, wastewater, stormwater, and solid-waste systems.
+- Energy and telecommunications.
+- Major transportation routes, bridges, transit, freight facilities, and officially designated evacuation routes.
+- Schools, childcare, food-access resources, and community-service organizations.
+
+Distinguish physical location from service area and dependent populations. Explain why each selected asset or system matters. Use only public information appropriate for public-facing planning. Do not disclose nonpublic security information or actionable descriptions of infrastructure vulnerabilities.
+
+J. Sociological assessment and community capacity
+Go beyond listing indicators. Examine how social conditions, institutions, relationships, and place shape experiences and planning needs, where evidence permits:
+- Community identity, place attachment, and cultural or historical resources.
+- Neighborhood differences and patterns of advantage or disadvantage.
+- Social networks, civic and faith-based organizations, and mutual-aid capacity.
+- Resident, institutional, and planning-process relationships.
+- Documented experience with disasters, relocation, public projects, or recovery.
+- Barriers to participation, including language, transportation, disability access, work schedules, childcare, and digital access.
+- Community strengths, local knowledge, leadership, and adaptive capacity.
+- Potential distribution of benefits, burdens, disruption, or risk of being overlooked.
+
+Separate statistical findings, attributed community perspectives, and analyst interpretation. Do not infer trust, cohesion, values, or preferences from demographic data alone. Identify questions requiring interviews, listening sessions, surveys, or other direct engagement.
+
+K. Hazard, exposure, vulnerability, and capacity
+Organize risk and resilience analysis under these four concepts:
+- Hazard: documented potentially damaging conditions or events.
+- Exposure: people, homes, businesses, services, and assets shown by spatial or documentary evidence to intersect an identified hazard area.
+- Vulnerability: supported conditions that may increase susceptibility or complicate recovery.
+- Capacity: documented resources, institutions, relationships, and capabilities that may reduce harm or support recovery.
+
+Clearly distinguish:
+1. Conditions documented within a hazard footprint.
+2. Conditions documented only for the broader community.
+3. Hypotheses requiring spatial analysis, field verification, or community engagement.
+
+Do not equate demographic disadvantage with demonstrated hazard exposure. Do not claim a population or facility is exposed without suitable spatial or documentary evidence.
+
+If flooding is relevant, include available evidence about flood history, mapped flood hazards, repetitive disruption, transportation access, service continuity, and recovery barriers. Explain hazard-data coverage and limitations.
+
+Avoid unsupported numerical risk scores. If an existing index or screening method is used, disclose inputs, geographic scale, weights, assumptions, uncertainty, and appropriate uses. Distinguish screening from engineering analysis or quantified damages.
+
+L. Planning implications and further investigation
+Translate findings into practical considerations:
+- Priority issues and questions for further investigation.
+- Populations or locations that may warrant detailed assessment.
+- Relevant stakeholders and organizations to engage.
+- Accessible engagement approaches tied to documented needs.
+- Potential distribution of benefits and adverse effects.
+- Opportunities to preserve or strengthen community capacity.
+- Data collection, mapping, fieldwork, or technical analyses needed before decisions.
+
+Separate evidence-supported implications from preliminary hypotheses. Do not recommend a preferred alternative without sufficient information and an explicit alternatives-evaluation framework.
+
+M. Stakeholder and engagement considerations
+Identify stakeholder categories and publicly documented organizations, explain relevance, and describe participation barriers and accessible approaches. Do not imply an organization represents an entire population without supporting evidence.
+
+N. Required analytical data and tables
+Populate the report and its structured export data with the evidence needed for analysis, but display only concise, decision-relevant summaries in the main reading flow. The required datasets below describe the information that must be preserved; they do not require every field to appear as a wide on-screen table. Apply the table-simplification rules that follow. Use the full structured values for the on-demand Excel/CSV exports.
+
+Populate the report with concise, evidence-supported tables or equivalent visual summaries for:
+
+1. Key indicators:
+- Topic.
+- Indicator.
+- Value and unit.
+- Value type: count, estimate, modeled result, projection, or analyst calculation.
+- Numerator and denominator where relevant.
+- Geography.
+- Reference period.
+- Comparison value, geography, and period.
+- Source and exact table/dataset identifier.
+- Uncertainty, margin of error, and limitation.
+
+2. Businesses and infrastructure inventory:
+- Entity or system.
+- Category and sector.
+- General location and service area.
+- Whether located within the study area.
+- Community significance and explicit significance criteria.
+- Employment/contribution and reporting year where applicable.
+- Documented hazard relevance and evidence.
+- Source and date.
+- Operating/verification status and date checked.
+
+3. Risk and resilience findings matrix:
+- Finding.
+- Affected population or system and geography.
+- Hazard and exposure evidence.
+- Evidence scope: hazard footprint, broader community, or hypothesis.
+- Vulnerability or capacity factors.
+- Planning implication.
+- Evidence strength/status.
+- Information gap.
+
+4. Stakeholder and engagement table:
+- Category or organization.
+- Relevance and supporting evidence.
+- Potential engagement topic.
+- Documented participation barrier.
+- Accessible approach.
+- Representation limits.
+
+5. Source register:
+- Stable source ID.
+- Publisher/author.
+- Source title and exact table/dataset/record identifier.
+- URL or retrieval details.
+- Period described.
+- Release/update date.
+- Access date.
+- Geography.
+- Limitations.
+- Verification and independent corroboration notes.
+
+6. Data-gap log:
+- Gap or unanswered question.
+- Decision relevance.
+- Affected geography/population/system.
+- Current limitation.
+- Proposed method to address it.
+- Priority and rationale.
+- Owner/timing when assigned.
+
+TABLE SIMPLIFICATION AND INFORMATION HIERARCHY
+
+The report should feel like a readable analysis, not a database dump. Preserve all researched facts, required fields, citations, uncertainty, and provenance in the HTML data model and on-demand exports, while presenting the main narrative in a selective, layered way:
+
+- Put the most decision-relevant findings in the narrative and no more than five key-finding cards on the landing view. Do not repeat a finding in multiple cards, paragraphs, tables, and callouts unless repetition adds a clear purpose.
+- Use a table only when rows and columns make comparison easier. Prefer concise prose, short lists, or cards when each record has substantial narrative text.
+- Keep main report tables to 3–4 columns where possible and never more than 5 visible columns. If a required dataset has more fields, show a summary table and place the remaining details in a clearly labeled, expandable “Detailed data” disclosure or in a focused supporting table. Do not remove those fields from the underlying report data or exports.
+- Key indicators: show a curated set of roughly 6–10 indicators most relevant to the assignment in the main view. Use compact columns such as indicator, value/unit, geography/period, and comparison/evidence. Keep margin of error, denominator, definitions, and other technical notes available in a concise note or expandable detail. Include further relevant indicators under an explicitly labeled disclosure rather than making one oversized table.
+- Businesses and infrastructure: group entries by meaningful category and show concise entity cards or a short table with name/type, location or service area, why it matters, and documented hazard relevance. Put long descriptions, dependencies, and verification notes in expandable record details. Do not repeat the same organization across categories without explaining why.
+- Risk and resilience findings: do not force the full seven-field matrix into a wide grid. Use concise finding cards or grouped entries that show finding/scope, evidence and status, planning implication, and gap; expand an individual finding for its full vulnerability/capacity analysis and source detail.
+- Stakeholder and engagement considerations: group related stakeholder categories and use concise, readable fields for relevance, participation barrier, and engagement approach. Do not imply representation beyond evidence.
+- Source register: keep claim-level citations adjacent in the narrative. Present a concise source list in the report and place extended retrieval metadata, dates, geography, and verification notes in a collapsed “Full source metadata” disclosure or compact record details.
+- Data gaps: show the highest-priority gaps first as short entries/cards with decision relevance and next step. Put secondary details or lower-priority gaps in a labeled disclosure. Do not bury a high-priority limitation.
+- Avoid showing the same values in a chart and a full table side by side. Use a visualization when it reveals a comparison or pattern; retain the underlying data and source details in the on-demand exports or a compact disclosure.
+- On mobile, render records as stacked cards or provide clearly labeled horizontal scrolling only when needed. Never solve table width by making text unreadably small.
+- Keep captions, units, geography, period, source, and uncertainty visible where they are needed to interpret a displayed value. Do not hide a limitation that changes the meaning of a finding.
+
+O. Final quality review and methodology notes
+Complete and report the final quality review, documenting any unresolved item and its effect. Confirm:
+- Every material quantitative claim has a supporting adjacent citation.
+- Geography, periods, units, denominators, estimate types, and uncertainty are clear.
+- Trend comparisons use compatible definitions/methods or disclose breaks.
+- Calculations show inputs and methods.
+- Independent corroboration is genuinely independent and documented where feasible.
+- Exposure claims have hazard-location evidence.
+- Community perspectives are attributed rather than inferred.
+- Business and infrastructure information is current enough for stated use and appropriate for public release.
+- Findings avoid stigma, reflect community strengths, and do not overstate precision.
+- Unsupported conclusions are removed or labeled.
+- Decision-relevant limitations and data gaps are prominent.
+- Irrelevant/unsupported optional sections and visualization placeholders are omitted.
+
+SECTION-BY-SECTION RESEARCH AND WRITING INSTRUCTIONS
+
+Apply the same research discipline, evidence labels, citation placement, concise writing, and compact presentation to every section, regardless of study area, hazard, planning purpose, or topic. Sources and measures will vary; the standards below do not. For each substantive section, make clear: (1) what the evidence shows, (2) which source supports it, (3) what it means for the assignment, and (4) what remains uncertain or needs follow-up. Keep facts, derived results, attributed perspectives, and analyst interpretations distinguishable. Include only relevant supported content; never fill a section with generic prose.
+
+A. Report identity and assignment summary
+- Carry the user’s requested area and purpose forward exactly. State the unit of analysis, boundary source, period, hazards/stressors, decision context, and comparison choices.
+- Separate supplied parameters from analyst assumptions. Explain any assumption that changes what was searched, compared, or concluded.
+- Identify boundary mismatches before presenting statistics. Name proxy geographies and explain why they are not identical to the requested area.
+- Do not imply that a desk-based screen is an engineering, regulatory, or official agency determination.
+
+B. Executive Summary
+- Use the heading “Executive Summary” only; never use “BLUF,” “Bottom Line Up Front,” or a duplicate summary panel.
+- Lead with a direct answer to the planning question, then synthesize consequential findings, evidence quality, uncertainty, and next steps.
+- Normally keep the summary to 150–250 words, followed by no more than five short, nonduplicative key findings when useful.
+- Cite material claims or link each finding to its evidence/source IDs. Do not introduce facts absent from the detailed sections.
+- State what cannot be concluded, especially where exposure, community perspectives, or service dependencies have not been established.
+
+C. Study area and comparison areas
+- Describe the requested boundary, included jurisdictions, settlement pattern, and relevant geographic units. Cite boundary source and date/version.
+- Explain what question each comparison area helps answer and whether definitions and periods are comparable.
+- If boundaries differ, describe the crosswalk, overlay, aggregation, or proxy method and limitations. Do not label proxy values as exact study-area values.
+- Include a map only when sourced geographic data are adequate; label its extent, legend, date, and source and explain consequential mismatch.
+
+D. Methods, sources, assumptions, and limitations
+- Summarize the topic-by-topic evidence plan, source types searched, geographic coverage, periods, access dates, and unavailable source classes.
+- Describe crosswalks, exclusions, calculations, trend-comparison rules, and validation checks so another analyst can reproduce the logic.
+- Distinguish data periods from publication/update/access dates and explain definition or method changes over time.
+- State limitations near affected analysis as well as here. Do not bury decision-relevant caveats only in the source register.
+- Never call the work globally “validated”; state exactly what was checked, against which independent source, and what remains unchecked.
+
+E. Community and geographic context
+- Summarize physical setting, settlement pattern, governance, land-use/development history, and regional connections only where relevant to the assignment.
+- Use dated, attributable sources. Distinguish documented history from interpretations about its present-day influence.
+- Explain planning relevance; avoid a generic community profile that does not inform the decision context.
+- Note subarea differences when evidence supports them. Use a map or chronology only when it improves comprehension.
+
+F. Population and demographics
+- Report population and change, households, age, race/ethnicity, language/English proficiency, disability, and other relevant characteristics when suitable data exist.
+- For each value state geography, period, unit, denominator where relevant, source definitions, value type, and material margin of error/uncertainty.
+- Use compatible definitions and periods for trends. Do not treat ACS multiyear estimates and decennial counts as identical measures.
+- Preserve source race/ethnicity categories; explain limitations and do not silently recode.
+- Describe within-area differences when data resolution permits. Do not infer exposure, need, preference, or vulnerability from demographics alone.
+
+G. Socioeconomic conditions
+- Assess income distribution and hardship, employment/industries, education, housing, vehicle/transport access, digital access, and documented service/recovery barriers as relevant.
+- Identify definitions, units, denominators, geography, period, and comparisons. For monetary trends state inflation basis; for housing burden define threshold and denominator.
+- Prefer distributions and meaningful subarea variation over a single average where uneven conditions matter.
+- Explain how a condition may affect planning, participation, disruption, or recovery without presenting a proxy as proof of a specific outcome.
+- Do not treat any single socioeconomic or demographic indicator as a complete vulnerability/resilience score.
+
+H. Businesses and local economy
+- State explicit criteria for selecting notable employers/businesses/institutions and include entities relevant under those criteria.
+- Distinguish establishments in the study area from organizations serving it from elsewhere. Support location/service area with sources.
+- Verify operating status and check date where feasible. Report employment/economic contribution only with source and reporting year; do not infer current employment from old announcements.
+- Describe local significance, sector, dependencies, and plausible disruption consequences. Label hypotheses and do not claim exposure without location evidence.
+- Do not imply selected entities represent the entire local economy.
+
+I. Critical infrastructure and essential community services
+- Select publicly documented facilities/systems relevant to the assignment, including appropriate health/emergency response, water/waste, energy/telecommunications, transportation, education/childcare, food access, and community services.
+- Distinguish asset location from service area and dependent population; explain significance and cite current public documentation.
+- State whether hazard relevance/exposure is documented, broader context, or unknown. Do not infer continuity, redundancy, capacity, or dependency from presence alone.
+- Exclude sensitive security details and actionable vulnerability descriptions.
+- If public sources do not establish service boundaries or dependencies, state the gap and follow-up method rather than guessing.
+
+J. Sociological assessment and community capacity
+- Analyze how place, institutions, social relationships, organizations, and documented experiences shape planning needs; do not stop at demographic description.
+- Separate quantitative indicators, attributed perspectives, institutional statements, and analyst interpretation. Attribute perspectives to sources and dates.
+- Discuss identity, attachment, trust, cohesion, leadership, or preferences only with appropriate direct evidence; never infer them from demographics or organization names.
+- Describe documented strengths alongside barriers and burdens. Treat local knowledge and capacity as evidence-based considerations.
+- Identify questions desk research cannot resolve and a suitable engagement method. Do not claim interviews/listening sessions/surveys occurred unless they did.
+
+K. Hazard, exposure, vulnerability, and capacity
+- Organize every risk finding explicitly under these four concepts and define the hazard and time period.
+- For exposure, identify spatial/documentary evidence, geography, resolution/date, overlay or matching method, and what is actually shown to intersect the hazard area.
+- Label evidence scope as hazard-footprint evidence, broader-community context, or hypothesis. Do not turn broader-area demographics into footprint-specific exposure.
+- Describe vulnerability and capacity as evidence-supported mechanisms or conditions. Disclose index inputs, scale, weights, assumptions, and uncertainty if a screening score is used.
+- If flood-related, assess relevant mapped hazards, observed events/losses, repetitive disruption, access, service continuity, and recovery evidence while stating map coverage/limits.
+- Distinguish screening from engineering analysis and quantified damages. Never score without support or infer exposure from proximity alone.
+
+L. Planning implications and further investigation
+- Tie each implication to finding/source IDs and name affected geography, system, or population.
+- Separate evidence-supported implications from hypotheses. Explain why each follow-up matters to a planning decision.
+- Prioritize work by decision consequence, uncertainty, and whether the gap could change screening or engagement choices.
+- Link inclusive engagement approaches to documented access barriers. Do not recommend a preferred alternative without an explicit alternatives-analysis basis.
+- Specify data collection, mapping, field verification, technical analysis, or direct engagement needed before stronger conclusions.
+
+M. Stakeholder and engagement considerations
+- Identify stakeholder categories and publicly documented organizations based on evidence of role, jurisdiction, service, or activity.
+- Explain relevance and what question engagement could answer. Separate documented organizations from groups still to be identified.
+- Link accessible approaches to documented barriers. Never assume one organization speaks for an entire population.
+- Do not imply prior engagement or endorsement; label future topics as proposed, not confirmed preferences or commitments.
+
+N. Required analytical data and tables
+- Populate required structures with sourced, relevant records. Give each record a stable ID and preserve source/relationship links.
+- Apply the table-simplification rules: curated indicators, categorized entity summaries, concise finding cards, prioritized data gaps, and compact source citations. Put secondary technical fields in clearly labeled expandable details.
+- Preserve all required fields in the embedded data model and on-demand workbook/CSV exports, even when visible report summaries are concise.
+- Never export placeholders, unsupported values, empty datasets as findings, or records without traceable provenance.
+- Ensure displayed values include unit, geography, period, evidence status, and nearby citation/source ID as applicable.
+
+O. Final quality review and methodology notes
+- Review material claims individually for support, geography, period, units, denominator, source access, uncertainty, and evidence status.
+- Recalculate derived values from stored inputs; check trend comparability, crosswalks, source independence, and discrepancies.
+- Audit exposure claims against hazard-location evidence; confirm perspectives are attributed and proxies are not presented as direct measures.
+- Check source recency for business/infrastructure status and public-release suitability. Remove sensitive details, stigma, and unsupported conclusions.
+- Record unresolved checks with consequences and next steps. Report only checks actually completed; do not mark every checklist item as passed automatically.
+- Confirm section summaries, tables, visualizations, citations, and exports agree and do not contradict one another.
+
+RESEARCH EXECUTION AND SOURCE DISCOVERY
+
+Before drafting, build a short internal evidence plan from the assignment: topic, needed measure/claim, study-area geography, reference period, best source type, comparison basis, and known limitations. Then research each relevant subject area systematically.
+
+Source discovery priorities:
+- Start with primary data producers and official records: federal and state agencies, Tribal governments, counties, municipalities, utilities, school districts, planning agencies, and official business/institutional sources as relevant.
+- Use secondary sources to provide context or locate primary materials, not as a substitute when the original evidence is available.
+- Search by both subject and geography; inspect detailed tables, metadata, map layers, technical reports, and local plans where available.
+- Check publication/update dates and the period actually represented. Prefer the latest suitable data while preserving comparability for trends.
+- Identify independent sources for consequential claims. Do not count a source that republishes the same dataset as independent corroboration.
+- Keep a source discovery log or concise methods note describing source categories searched, geographic coverage, reference periods, and important access limitations.
+
+For each source, extract only information relevant to the assignment. Record exact source title, publisher, table/dataset/record identifier, URL, release/update date, access date, geography, period, units, definitions, uncertainty, and known limitations. When a source does not support the claim as written, revise the claim or label it unverified; do not stretch the source.
+
+Synthesize evidence into plain-language summaries that answer the planning questions. Explain what the evidence means, what it does not establish, how it relates to other findings, and what remains unknown. Distinguish descriptive context from causal explanations. Do not imply that correlation establishes causation.
+
+For geographic analysis, use the exact requested boundary where data permit. If source geographies differ, explain the crosswalk or mismatch, document any aggregation/intersection method, and avoid presenting mismatched data as exact study-area values. A map or overlay may support exposure claims only if the spatial evidence, resolution, dates, and method are adequate and documented.
+
+For calculations, retain reproducible inputs and methods. For charts and maps, retain the data values used, source references, geography, period, units, denominators, and uncertainty so the visualization can be audited and exported.
+
+EVIDENCE AND CITATION PROTOCOL
+
+Prioritize authoritative, publicly accessible sources and original data producers, official records, and documented datasets. Select sources to fit the question; do not assume one source is suitable for every topic.
+
+Potential sources include the U.S. Census Bureau and American Community Survey, Bureau of Labor Statistics, Bureau of Economic Analysis, relevant federal and state agencies, Tribal governments, local governments, utilities, school districts, planning organizations, and official business or institutional records.
+
+For every material statistic or factual claim:
+- Place an adjacent citation linked to the specific dataset, table, report, or record.
+- Register enough detail to identify and retrieve the source.
+- Distinguish the period described from release/update and access dates.
+- Prefer the latest suitable data, while prioritizing comparability for trends.
+- Label counts, estimates, modeled results, projections, and analyst calculations.
+- Provide units, denominators, and inflation-adjustment basis where relevant.
+- Report margins of error or other uncertainty when available and material.
+- Cross-check consequential/disputed claims against a separate appropriate source when feasible. Repeated copies of the same underlying dataset are not independent corroboration.
+- Explain discrepancies.
+- Show calculation inputs and methods and cite source data.
+
+Use explicit evidence-status labels:
+- Source verified: the cited source was accessed and supports the claim.
+- Independently corroborated: a separate appropriate source supports the same claim.
+- Derived: calculated from cited inputs using a disclosed method.
+- Unverified: not adequately confirmed; do not present as established fact.
+- Hypothesis: interpretation requiring spatial analysis, field verification, or direct engagement.
+
+Never fabricate citations, imply access to unavailable sources, or call all information “validated” without explaining checks performed. If live research is unavailable in a future report task, provide a framework and data-acquisition plan rather than inventing current findings.
+
+VISUALIZATION RULES
+
+Create and include charts, maps, or other visualizations when suitable researched data are available and the visualization clarifies the report beyond text or a table. Do not use empty visualization placeholders in the completed report. Every included visualization must identify:
+- Title and purpose.
+- Geography.
+- Reference period.
+- Units and denominator where relevant.
+- Source.
+- Uncertainty and limitations.
+
+Visualizations must be understandable without color alone, use simple readable charts/maps, and avoid decorative dashboard elements. Never invent values, imply unsupported precision, or infer hazard exposure from demographic disadvantage. If no suitable data exist, omit the visualization and identify what data would be needed.
+
+VISUAL SYSTEM AND REPORT DESIGN
+
+Standardization requirement:
+Every report generated from this template must use the same visual system. Treat the design tokens and CSS starter below as the canonical shared style. Reuse the exact color values, font stack, type scale, spacing scale, layout widths, breakpoints, border treatments, evidence-label styles, and table styles across reports. Do not create a new theme, choose alternate fonts, or vary colors from report to report unless the user explicitly requests a redesign. Content may grow or shrink, but the visual language remains consistent.
+
+Design tokens:
+- Page background: #F3F6F7.
+- Main content surface: #FFFFFF.
+- Primary text: #1F2933.
+- Secondary text: #52616B.
+- Primary headings and masthead: #17324D.
+- Masthead title and masthead text: #FFFFFF on #17324D. The H1 title must be white; do not let generic navy heading styles override this rule.
+- Body headings: #17324D on the white report surface.
+- Accent and interactive links: #176B70; use a darker accessible link color #075C78 for inline links.
+- Borders and dividers: #CBD5DC.
+- Informational surface: #EAF2F7.
+- Warning text/surface: #78550A on #FFF5D9.
+- Error/data-gap text/surface: #8A3030 on #FBEBeA.
+- Positive text/surface: #286044 on #EAF4ED.
+- Focus indicator: 3px solid #B66A00 with 3px offset. Keep a visible outline.
+- Use color only as a supplement to text labels; evidence status must always have a readable text label.
+
+Typography:
+- Use this system font stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif. Do not load external fonts.
+- Body text: 1rem (16px at default browser settings), line-height 1.62.
+- H1: clamp(2rem, 5vw, 3.3rem), line-height 1.23, weight 700 or 750.
+- H2: 1.65rem, line-height 1.23.
+- H3: 1.18rem, line-height 1.23.
+- H4: 1rem, line-height 1.23.
+- Metadata, captions, and helper text: 0.875rem to 0.92rem; do not reduce essential body text to small-print size.
+- Use consistent weight and capitalization. Do not use all-caps body headings; small uppercase section kickers are permitted.
+
+Layout and spacing:
+- Main report maximum width: 76rem; centered with responsive side padding.
+- Desktop report content: table of contents about 15rem wide and flexible article column, with a 2rem gap.
+- Readable narrative measure: keep paragraphs near 68–75 characters per line where practical; tables may use the full article width.
+- Use this spacing scale consistently: 0.25rem, 0.5rem, 0.75rem, 1rem, 1.5rem, 2rem, and 3rem. Favor the compact tokens for routine component spacing; reserve 1.5rem and larger for major section transitions.
+- Use 1px borders in #CBD5DC, restrained corner radii of 0.4–0.5rem, and white surfaces. Avoid shadows, gradients, ornamental icons, and decorative graphics that compete with analysis.
+- Keep section rhythm compact and consistent: use about 0.85rem vertical padding per section with a fine divider. The first section may omit top padding. Use larger separation only between major report regions.
+- Tables use collapsed borders, about 0.4rem vertical and 0.5rem horizontal cell padding, left-aligned text, top-aligned cells, a pale gray-blue header surface, and optional very subtle alternating row fill. Captions use about 0.55rem vertical and 0.65rem horizontal padding on a pale informational surface. Prefer 3–4 visible columns; never exceed 5 columns in a main report table. Do not squeeze dense content into tiny type or force users to scan a very wide matrix. Split complex material into focused tables, compact cards, or expandable per-record details.
+- Callouts use a 4px colored left border, 0.65–0.75rem internal padding, and a text heading or label. Finding cards use a thin border, white background, about 0.7rem padding, and a 0.6–0.7rem gap. Avoid oversized empty card areas.
+- Evidence labels are compact outlined or lightly tinted pills with visible text. Keep labels legible in grayscale and print.
+
+Responsive breakpoints:
+- At widths of 900px or less, stack the table of contents above the report and make it non-sticky.
+- At widths of 600px or less, reduce outer gutters, use a single-column card layout, and allow wide tables to scroll horizontally in a clearly labeled wrapper.
+- Do not change the basic color, type, or evidence-label system at any breakpoint.
+
+Canonical CSS starter:
+Embed the following CSS variables and base rules in every generated report’s <style> block. Extend this code only to implement the specified components, accessibility, responsive behavior, print behavior, and report structure. Keep token values identical across reports.
+
+```css
+:root {
+  color-scheme: light;
+  --ink: #1F2933;
+  --muted: #52616B;
+  --navy: #17324D;
+  --teal: #176B70;
+  --link: #075C78;
+  --line: #CBD5DC;
+  --wash: #F3F6F7;
+  --paper: #FFFFFF;
+  --blue-wash: #EAF2F7;
+  --gold: #78550A;
+  --gold-wash: #FFF5D9;
+  --red: #8A3030;
+  --red-wash: #FBEBeA;
+  --green: #286044;
+  --green-wash: #EAF4ED;
+  --focus: #B66A00;
+  --page-width: 76rem;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --content-gap: 1.25rem;
+  --section-space-y: .85rem;
+  --component-padding: .7rem;
+  --card-gap: .65rem;
+  --table-cell-y: .4rem;
+  --table-cell-x: .5rem;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+body {
+  margin: 0;
+  background: var(--wash);
+  color: var(--ink);
+  font: 1rem/1.62 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+a { color: var(--link); text-underline-offset: .15em; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.masthead { background: var(--navy); color: var(--paper); border-bottom: .35rem solid var(--teal); }
+main, .masthead-inner, footer {
+  width: min(var(--page-width), calc(100% - 2rem));
+  margin-inline: auto;
+}
+.masthead-inner { padding: 1.25rem 0 1.1rem; }
+main { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--content-gap); }
+.toc, .card, .callout { background: var(--paper); border: 1px solid var(--line); border-radius: .45rem; }
+.toc, .card, .callout { padding: var(--component-padding); }
+.cards { gap: var(--card-gap); }
+p { margin: .35rem 0 .6rem; }
+section { padding: var(--section-space-y) 0; border-bottom: 1px solid var(--line); }
+h1, h2, h3, h4 { color: var(--navy); line-height: 1.23; }
+.masthead h1, .masthead h2, .masthead h3, .masthead h4, .masthead p { color: var(--paper); }
+h1 { font-size: clamp(2rem, 5vw, 3.3rem); }
+h2 { font-size: 1.65rem; }
+h3 { font-size: 1.18rem; }
+h4 { font-size: 1rem; }
+.table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line); background: var(--paper); }
+table { width: 100%; border-collapse: collapse; }
+caption { padding: .55rem .65rem; color: var(--navy); background: var(--blue-wash); font-weight: 750; text-align: left; }
+th, td { padding: var(--table-cell-y) var(--table-cell-x); border: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { color: var(--navy); background: #EDF1F3; }
+.status { display: inline-block; padding: .13rem .45rem; border: 1px solid currentColor; border-radius: 999px; font-size: .78rem; font-weight: 750; }
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; gap: 1rem; }
+  .toc { position: static; max-height: none; }
+}
+@media (max-width: 600px) {
+  main, .masthead-inner, footer { width: min(calc(100% - 1.1rem), var(--page-width)); }
+  .masthead-inner { padding: .9rem 0; }
+  .cards { grid-template-columns: 1fr; }
+  .table-wrap table { min-width: 42rem; }
+}
+```
+
+Use consistent modifier styles:
+- Verified status uses --green and --green-wash.
+- Independently corroborated uses --link and --blue-wash.
+- Derived uses --gold and --gold-wash.
+- Unverified and data-gap status uses --red and --red-wash.
+- Hypotheses use a muted purple text/surface pair with an explicit “Hypothesis” label; do not make this the only indicator.
+- Informational notes use --teal or --blue-wash.
+- Warnings use --gold and --gold-wash.
+
+Apply these rules to all report components:
+- Masthead: navy background, white text, teal lower rule; on print, switch to white background and dark text.
+- Table of contents: white panel with compact readable links; sticky only on wide screens.
+- Section kickers: small teal uppercase labels with letter spacing; never replace semantic headings.
+- Key-finding cards: same border, surface, radius, spacing, and heading treatment throughout.
+- Citations: readable inline links adjacent to claims; retain underlining or another visible link cue.
+- Figures: simple framed content, with caption and data/source context; do not add decorative chart treatments.
+- Data-gap notices: red is paired with explicit “Data gap” text and a concise explanation.
+- Print: white background, dark text, visible citations, repeatable table headings where supported, practical margins and page breaks, and no interface-only controls.
+
+Formatting consistency:
+- Use the same heading hierarchy, section numbering/kicker approach, metadata presentation, table design, callout design, evidence labels, link styles, and print treatment in every generated report.
+- Use the same collapsed-by-default report-section disclosure pattern in every generated report. The visible summary row must look like a report heading, not a small generic browser widget.
+- Preserve each section’s content for print and export regardless of whether its disclosure is currently open or closed.
+- Do not invent alternative styles for individual sections. Use named classes and CSS variables instead of one-off inline styles.
+- The HTML must embed its CSS. Do not provide an external stylesheet or substitute a prose-only design description for the code.
+- Keep the canonical token values unchanged if extending styles; add new tokens only when necessary and document them in the design specification.
+- The generated HTML must include the canonical CSS starter, with necessary additions, so this report and later reports can reuse the same visual system directly. Keep CSS tokens and component styling identical across reports.
+
+ACCESSIBILITY, RESPONSIVENESS, AND PRINT
+
+- Use semantic HTML landmarks, ordered headings, table captions, scoped column/row headers, and meaningful link text.
+- Provide a linked table of contents.
+- Ensure keyboard access and visible focus for all controls.
+- Maintain accessible contrast; never encode evidence status by color alone.
+- Provide responsive layouts for mobile and desktop; wide tables may scroll horizontally on narrow screens with clear context.
+- Main report sections start collapsed by default as explicitly requested, but remain present in the document and expandable with keyboard or pointer. Use native HTML details/summary behavior where practical so disclosure still works without JavaScript. Do not make content available only on hover.
+- Provide “Expand all sections” and “Collapse all sections” buttons with accessible names and visible focus. On activation, update all report-section disclosures.
+- Table-of-contents links to collapsed sections must expand the target section before navigating to it.
+- The report-at-a-glance summary and essential title/scope metadata may remain visible above the collapsed sections; the detailed sections themselves begin closed.
+- Add print styles for readable page width, margins, headings, citations, tables, captions, and ink-friendly colors.
+- Keep the report complete if JavaScript is unavailable.
+
+EXPORT CONTROLS AND BEHAVIOR
+
+Provide one compact “Export” button near the report title or primary report controls. Do not place a separate button for every format or dataset in the sidebar, contents panel, or page footer. Activating “Export” opens one small, accessible export dialog (prefer the native HTML <dialog> element) containing:
+- One format selector with four choices: PDF, Markdown, Excel workbook (.xlsx), or CSV.
+- A dataset selector that appears only when CSV is selected. The selector contains the available datasets; never render the dataset names as a long stack of buttons.
+- One “Create export” button and a clear close/cancel control.
+
+The Excel workbook contains all structured datasets in separate worksheets plus a data dictionary, so it is the default choice for a complete data export. CSV exports one user-selected dataset per action. Keep the CSV selector compact and label it “Choose dataset.” Do not expose eleven or more CSV buttons or list generated filenames in the report interface.
+
+The dialog must be keyboard accessible, have a visible focus state, support Escape to close, return focus to the Export button when closed, and announce export status politely. On narrow screens, make it fit the viewport. Use semantic labels and explain that PDF opens the browser print dialog, where the reader chooses “Save as PDF.”
+
+These are on-demand browser actions. Do not automatically start downloads when the report loads, do not generate or attach exports in the initial response, and do not bundle exports into a ZIP. A single action creates only the selected export. Keep the report as the sole initial deliverable file. Do not require uploading report contents to a service.
+
+PDF:
+- Use the browser’s native print dialog, such as window.print().
+- Tell the user to choose “Save as PDF” in that dialog; do not claim silent PDF generation.
+- Before printing, include the content of every collapsed report section in the print/PDF output. Use print CSS to reveal disclosure content without requiring the reader to expand sections manually.
+- Hide interface-only controls and screen-only navigation from print.
+- Preserve title, headings, citations, evidence labels, captions, table headers, source details, and included optional content.
+- Use readable type, margins, ink-friendly colors, and practical page breaks.
+- Avoid splitting short callouts, cards, figures, and table rows where practical. Allow long tables to continue and repeat headers where supported.
+- Do not truncate essential content.
+
+Markdown:
+- Export the report’s included authored content in the original order: title, subtitle, report metadata, headings, prose, lists, callouts, evidence labels, adjacent citations, tables, and figure captions.
+- Include a linked table of contents where practical.
+- Include source IDs and details.
+- For visualizations that cannot be represented as Markdown, include a brief descriptive note preserving title, geography, period, source, and limitations.
+- Convert semantic headings, paragraphs, lists, emphasis, links, captions, and tables appropriately.
+- Include the full content of all report sections in the Markdown export, even when those sections are collapsed in the browser.
+- Exclude navigation, export controls, author instructions, empty placeholders, and optional sections omitted or left empty.
+- Never export bracketed author prompts such as [Insert finding] as factual report content.
+- Preserve meaningful included callouts and optional details.
+- Generate the file locally using browser-native Blob/object URL methods, handle Unicode, and revoke temporary URLs.
+- Use a safe filename derived from report title, with fallback critical-analysis-report.md.
+
+STANDARDIZED EXCEL WORKBOOK AND CSV DATA MODEL
+
+When the reader selects Excel workbook in the export dialog and clicks “Create export,” generate one .xlsx workbook in the browser containing the completed structured data. Include one clearly named worksheet per dataset and a data dictionary/instructions worksheet; freeze header rows where practical, add filters to tabular sheets, and use readable column widths. Do not merge cells in data tables. Include report_id in every dataset and stable record IDs and cross-references so future users can join data across reports and datasets.
+
+When the reader selects CSV in the export dialog, chooses one dataset, and clicks “Create export,” export only that selected dataset as one CSV file. Do not create all CSVs at once, attach them to the initial response, or create a ZIP package. The Excel workbook and selected CSV must be generated locally in the browser from the data already embedded in the HTML, with no network upload. Prefer self-contained standards-compliant XLSX generation with no external service or dependency. Always retain CSV as an interoperable on-demand option; do not label CSV as an Excel workbook. If a valid workbook cannot be generated in the target browser, explain the limitation in the interface and make CSV available on demand.
+
+Provide these datasets when they contain completed records:
+
+1. report_metadata.csv
+Fields:
+report_id, report_title, subtitle, study_area_name, study_area_type, boundary_description, planning_purpose, hazards_or_stressors, decision_context, time_frame, comparison_areas, comparison_rationale, desired_depth, report_date, prepared_for, working_assumptions, limitations_summary
+
+2. indicators.csv
+Fields:
+report_id, indicator_id, topic, indicator_name, value, value_type, unit, numerator, denominator, geography_id, geography_name, reference_start, reference_end, comparison_value, comparison_unit, comparison_geography, comparison_period, source_table_or_locator, primary_source_id, evidence_status, margin_of_error, uncertainty_or_limitation, notes
+
+3. entities_inventory.csv
+Fields:
+report_id, entity_id, entity_name, entity_type, category, sector, general_location, service_area, located_within_study_area, community_significance, significance_criteria, employment_value, employment_unit, employment_reporting_year, documented_hazard_relevance, hazard_exposure_evidence, operating_status, status_checked_date, primary_source_id, verification_status, limitations_or_notes
+
+4. risk_resilience_findings.csv
+Fields:
+report_id, finding_id, finding, affected_population_or_system, geography_id, geography_name, hazard, hazard_evidence, exposure_evidence, evidence_geography_scope, vulnerability_factors, capacity_factors, planning_implication, evidence_strength, evidence_status, hypothesis, primary_source_id, limitations_or_notes
+
+5. engagement_considerations.csv
+Fields:
+report_id, engagement_id, stakeholder_category, organization_name, relevance, potential_engagement_topic, documented_participation_barrier, accessible_engagement_approach, representation_limits, primary_source_id, notes
+
+6. sources.csv
+Fields:
+report_id, source_id, publisher_or_author, source_title, table_dataset_or_record_id, url, retrieval_details, period_described_start, period_described_end, release_or_update_date, access_date, geography, source_type, source_limitations, verification_notes, independent_corroboration_notes
+
+7. data_gaps.csv
+Fields:
+report_id, gap_id, gap_or_unanswered_question, decision_relevance, affected_geography_population_or_system, current_limitation, proposed_method_to_address, priority, priority_rationale, owner, target_timing
+
+8. calculations.csv
+Fields:
+report_id, calculation_id, measure_name, formula, input_values, input_units, output_value, output_unit, calculation_method, assumptions, uncertainty, notes
+
+9. record_sources.csv
+Fields:
+report_id, record_type, record_id, source_id, relationship, source_locator, verification_status
+Use this normalized relationship table when a record relies on multiple sources. A primary_source_id may remain in a record for convenience; record_sources.csv is the complete source linkage.
+
+10. record_relationships.csv
+Fields:
+report_id, from_record_type, from_record_id, relationship_type, to_record_type, to_record_id
+Use for links such as finding-to-gap or indicator-to-calculation. Export only relationships that are actually documented.
+
+11. visualization_data.csv (conditional)
+Fields:
+report_id, visualization_id, series_id, category, measure_name, value, unit, geography_id, geography_name, reference_start, reference_end, denominator, source_id, uncertainty_or_limitation
+Include only when the report contains structured underlying values for a chart or map. Do not invent values or infer raw values from an image.
+
+CSV FORMAT AND EXPORT RULES
+
+- Use UTF-8 and a consistent documented convention such as RFC 4180 quoting.
+- Use the exact snake_case column names specified.
+- Correctly quote and escape commas, quotation marks, and line breaks.
+- Use ISO dates (YYYY-MM-DD) when known.
+- Store numeric values without locale-specific thousands separators; store units and denominators separately.
+- Do not store formatted HTML in CSV.
+- Keep missing values distinct from zero. Prefer blank cells plus a relevant status or note; preserve unavailable, suppressed, unknown, not collected, and not applicable when known.
+- Use the normalized record_sources.csv and record_relationships.csv for multi-source and cross-record links; do not use ambiguous delimiter-separated ID lists.
+- Do not infer verification, exposure, operating status, or evidence strength from the mere presence of a row.
+- Do not export instructional text, empty template rows, or unfilled placeholders as factual records.
+- Preserve source categories and geographic definitions; do not silently recode.
+- Provide the workbook and selected CSV only in response to the reader’s explicit export action. Keep workbook and CSV values consistent.
+- If a dataset has no completed records, do not download a header-only or placeholder-filled file; announce accessibly that there are no completed records to export.
+- Use safe filenames derived from the report title and dataset name, for example study-area-critical-analysis_indicators.csv.
+- Generate files locally using Blob/object URL downloads and clean up temporary URLs. Exports must work offline after the HTML loads.
+- Do not upload report data to a server.
+
+STRUCTURING THE HTML FOR EXPORT
+
+Design table structures so authors can enter report information consistently and it maps reliably to the CSV schemas. Use semantic captions and column headings. Add visible stable-ID fields where appropriate. Use a documented schema mapping, data attributes, or equivalent maintainable method. Do not rely on brittle positional assumptions without validation.
+
+If presentation tables contain prose that does not map directly to structured fields, preserve the prose in the report and explain its export mapping. Do not remove analytical content merely to simplify CSV output. Keep citations adjacent to claims in the report; structured source links may also appear in record_sources.csv.
+
+Do not require a separate application, external service, or third-party library for exports. If a browser limitation affects a feature, explain it to the user and provide the best portable fallback.
+
+Single-file delivery rule: the report is the only file the AI initially returns. Embed CSS, JavaScript, report content, table data, and inline visualizations in that one HTML file. Do not create companion files or a convenience ZIP. Keep the interface to one Export button that opens a compact format dialog; do not display a long list of format or per-dataset export buttons. PDF, Markdown, XLSX, and the selected CSV are generated only after the reader chooses that format and activates Create export. Each action generates only the selected format/dataset. The native PDF action opens the print dialog and lets the reader choose Save as PDF.
+
+FINAL QUALITY REVIEW
+
+Before delivering the completed report and export files, check that:
+- All substantive analytical requirements above are addressed in the populated report or explicitly identified as not assessable, unsupported, or a data gap.
+- Relevant sources were actively researched, inspected, cited, and entered in the source register; summaries and descriptions are based on those sources.
+- Consequential claims were cross-checked where feasible, calculations disclose inputs and methods, and discrepancies are explained.
+- The report flow is logical and easy to scan.
+- Every report section follows the section-specific research, interpretation, citation, and presentation instructions above; irrelevant sections are omitted with a reason where needed.
+- Routine sections, cards, callouts, tables, and the masthead use the compact spacing values; avoid excessive interior padding or large blank gaps while preserving readable line spacing and touch targets.
+- The summary heading is “Executive Summary”; no “BLUF” label, duplicate summary panel, or redundant repeated finding appears.
+- Main tables are concise (prefer 3–4 columns, maximum 5), with dense but relevant details available through clearly labeled disclosures and complete on-demand data exports.
+- Tables, cards, narrative, and visualizations do not repeat information without purpose; the report does not overwhelm readers with a database-style dump.
+- Conditional sections can be omitted without leaving misleading empty findings.
+- Evidence labels, uncertainty, limitations, citations, and gaps have clear places.
+- Visualizations are conditional on suitable data and provide required context.
+- PDF uses native print-to-PDF behavior and print styles preserve essential content.
+- Markdown includes completed report content but excludes instructions, controls, and empty placeholders.
+- The Excel workbook and CSV files use the exact schemas, stable IDs, source provenance, and one record per row; workbook and CSV contents agree.
+- CSV output correctly handles quoting, Unicode, missing values, and no-data cases.
+- The export interface presents one “Export” button and one compact dialog; it has no per-dataset button list, and the CSV dataset dropdown appears only after CSV is selected.
+- Export controls and expand/collapse controls work with keyboard and responsive layouts; all report sections start closed on initial page load.
+- The title and masthead text have clearly visible contrast against their backgrounds; generic heading rules must not override the masthead title color.
+- PDF, Markdown, Excel, and CSV exports include the complete report/data regardless of the on-screen collapsed state.
+- The HTML is self-contained, portable, and does not require network access.
+- No fictional assessment content, sources, organizations, or conclusions have been added; unresolved information is labeled as a data gap rather than hidden or guessed.
+- Every report section reads as a completed, area-specific analysis rather than a blank template; the landing view presents the area’s findings and context.
+- No feature is described as tested unless it was actually checked.
+
+FINAL RESPONSE
+
+Provide exactly one downloadable file artifact: the completed, self-contained HTML report with its export controls. Do not attach separate PDF, Markdown, XLSX, CSV, or ZIP files. Explain briefly that readers can create those exports by using the controls inside the HTML. Summarize the research conducted, strongest findings, evidence quality, major limitations, and data gaps in the response. Do not provide only a design specification or empty template. Do not include fictional assessment content or claim an official determination or agency compliance.
