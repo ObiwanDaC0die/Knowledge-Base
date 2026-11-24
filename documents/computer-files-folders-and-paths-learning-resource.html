@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Computer Files, Folders, and Paths: A Progressive Learning Resource</title><meta name="tags" content="computer files, folders, file paths, file systems, Windows paths, macOS Finder, Linux filesystem"><meta name="prompt-type" content="general-knowledge"><style>:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.58 var(--sans); }
+a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--blue2); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 100; padding: .6rem; background: #fff; border: 2px solid var(--blue); }
+.site { max-width: var(--max); margin: auto; padding: 0 var(--space-4); }
+.header { background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%); color: white; padding: var(--space-6) 0 var(--space-5); border-bottom: 6px solid var(--gold); }
+.eyebrow, .meta-label { font-size: .76rem; text-transform: uppercase; letter-spacing: .11em; font-weight: 800; }
+.eyebrow { color: #cce7eb; margin: 0 0 .5rem; }
+.header h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.05; margin: 0; max-width: 950px; letter-spacing: -.02em; }
+.subtitle { font-size: 1.15rem; max-width: 840px; margin: 1rem 0 1.35rem; color: #e2f2f4; }
+.metadata { display: flex; gap: 1rem 2rem; flex-wrap: wrap; border-top: 1px solid rgba(255, 255, 255, .25); padding-top: 1rem; font-size: .88rem; }
+.metadata strong { display: block; color: #b9e1e3; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.toolbar { background: #102f43; color: #fff; padding: .55rem 0; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 10px rgba(0, 0, 0, .16); }
+.toolbar .site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.toolbar a { color: #e8f5f5; font-size: .9rem; text-decoration: none; }
+.toolbar a:hover { text-decoration: underline; }
+.btn { cursor: pointer; border: 1px solid #bfe3e2; background: #fff; color: #123d59; border-radius: 7px; padding: .42rem .68rem; font: 700 .83rem var(--sans); }
+.btn:hover { background: #dff2f1; }
+.layout { display: grid; grid-template-columns: 255px minmax(0, 1fr); gap: var(--space-5); margin: var(--space-5) auto; }
+.toc { position: sticky; top: 3.6rem; align-self: start; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+.toc h2 { font-size: .84rem; margin: 0 0 .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: .34rem 0; }
+.toc a { font-size: .84rem; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.content { min-width: 0; }
+.section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.2rem, 3vw, 2.25rem); margin-bottom: var(--space-4); scroll-margin-top: 4.2rem; }
+.section h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.15rem); margin: 0 0 1rem; padding-bottom: .7rem; border-bottom: 2px solid var(--pale); line-height: 1.15; }
+.section h3 { font-size: 1.1rem; margin: 1.55rem 0 .6rem; color: #173f57; }
+.section h4 { font-size: .98rem; margin: 1.1rem 0 .3rem; }
+.num { display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--blue); color: #fff; font: 800 .83rem var(--sans); vertical-align: middle; margin-right: .5rem; }
+.lead { font-size: 1.08rem; }
+.callout { border-left: 5px solid var(--blue2); padding: 1rem 1.1rem; background: var(--pale); border-radius: 0 8px 8px 0; margin: 1rem 0; }
+.callout.warn { border-color: var(--gold); background: var(--pale3); }
+.callout strong { color: #133d55; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stat { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; background: #fff; }
+.stat .n { font: 800 1.75rem/1 var(--serif); color: var(--blue); }
+.stat .k { font-size: .78rem; text-transform: uppercase; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: .4rem; }
+.tag, .ev { display: inline-block; border-radius: 999px; padding: .18rem .55rem; font-size: .72rem; font-weight: 800; letter-spacing: .025em; white-space: nowrap; }
+.tag { background: #dceff3; color: #145a78; }
+.tag.green { background: #ddf0e9; color: #176353; }
+.tag.gold { background: #f6e8cb; color: #795312; }
+.tag.red { background: #f5dee0; color: #8a303a; }
+.ev.high { background: #dcefe8; color: #14604e; }
+.ev.med { background: #f8ecd4; color: #795312; }
+.ev.low { background: #f5e0e1; color: #8b333a; }
+.definition { border: 1px solid var(--line); border-radius: 10px; background: #fbfcfd; padding: .85rem 1rem; margin: .65rem 0; }
+.definition strong { color: var(--blue); }
+.card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #fff; }
+.card summary { cursor: pointer; list-style: none; padding: 1rem 1.1rem; background: #f8fbfc; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-weight: 800; color: #163d54; }
+.card summary::-webkit-details-marker { display: none; }
+.card summary:after { content: '+'; font-size: 1.3rem; color: var(--blue); }
+.card[open] summary:after { content: '–'; }
+.card-body { padding: 1rem 1.1rem 1.2rem; }
+.theory-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin: .3rem 0 .8rem; }
+.theory-grid { display: grid; grid-template-columns: 155px 1fr; gap: .4rem 1rem; margin: 0; }
+.theory-grid dt { font-weight: 800; color: #31556b; }
+.theory-grid dd { margin: 0; }
+.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 9px; margin: 1rem 0; }
+.matrix { width: 100%; border-collapse: collapse; font-size: .87rem; min-width: 760px; }
+.matrix th, .matrix td { padding: .7rem .75rem; vertical-align: top; border-bottom: 1px solid var(--line); text-align: left; }
+.matrix th { background: #eaf3f6; color: #183e54; font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
+.matrix tr:last-child td { border-bottom: 0; }
+.matrix tbody tr:nth-child(even) { background: #fbfcfd; }
+.figure { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; margin: 1rem 0; background: #fff; overflow: auto; }
+.figure h3 { margin: .1rem 0 .55rem; }
+.figure figcaption { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .75rem; padding-top: .65rem; }
+.svgwide { display: block; width: 100%; min-width: 680px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .8rem; color: var(--muted); margin: .3rem 0; }
+.legend i { width: .75rem; height: .75rem; border-radius: 2px; display: inline-block; vertical-align: -.08rem; margin-right: .25rem; }
+.evidence-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1rem; border-bottom: 1px solid var(--line); padding: .7rem 0; }
+.evidence-row:last-child { border: 0; }
+.small { font-size: .88rem; color: var(--muted); }
+.footnote { font-size: .79rem; color: var(--muted); }
+.refs { padding-left: 1.2rem; }
+.refs li { margin: .8rem 0; }
+.recommend { counter-reset: recommend; }
+.recommend li { list-style: none; position: relative; padding: .85rem 1rem .85rem 3.1rem; background: #f8fbfc; border: 1px solid var(--line); border-radius: 9px; margin: .65rem 0; }
+.recommend li:before { counter-increment: recommend; content: counter(recommend); position: absolute; left: .8rem; top: .78rem; width: 1.55rem; height: 1.55rem; display: grid; place-items: center; background: var(--blue); color: #fff; border-radius: 50%; font: 800 .76rem var(--sans); }
+.print-note { display: none; }
+@media(max-width:900px) { .layout { grid-template-columns: 1fr; } .toc { position: relative; top: auto; } .toc ol { columns: 2; column-gap: 2rem; } .grid.three { grid-template-columns: 1fr 1fr; } }
+@media(max-width:620px) { .site { padding: 0 1rem; } .header { padding: 2.5rem 0 2rem; } .layout { margin: 1.25rem auto; } .section { padding: 1.15rem; } .grid, .grid.three { grid-template-columns: 1fr; } .toc ol { columns: 1; } .metadata { gap: .8rem 1.2rem; } .evidence-row { grid-template-columns: 1fr; } .toolbar .site { padding: 0 1rem; } .toolbar a { display: none; } }
+@media print { body { background: #fff; font-size: 10.5pt; } .header { padding: 1.5rem 0; background: #fff !important; color: #000; border-bottom: 3px solid #000; } .header .eyebrow, .header .subtitle, .metadata strong { color: #222; } .toolbar, .toc, .btn { display: none; } .layout { display: block; margin: 0; } .section { box-shadow: none; border: 0; padding: 0; margin: 0 0 1rem; break-inside: avoid; } .section h2 { break-after: avoid; } .card { break-inside: avoid; } .card summary { background: #fff; } .card:not([open]) .card-body { display: block; } .figure { break-inside: avoid; } .print-note { display: block; } .content { width: 100%; } a { color: #000; text-decoration: none; } .table-wrap { overflow: visible; } .matrix { min-width: 0; font-size: 8pt; } .svgwide { min-width: 0; } }
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style></head>
+<body>
+<a class="skip" href="#main">Skip to learning content</a>
+<header class="header"><div class="site">
+  <p class="eyebrow">Progressive Learning Resource</p>
+  <h1>Computer Files, Folders, and Paths</h1>
+  <p class="subtitle">Learn how computers organize information, how a path identifies a location, and how to move safely between common Windows, macOS, and Linux conventions.</p>
+  <div class="metadata">
+    <span><strong>Topic</strong> Files, folders, and paths</span>
+    <span><strong>Knowledge Level</strong> Beginner</span>
+    <span><strong>Purpose</strong> General understanding</span>
+    <span><strong>Depth</strong> Comprehensive</span>
+    <span><strong>Prepared</strong> November 24, 2026</span>
+    <span><strong>Evidence</strong> Official documentation reviewed</span>
+  </div>
+</div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout">
+<nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol>
+  <li><a href="#executive-summary">Executive Summary</a></li>
+  <li><a href="#core-idea">The Core Idea</a></li>
+  <li><a href="#progressive-levels">Progressive Levels</a></li>
+  <li><a href="#visual-learning-aids">Visual Learning Aids</a></li>
+  <li><a href="#interactive-learning">Interactive Learning</a></li>
+  <li><a href="#worked-examples">Worked Examples</a></li>
+  <li><a href="#prerequisites">Prerequisite Knowledge</a></li>
+  <li><a href="#glossary">Glossary</a></li>
+  <li><a href="#related-concepts">Related Concepts</a></li>
+  <li><a href="#misunderstandings">Common Misunderstandings</a></li>
+  <li><a href="#practical-applications">Practical Applications</a></li>
+  <li><a href="#knowledge-check">Knowledge Check</a></li>
+  <li><a href="#final-summary">Final Summary</a></li>
+</ol></nav>
+<div class="content">
+
+<section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">1</span>Executive Summary</h2></summary><div class="section-body">
+  <div class="callout"><p><strong>Files</strong> hold information such as a report, photo, or program; <strong>folders</strong> organize files and other folders; and a <strong>path</strong> is an address that tells the computer where an item is located. You encounter these ideas when saving a document, downloading an attachment, opening a photo, or using a command line. Different operating systems display paths differently, but the organizing idea is the same: begin from a known location and follow a sequence of containers to a named item. The indispensable takeaway is that a filename alone is often not enough—the path supplies the context that distinguishes one item from another.</p></div>
+  <p class="small"><strong>Assumptions:</strong> This resource uses everyday examples and compares common Windows, macOS, and Linux/Unix-style conventions. Exact permissions, cloud-sync behavior, and application displays can vary by device and configuration.</p>
+</div></details></section>
+
+<section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body">
+  <p class="lead">Think of a computer’s storage as a well-labeled building. A <strong>folder</strong> is like a room or cabinet; a <strong>file</strong> is a particular item stored inside; and a <strong>path</strong> is the written set of directions needed to reach it.</p>
+  <div class="definition"><strong>Concrete illustration:</strong> A budget workbook called <code>April-budget.xlsx</code> might be stored in a Projects folder, inside a Finance folder, inside a person’s Documents folder. Its path identifies not just the workbook’s name but its place in the organizing structure.</div>
+  <p>The central mechanism is a <strong>hierarchy</strong>: a folder can contain files and can also contain subfolders. A path lists each step through that hierarchy. On Windows, separators are commonly backslashes, such as <code>C:\Users\Avery\Documents\Finance\April-budget.xlsx</code>. On macOS and Linux, separators are commonly forward slashes, such as <code>/Users/avery/Documents/Finance/April-budget.xlsx</code> or <code>/home/avery/Documents/Finance/April-budget.xlsx</code>.</p>
+  <p>The building analogy helps explain nesting and addresses, but it breaks down in important ways. Digital files can be copied cheaply, moved without physical distance, synchronized to cloud storage, or represented by shortcuts and aliases; those features can make the apparent location different from the underlying storage location.</p>
+</div></details></section>
+
+<section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary><div class="section-body">
+  <details class="card"><summary>Beginner — What are files, folders, and paths?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Orientation</span></div><dl class="theory-grid"><dt>Definition</dt><dd>A file is a named unit of stored information. A folder is a container used to organize files and other folders. A path is the location description for an item.</dd><dt>Purpose</dt><dd>Organization makes items easier to find, share, back up, and manage.</dd><dt>Example</dt><dd><code>Vacation.jpg</code> in <code>Pictures/2026/June</code> is easier to distinguish from another photo with the same name.</dd><dt>Takeaway</dt><dd>Names identify an item; paths identify where that named item belongs in the storage hierarchy.</dd></dl></div></details>
+  <details class="card"><summary>Foundational — Parts, mechanisms, and distinctions</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Core mechanics</span></div><dl class="theory-grid"><dt>Path components</dt><dd>A path may include a starting point, one or more folder names, separators, a filename, and often an extension such as <code>.pdf</code> or <code>.jpg</code>.</dd><dt>Hierarchy</dt><dd>The top of a hierarchy is called a root. Each lower folder is nested inside a parent folder; a folder inside another folder is a child folder.</dd><dt>File versus folder</dt><dd>A file usually holds content. A folder usually holds references to items. Both have names, dates, permissions, and locations.</dd><dt>Misconception</dt><dd>A desktop icon is not necessarily the actual file. It may be a shortcut or alias that points somewhere else.</dd></dl></div></details>
+  <details class="card"><summary>Intermediate — Absolute, relative, and realistic use</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Working knowledge</span></div><dl class="theory-grid"><dt>Absolute path</dt><dd>An absolute path starts from a defined root or drive and can identify the same location regardless of the current folder. Example: <code>C:\Users\Avery\Documents\Notes\plan.txt</code>.</dd><dt>Relative path</dt><dd>A relative path is interpreted from the current location. If you are already in <code>Documents</code>, <code>Notes\plan.txt</code> can refer to the same file.</dd><dt>Realistic case</dt><dd>A project team can keep one project folder with subfolders for drafts, sources, and final products. A short, consistent relative path can be useful inside that project.</dd><dt>Tradeoff</dt><dd>Deep nesting can be precise but harder to browse and more vulnerable to path-length or sharing constraints. Flat storage is quick but becomes difficult to search and distinguish.</dd></dl></div></details>
+  <details class="card"><summary>Advanced — System differences, edge cases, and uncertainty</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Context dependent</span></div><dl class="theory-grid"><dt>Separators and roots</dt><dd>Windows commonly uses drive letters and backslashes; Unix-like systems use one root represented by <code>/</code> and forward slashes. Modern applications sometimes accept more than one form, but do not assume they are interchangeable.</dd><dt>Case sensitivity</dt><dd>Whether <code>Report.pdf</code> and <code>report.pdf</code> are treated as different names depends on the file system and configuration. Avoid relying on case alone to distinguish important items.</dd><dt>Special entries</dt><dd>In many command-line contexts, <code>.</code> means the current directory and <code>..</code> means its parent. These are navigation conventions, not ordinary destination names.</dd><dt>Uncertainty</dt><dd>Cloud drives, network shares, containers, and application sandboxes can show a logical path that is not a simple map to one physical disk location.</dd></dl></div></details>
+  <details class="card"><summary>Expert Perspective — Designing reliable organization</summary><div class="card-body"><div class="theory-meta"><span class="tag">Professional practice</span></div><dl class="theory-grid"><dt>Framework</dt><dd>Design folder structures around retrieval, access control, retention, collaboration, and backup—not merely around the author’s personal habits.</dd><dt>Decision points</dt><dd>Choose a naming convention, keep depth reasonable, identify the authoritative copy, and set permissions at the appropriate folder level.</dd><dt>Adjacent disciplines</dt><dd>Information architecture, records management, cybersecurity, software configuration management, and data governance all use structured locations and names.</dd><dt>Signs of mastery</dt><dd>You can explain where an item is, distinguish a shortcut from the original, use absolute and relative paths appropriately, and anticipate naming or permission conflicts before they disrupt work.</dd></dl></div></details>
+</div></details></section>
+
+<section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary><div class="section-body">
+  <figure class="figure"><h3>A conceptual path through a folder hierarchy</h3>
+  <div class="legend"><span><i style="background:#145a78"></i>Structure: folder or root</span><span><i style="background:#188d88"></i>Destination: file</span><span><i style="background:#b57922"></i>Condition: operating-system convention</span></div>
+  <svg class="svgwide" viewBox="0 0 900 350" role="img" aria-labelledby="path-figure-title path-figure-desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="path-figure-title">Conceptual diagram of a file path</title><desc id="path-figure-desc">A sequence runs from a Windows drive or Unix root, through a user folder, Documents, and Projects, to a file named final-report.pdf. Labels show that separators differ by operating system.</desc>
+    <defs><marker id="path-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#188d88"/></marker></defs>
+    <rect x="30" y="115" width="135" height="85" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="97" y="150" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#145a78">Starting point</text><text x="97" y="178" text-anchor="middle" font-family="system-ui" font-size="15" fill="#17212b">C:\ or /</text>
+    <path d="M165 158 H255" stroke="#188d88" stroke-width="3" marker-end="url(#path-arrow)"/>
+    <rect x="265" y="115" width="135" height="85" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="332" y="150" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#145a78">User folder</text><text x="332" y="178" text-anchor="middle" font-family="system-ui" font-size="15" fill="#17212b">Avery</text>
+    <path d="M400 158 H490" stroke="#188d88" stroke-width="3" marker-end="url(#path-arrow)"/>
+    <rect x="500" y="115" width="135" height="85" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="567" y="150" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#145a78">Folder</text><text x="567" y="178" text-anchor="middle" font-family="system-ui" font-size="15" fill="#17212b">Documents</text>
+    <path d="M635 158 H725" stroke="#188d88" stroke-width="3" marker-end="url(#path-arrow)"/>
+    <rect x="735" y="115" width="135" height="85" rx="10" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="802" y="150" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#176353">File</text><text x="802" y="178" text-anchor="middle" font-family="system-ui" font-size="15" fill="#17212b">final-report.pdf</text>
+    <text x="450" y="50" text-anchor="middle" font-family="Georgia" font-size="22" fill="#17212b">Example address: starting point → user → folder → file</text>
+    <text x="450" y="275" text-anchor="middle" font-family="system-ui" font-size="16" fill="#795312">Windows commonly uses \; macOS and Linux commonly use /</text>
+    <text x="450" y="310" text-anchor="middle" font-family="system-ui" font-size="15" fill="#586875">Illustrative model—not a map of a particular device or cloud service.</text>
+  </svg>
+  <figcaption><strong>Classification:</strong> conceptual. Notice that each segment narrows the destination. The figure simplifies real storage: shortcuts, synced folders, permissions, and multiple disks may add layers not shown. Sources: Microsoft’s File Explorer documentation; freedesktop.org Filesystem Hierarchy Standard.</figcaption></figure>
+  <p><strong>Text equivalent:</strong> Start from <code>C:\</code> on a Windows drive or <code>/</code> on a Unix-like system. Move into a user folder, then Documents, then a project folder, and finally identify the file. Each path segment gives the computer another direction.</p>
+  <div class="table-wrap"><table class="matrix"><caption>Common path conventions (illustrative examples)</caption><thead><tr><th scope="col">Concept</th><th scope="col">Windows</th><th scope="col">macOS / Linux</th><th scope="col">What to notice</th></tr></thead><tbody>
+  <tr><td>Starting point</td><td><code>C:\</code> (a drive)</td><td><code>/</code> (root)</td><td>Both identify a defined starting location, but their notation differs.</td></tr>
+  <tr><td>Separator</td><td><code>\</code></td><td><code>/</code></td><td>A separator divides folder names in a path.</td></tr>
+  <tr><td>Example user location</td><td><code>C:\Users\Avery\Documents</code></td><td><code>/Users/avery/Documents</code> or <code>/home/avery/Documents</code></td><td>Actual account names and locations vary.</td></tr>
+  <tr><td>Relative reference</td><td><code>Projects\plan.docx</code></td><td><code>Projects/plan.docx</code></td><td>Meaning depends on the current folder.</td></tr>
+  </tbody></table></div>
+</div></details></section>
+
+<section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body">
+  <p>Use the following prediction-and-reveal activities. Each is available as native HTML disclosure, so the instruction and answer remain usable without JavaScript and appear in print.</p>
+  <details class="card"><summary>Prediction 1 — Which item is the complete address?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Predict, then reveal</span></div><p>Suppose a report is saved in the <code>Reports</code> folder within <code>Documents</code>. Which tells you the complete location on a Windows computer: <code>report.pdf</code>, <code>Reports</code>, or <code>C:\Users\Avery\Documents\Reports\report.pdf</code>?</p><p><strong>Reveal:</strong> The third option is a complete absolute path. The filename tells you what item to seek; the preceding segments identify where to seek it. The model is simplified: a different user account, drive, or cloud-sync configuration can change the actual path.</p></div></details>
+  <details class="card"><summary>Prediction 2 — What changes after “go up one folder”?</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Stepwise navigation</span></div><p>Starting location: <code>/home/avery/Documents/Projects/Atlas</code>. Predict the location after moving to the parent folder once.</p><p><strong>Reveal:</strong> The new location is <code>/home/avery/Documents/Projects</code>. In many command-line environments, <code>..</code> is shorthand for the parent directory. This does not delete or move anything; it changes the location from which relative paths are interpreted.</p></div></details>
+  <details class="card"><summary>Mini quiz — A same-name file problem</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Reasoning practice</span></div><p>You have two files named <code>notes.txt</code>: one in <code>School</code> and one in <code>Work</code>. Why is the path more reliable than the filename when someone asks for one of them?</p><p><strong>Reveal:</strong> The two filenames are identical, but their paths are different. The path provides the folder context that resolves the ambiguity. A clearer naming convention can also help, but it does not replace knowing the authoritative location.</p></div></details>
+  <div class="callout warn"><p><strong>Limit of the demonstrations:</strong> These examples teach location notation and hierarchy. They do not demonstrate permissions, deleted items, network availability, shortcut behavior, or version history, all of which can affect whether a path is usable.</p></div>
+</div></details></section>
+
+<section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">6</span>Worked Examples</h2></summary><div class="section-body">
+  <details class="card"><summary>Example 1 — Saving a personal photo</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical everyday scenario</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A person downloads <code>beach-sunrise.jpg</code> and wants to keep it with other vacation photos.</dd><dt>Inputs and assumptions</dt><dd>The file begins in Downloads; the person uses folders named Pictures, Travel, and 2026.</dd><dt>Steps</dt><dd>Open Downloads; create or open <code>Pictures/Travel/2026</code>; move or copy the file there; confirm the destination before removing the original.</dd><dt>Result</dt><dd>The file can be described by both a name and a location, such as <code>Pictures/Travel/2026/beach-sunrise.jpg</code>.</dd><dt>Key lesson</dt><dd>Folders add retrieval context to a descriptive filename.</dd><dt>Limit or alternative</dt><dd>Photo-management applications may organize items using albums or a library view that is not identical to a visible folder structure.</dd></dl></div></details>
+  <details class="card"><summary>Example 2 — Locating a class assignment</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Hypothetical study scenario</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A student needs to submit the final version of an essay, but there are drafts with similar names.</dd><dt>Inputs and assumptions</dt><dd>The project is arranged as <code>Documents/School/History-101/Essay</code>, with <code>Drafts</code> and <code>Final</code> subfolders.</dd><dt>Steps</dt><dd>Navigate to the project folder; select <code>Final</code>; verify the filename and modified date; attach or upload from that location.</dd><dt>Result</dt><dd>The intended file is <code>Documents/School/History-101/Essay/Final/causes-of-change.pdf</code>.</dd><dt>Key lesson</dt><dd>A purposeful folder structure reduces the chance of submitting the wrong version.</dd><dt>Limit or alternative</dt><dd>Dates and version-control tools can help, but they require consistent use and do not automatically make one file authoritative.</dd></dl></div></details>
+  <details class="card"><summary>Example 3 — Sharing a team project location</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Hypothetical collaborative scenario</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A team stores working material in a shared drive. A teammate asks where the approved slide deck is located.</dd><dt>Inputs and assumptions</dt><dd>The shared drive uses folders for project, workstream, review, and approved deliverables.</dd><dt>Steps</dt><dd>Confirm the approved location; use the service’s share function or copy a permitted link; describe the folder route in plain language; avoid relying only on a local sync path that may differ for other users.</dd><dt>Result</dt><dd>Teammates receive a location that identifies the shared authoritative item rather than a private copy.</dd><dt>Key lesson</dt><dd>Paths are context-specific. A local path on one device may not be the best way to communicate a shared location.</dd><dt>Limit or alternative</dt><dd>Access permissions and organizational sharing policies determine whether another person can open the item.</dd></dl></div></details>
+  <details class="card"><summary>Example 4 — Using a relative path in a project</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Hypothetical technical scenario</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A project folder contains <code>docs</code> and <code>images</code>. A document in <code>docs</code> needs to refer to <code>images/logo.png</code>.</dd><dt>Inputs and assumptions</dt><dd>The project’s folder arrangement stays together when copied or shared; the reference begins from the <code>docs</code> folder.</dd><dt>Steps</dt><dd>Move up one level to the project folder, then down into images: <code>../images/logo.png</code>.</dd><dt>Result</dt><dd>The reference can continue to work if the entire project moves while its internal arrangement remains unchanged.</dd><dt>Key lesson</dt><dd>Relative paths are portable within a stable structure; absolute paths are more explicit but may be specific to one machine.</dd><dt>Limit or alternative</dt><dd>Software tools differ in where they interpret relative paths from. Confirm the tool’s documented working directory before relying on the reference.</dd></dl></div></details>
+</div></details></section>
+
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary><div class="section-body">
+  <p>No technical prerequisite is required to begin. Basic familiarity with opening, saving, and selecting items on a computer is helpful.</p>
+  <div class="table-wrap"><table class="matrix"><caption>Knowledge that supports deeper mastery</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite Topic</th><th scope="col">Why It Helps</th><th scope="col">Recommended Starting Point</th></tr></thead><tbody>
+  <tr><td>Essential</td><td>Opening and saving a file</td><td>Connects the concepts to everyday computer actions.</td><td>Save a simple text document and identify its folder in a file browser.</td></tr>
+  <tr><td>Helpful</td><td>Copy versus move</td><td>Prevents accidental loss or duplication when reorganizing items.</td><td>Practice copying a noncritical sample file, then compare both locations.</td></tr>
+  <tr><td>Helpful</td><td>Search and sorting</td><td>Shows that organization and search complement each other.</td><td>Search for a known file by part of its name, then inspect its containing folder.</td></tr>
+  <tr><td>Optional / Advanced</td><td>Command-line navigation</td><td>Uses paths directly and makes absolute versus relative references visible.</td><td>Learn the current-directory concept before using navigation commands.</td></tr>
+  <tr><td>Optional / Advanced</td><td>Permissions and sharing</td><td>Explains why a visible path may still be inaccessible.</td><td>Review the sharing or permissions panel for a test folder.</td></tr>
+  </tbody></table></div>
+</div></details></section>
+
+<section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">8</span>Glossary</h2></summary><div class="section-body">
+  <div class="table-wrap"><table class="matrix"><caption>Key terms for files, folders, and paths</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language definition</th><th scope="col">Technical detail or connection</th></tr></thead><tbody>
+  <tr><td>File</td><td>A named item that stores information.</td><td>Its type may be indicated by an extension, but the extension is not a complete guarantee of what the file contains.</td></tr>
+  <tr><td>Folder / directory</td><td>A container used to organize items.</td><td>“Directory” is common in technical and command-line contexts; “folder” is common in graphical interfaces.</td></tr>
+  <tr><td>Path</td><td>An address showing how to locate an item in a hierarchy.</td><td>It is composed of segments separated by system conventions.</td></tr>
+  <tr><td>Root</td><td>The starting point at the top of a file hierarchy.</td><td>Unix-like systems use <code>/</code>; Windows commonly begins an absolute path with a drive designation such as <code>C:\</code>.</td></tr>
+  <tr><td>Absolute path</td><td>A full address from a defined starting point.</td><td>It does not depend on the current folder, but it may not work unchanged on a different machine.</td></tr>
+  <tr><td>Relative path</td><td>An address interpreted from the current folder.</td><td>It is shorter and can be portable within a preserved structure, but depends on context.</td></tr>
+  <tr><td>Parent folder</td><td>The folder that contains another folder or file.</td><td>In many command-line contexts, <code>..</code> refers to the parent directory.</td></tr>
+  <tr><td>Extension</td><td>The ending after a final dot in many filenames, such as <code>.pdf</code>.</td><td>Applications often use it as a type hint; users should still be cautious with unexpected files.</td></tr>
+  <tr><td>Shortcut / alias</td><td>An item that points to another item or location.</td><td>Removing a shortcut often does not remove the original, but behavior varies by system and tool.</td></tr>
+  </tbody></table></div>
+</div></details></section>
+
+<section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary><div class="section-body">
+  <div class="grid three">
+    <div class="stat"><div class="n">Naming</div><div class="k">Retrieval connection</div><p class="small">Clear names help users recognize an item; paths add the organizational context needed when names repeat.</p></div>
+    <div class="stat"><div class="n">Search</div><div class="k">Discovery connection</div><p class="small">Search can find items even when the path is forgotten. Inspecting the resulting path helps verify that the found copy is the right one.</p></div>
+    <div class="stat"><div class="n">Permissions</div><div class="k">Access connection</div><p class="small">A path identifies a location; permissions determine whether a person or program can read, change, or share what is there.</p></div>
+  </div>
+  <h3>Cloud synchronization and shared drives</h3><p>Cloud storage can present familiar folders while maintaining synchronized copies or references across devices. This is useful for access and collaboration, but it introduces questions about sync status, version conflicts, links, and organizational policy. Treat a locally displayed path as a location in a particular environment, not automatically as a universal address.</p>
+  <h3>Backups and records</h3><p>Folder organization contributes to recovery and retention because it can make important material easier to identify and include in a backup process. It does not substitute for a backup strategy, retention schedule, or records-management process.</p>
+  <h3>Security and safe handling</h3><p>File paths can expose meaningful context, such as usernames, project names, or network locations. Share only the path details needed for the task, and use authorized locations and sharing methods for sensitive or controlled material.</p>
+</div></details></section>
+
+<section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body">
+  <div class="table-wrap"><table class="matrix"><caption>Misconceptions and corrections</caption><thead><tr><th scope="col">Likely misunderstanding</th><th scope="col">Accurate correction</th><th scope="col">Why it matters / counterexample</th></tr></thead><tbody>
+  <tr><td>“The filename tells me exactly what file it is.”</td><td>A filename can be duplicated in many folders.</td><td><code>notes.txt</code> in Work may be different from <code>notes.txt</code> in School; the path resolves which one is intended.</td></tr>
+  <tr><td>“A shortcut is the original file.”</td><td>A shortcut or alias commonly points to an original item elsewhere.</td><td>Deleting or moving the target can break the shortcut; deleting the shortcut often leaves the target intact.</td></tr>
+  <tr><td>“Moving a file changes what it contains.”</td><td>Moving normally changes its location, not its content.</td><td>Some applications update references, histories, or sync state, so related links may still need attention.</td></tr>
+  <tr><td>“All computers write paths the same way.”</td><td>Path roots, separators, case behavior, and special folders vary.</td><td>A Windows path with a drive letter is not the normal form for a Unix-like system.</td></tr>
+  <tr><td>“If I can see a path, I can open it.”</td><td>Access can be limited by permissions, network availability, encryption, or sync state.</td><td>A teammate may receive a valid shared-drive location but lack authorization to open its contents.</td></tr>
+  </tbody></table></div>
+  <p class="small">Introductory simplification: calling every container a “folder” is useful for most desktop work. In technical contexts, “directory” may be more precise, especially when discussing operating-system APIs or command-line behavior.</p>
+</div></details></section>
+
+<section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body">
+  <h3>Everyday personal organization</h3><p><strong>Situation:</strong> managing documents, media, downloads, and household records. <strong>How the concept informs action:</strong> create a limited number of meaningful top-level folders and use consistent subfolders and filenames. <strong>Benefit:</strong> faster retrieval and less reliance on memory. <strong>Risk and tradeoff:</strong> elaborate structures can become burdensome; use search rather than creating unnecessary nesting. This is a practical organization recommendation, not a measured claim about a specific productivity outcome.</p>
+  <h3>Academic and professional work</h3><p><strong>Situation:</strong> drafting deliverables with multiple versions and source materials. <strong>How the concept informs action:</strong> separate working drafts, reference material, and approved/final products; verify the path before attaching or submitting a file. <strong>Benefit:</strong> clearer handoffs and fewer version mistakes. <strong>Risk and ethics:</strong> avoid placing sensitive material in unauthorized locations or sharing path details that disclose more context than needed. Organization-specific records and security rules still govern.</p>
+  <h3>Software, data, and automation</h3><p><strong>Situation:</strong> a program needs to load a configuration file, image, dataset, or output directory. <strong>How the concept informs action:</strong> use explicit paths when a fixed machine location is required and relative paths when a self-contained project structure should remain portable. <strong>Benefit:</strong> more reproducible workflows. <strong>Tradeoff:</strong> relative paths depend on the working location; absolute paths can fail after a move or on another device. Consult a tool’s documentation for its path rules.</p>
+  <h3>Collaboration and shared storage</h3><p><strong>Situation:</strong> people need a common authoritative location for a team product. <strong>How the concept informs action:</strong> use the organization’s approved shared location and a clear folder convention; share through authorized mechanisms and confirm access. <strong>Benefit:</strong> reduced confusion over personal copies. <strong>Risk:</strong> a locally synchronized path, an emailed attachment, and a shared link may refer to different copies or permissions. Access, records, and release decisions require appropriate human and policy review.</p>
+</div></details></section>
+
+<section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body">
+  <ol>
+    <li>What is the main difference between a file and a folder?</li>
+    <li>Why can two files with the same filename still be different items?</li>
+    <li>What information does an absolute path provide that a relative path may not?</li>
+    <li>On many Unix-like systems, what does a path beginning with <code>/</code> indicate?</li>
+    <li>Why should you verify a destination folder before moving or uploading a file?</li>
+    <li><strong>Application:</strong> A teammate sends you <code>C:\Users\Jordan\Desktop\Final\brief.pdf</code>. Why might that be insufficient for you to locate the same shared file?</li>
+    <li><strong>Analysis:</strong> Choose between an absolute and a relative path for a self-contained project that will be copied to different computers. Explain your choice and one condition that could make the choice fail.</li>
+  </ol>
+  <details class="card"><summary>Answer Key</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Model answers</span></div>
+    <ol>
+      <li>A file stores information; a folder organizes files and often other folders.</li>
+      <li>The folder context can differ. For example, <code>Work/notes.txt</code> and <code>School/notes.txt</code> have different paths.</li>
+      <li>An absolute path begins from a defined root or drive, so it specifies the full route to an item without relying on the current folder.</li>
+      <li>It commonly indicates an absolute path beginning at the root of the hierarchy.</li>
+      <li>Verification reduces the chance of misfiling, overwriting, sharing the wrong version, or later being unable to find the item.</li>
+      <li>That is a path on Jordan’s device and account. Your device may have different usernames, drive mappings, desktop locations, permissions, or sync configuration. A permitted shared link or common shared-drive location may be more useful.</li>
+      <li>A relative path is often suitable because it can keep working when the entire project structure moves together. It may fail if the tool interprets the path from a different working folder, or if the project’s internal structure changes. An absolute path may be appropriate when a fixed system resource is intentionally required.</li>
+    </ol>
+    <p><strong>Acceptable alternatives:</strong> Answers may use different operating-system examples if they correctly distinguish location, starting point, and context.</p>
+  </div></details>
+</div></details></section>
+
+<section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body">
+  <p class="lead"><strong>Central idea:</strong> Files hold information, folders create an organizing hierarchy, and paths express the route to a particular item within that hierarchy.</p>
+  <ul>
+    <li>A filename is useful, but a path provides the context that distinguishes same-named files.</li>
+    <li>Folders can contain files and subfolders, creating a hierarchy from a root or drive to a destination.</li>
+    <li>Windows commonly uses drive letters and backslashes; macOS and Linux commonly use a root slash and forward slashes.</li>
+    <li>Absolute paths are complete from a defined starting point; relative paths depend on the current location.</li>
+    <li>Shortcuts, aliases, cloud synchronization, sharing permissions, and application behavior can make a displayed location more complex than it first appears.</li>
+    <li>Good organization balances clear names, useful folder structure, manageable depth, authorized sharing, and reliable backup or retention practices.</li>
+  </ul>
+  <p><strong>Specific next learning step:</strong> On a noncritical folder, create a small structure with a file inside two nested folders. Use your file browser to view its location, then compare the displayed path with a second file that has the same name in a different folder.</p>
+  <div class="callout"><p><strong>If you remember only one thing…</strong> A path is the context that turns a file’s name into a specific location.</p></div>
+  <h3>Sources and verification notes</h3>
+  <p class="small">The explanations and examples are instructional models. Official documentation was reviewed on November 24, 2026. User-interface labels, default locations, supported path lengths, and specific file-system behavior can change by operating-system version, configuration, and service.</p>
+  <ol class="refs">
+    <li>Microsoft Support, <a href="https://support.microsoft.com/en-US/Windows/Experience/FileExplorer/file-explorer-in-windows">File Explorer in Windows</a>. Used for common File Explorer organization and known-folder context.</li>
+    <li>Microsoft Support, <a href="https://support.microsoft.com/en-us/onedrive/what-are-file-path-length-limits">What are the file path length limits?</a>. Used for the definition of a file path and Windows-oriented path examples; its limits are configuration- and product-specific.</li>
+    <li>Apple Support, <a href="https://support.apple.com/en-nz/guide/mac-help/mchle9f0a1b2/mac">Organise your files in the Finder on Mac</a>. Used for Finder organization and folder-management context.</li>
+    <li>freedesktop.org, <a href="https://specifications.freedesktop.org/fhs/latest/">Filesystem Hierarchy Standard</a>. Used for the Unix-like hierarchy context; individual Linux distributions and macOS can differ from a general standard.</li>
+  </ol>
+</div></details></section>
+
+</div></main>
+<script>  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script></body>
+</html>

@@ -1,0 +1,1723 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Fundamentals of GitHub: Progressive Learning Resource</title>
+  <meta name="tags" content="GitHub, Git, Version Control, Pull Requests, Open Source, Software Collaboration, CI/CD, DevOps">
+  <meta name="prompt-type" content="general-knowledge">
+  <style>
+:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.58 var(--sans);
+}
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover {
+  color: var(--blue2);
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: .6rem;
+  background: #fff;
+  border: 2px solid var(--blue);
+}
+.site {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 var(--space-4);
+}
+.header {
+  background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%);
+  color: white;
+  padding: var(--space-6) 0 var(--space-5);
+  border-bottom: 6px solid var(--gold);
+}
+.eyebrow, .meta-label {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-weight: 800;
+}
+.eyebrow {
+  color: #cce7eb;
+  margin: 0 0 .5rem;
+}
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 950px;
+  letter-spacing: -.02em;
+}
+.subtitle {
+  font-size: 1.15rem;
+  max-width: 840px;
+  margin: 1rem 0 1.35rem;
+  color: #e2f2f4;
+}
+.metadata {
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 1rem;
+  font-size: .88rem;
+}
+.metadata strong {
+  display: block;
+  color: #b9e1e3;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.toolbar {
+  background: #102f43;
+  color: #fff;
+  padding: .55rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .16);
+}
+.toolbar .site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.toolbar a {
+  color: #e8f5f5;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.toolbar a:hover {
+  text-decoration: underline;
+}
+.btn {
+  cursor: pointer;
+  border: 1px solid #bfe3e2;
+  background: #fff;
+  color: #123d59;
+  border-radius: 7px;
+  padding: .42rem .68rem;
+  font: 700 .83rem var(--sans);
+}
+.btn:hover {
+  background: #dff2f1;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: var(--space-5) auto;
+}
+.toc {
+  position: sticky;
+  top: 3.6rem;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+.toc h2 {
+  font-size: .84rem;
+  margin: 0 0 .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.toc li {
+  margin: .34rem 0;
+}
+.toc a {
+  font-size: .84rem;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.content {
+  min-width: 0;
+}
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: 4.2rem;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--pale);
+  line-height: 1.15;
+}
+.section h3 {
+  font-size: 1.1rem;
+  margin: 1.55rem 0 .6rem;
+  color: #173f57;
+}
+.section h4 {
+  font-size: .98rem;
+  margin: 1.1rem 0 .3rem;
+}
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font: 800 .83rem var(--sans);
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+.lead {
+  font-size: 1.08rem;
+}
+.callout {
+  border-left: 5px solid var(--blue2);
+  padding: 1rem 1.1rem;
+  background: var(--pale);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+.callout.warn {
+  border-color: var(--gold);
+  background: var(--pale3);
+}
+.callout strong {
+  color: #133d55;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+.stat .n {
+  font: 800 1.75rem/1 var(--serif);
+  color: var(--blue);
+}
+.stat .k {
+  font-size: .78rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-top: .4rem;
+}
+.tag, .ev {
+  display: inline-block;
+  border-radius: 999px;
+  padding: .18rem .55rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+.tag {
+  background: #dceff3;
+  color: #145a78;
+}
+.tag.green {
+  background: #ddf0e9;
+  color: #176353;
+}
+.tag.gold {
+  background: #f6e8cb;
+  color: #795312;
+}
+.tag.red {
+  background: #f5dee0;
+  color: #8a303a;
+}
+.ev.high {
+  background: #dcefe8;
+  color: #14604e;
+}
+.ev.med {
+  background: #f8ecd4;
+  color: #795312;
+}
+.ev.low {
+  background: #f5e0e1;
+  color: #8b333a;
+}
+.definition {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: .85rem 1rem;
+  margin: .65rem 0;
+}
+.definition strong {
+  color: var(--blue);
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  background: #fff;
+}
+.card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.1rem;
+  background: #f8fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 800;
+  color: #163d54;
+}
+.card summary::-webkit-details-marker {
+  display: none;
+}
+.card summary:after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+.card[open] summary:after {
+  content: '–';
+}
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+.theory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .3rem 0 .8rem;
+}
+.theory-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+}
+.theory-grid dt {
+  font-weight: 800;
+  color: #31556b;
+}
+.theory-grid dd {
+  margin: 0;
+}
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 1rem 0;
+}
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+  min-width: 760px;
+}
+.matrix th, .matrix td {
+  padding: .7rem .75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.matrix th {
+  background: #eaf3f6;
+  color: #183e54;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.matrix tr:last-child td {
+  border-bottom: 0;
+}
+.matrix tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+.figure {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fff;
+  overflow: auto;
+}
+.figure h3 {
+  margin: .1rem 0 .55rem;
+}
+.figure figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: .75rem;
+  padding-top: .65rem;
+}
+.svgwide {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--muted);
+  margin: .3rem 0;
+}
+.legend i {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -.08rem;
+  margin-right: .25rem;
+}
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+}
+.evidence-row:last-child {
+  border: 0;
+}
+.small {
+  font-size: .88rem;
+  color: var(--muted);
+}
+.footnote {
+  font-size: .79rem;
+  color: var(--muted);
+}
+.refs {
+  padding-left: 1.2rem;
+}
+.refs li {
+  margin: .8rem 0;
+}
+.recommend {
+  counter-reset: recommend;
+}
+.recommend li {
+  list-style: none;
+  position: relative;
+  padding: .85rem 1rem .85rem 3.1rem;
+  background: #f8fbfc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: .65rem 0;
+}
+.recommend li:before {
+  counter-increment: recommend;
+  content: counter(recommend);
+  position: absolute;
+  left: .8rem;
+  top: .78rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  font: 800 .76rem var(--sans);
+}
+.print-note {
+  display: none;
+}
+@media(max-width:900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    position: relative;
+    top: auto;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media(max-width:620px) {
+  .site {
+    padding: 0 1rem;
+  }
+  .header {
+    padding: 2.5rem 0 2rem;
+  }
+  .layout {
+    margin: 1.25rem auto;
+  }
+  .section {
+    padding: 1.15rem;
+  }
+  .grid, .grid.three {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+  .metadata {
+    gap: .8rem 1.2rem;
+  }
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+  .toolbar .site {
+    padding: 0 1rem;
+  }
+  .toolbar a {
+    display: none;
+  }
+}
+@media print {
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+  .header {
+    padding: 1.5rem 0;
+    background: #fff !important;
+    color: #000;
+    border-bottom: 3px solid #000;
+  }
+  .header .eyebrow, .header .subtitle, .metadata strong {
+    color: #222;
+  }
+  .toolbar, .toc, .btn {
+    display: none;
+  }
+  .layout {
+    display: block;
+    margin: 0;
+  }
+  .section {
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    break-inside: avoid;
+  }
+  .section h2 {
+    break-after: avoid;
+  }
+  .card {
+    break-inside: avoid;
+  }
+  .card summary {
+    background: #fff;
+  }
+  .card:not([open]) .card-body {
+    display: block;
+  }
+  .figure {
+    break-inside: avoid;
+  }
+  .print-note {
+    display: block;
+  }
+  .content {
+    width: 100%;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .matrix {
+    min-width: 0;
+    font-size: 8pt;
+  }
+  .svgwide {
+    min-width: 0;
+  }
+}
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+
+/* Progressive Interactive Component Specific Styles */
+.interactive-panel {
+  border: 1px solid var(--line);
+  background: var(--pale2);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin: 1.2rem 0;
+}
+.interactive-controls {
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.sim-stage {
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: .9rem;
+}
+.code-block {
+  background: #17212b;
+  color: #f6f8fa;
+  padding: .85rem 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+  </style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to learning content</a>
+
+<header class="header">
+  <div class="site">
+    <p class="eyebrow">Progressive Learning Resource</p>
+    <h1>The Fundamentals of GitHub</h1>
+    <p class="subtitle">A structured exploration of distributed revision hosting, asynchronous team collaboration, and modern continuous integration pipelines.</p>
+    <div class="metadata">
+      <span><strong>Topic</strong> The Fundamentals of GitHub</span>
+      <span><strong>Knowledge Level</strong> Beginner to Intermediate</span>
+      <span><strong>Purpose</strong> General Understanding &amp; Practical Competence</span>
+      <span><strong>Depth</strong> Comprehensive</span>
+      <span><strong>Prepared</strong> Current Instructional Edition</span>
+      <span><strong>Evidence</strong> Established Software Engineering Consensus</span>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="site">
+    <a href="#main">Jump to learning resource</a>
+    <div class="actions">
+      <button class="btn" id="expandAll" type="button">Expand all</button>
+      <button class="btn" id="collapseAll" type="button">Collapse all</button>
+      <button class="btn" id="exportMarkdown" type="button">Export Markdown</button>
+      <button class="btn" id="printReport" type="button">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<main id="main" class="site layout">
+  <nav class="toc" aria-label="Table of contents">
+    <h2>On This Page</h2>
+    <ol>
+      <li><a href="#executive-summary">Executive Summary</a></li>
+      <li><a href="#core-idea">The Core Idea — Explain It Simply</a></li>
+      <li><a href="#progressive-levels">Progressive Levels of Understanding</a></li>
+      <li><a href="#visual-learning-aids">Visual Learning Aids</a></li>
+      <li><a href="#interactive-learning">Interactive Learning Elements</a></li>
+      <li><a href="#worked-examples">Worked Examples</a></li>
+      <li><a href="#prerequisites">Prerequisite Knowledge</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#related-concepts">Related Concepts &amp; Connections</a></li>
+      <li><a href="#misunderstandings">Common Misunderstandings</a></li>
+      <li><a href="#practical-applications">Practical Applications</a></li>
+      <li><a href="#knowledge-check">Knowledge Check</a></li>
+      <li><a href="#final-summary">Final Summary</a></li>
+    </ol>
+  </nav>
+
+  <div class="content">
+
+    <!-- 01 EXECUTIVE SUMMARY -->
+    <section class="section" id="executive-summary">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">1</span>Executive Summary</h2></summary>
+        <div class="section-body">
+          <div class="callout">
+            GitHub is a cloud-based platform built on top of Git, the distributed version control system created by Linus Torvalds. It enables individuals and distributed teams across the globe to store, track, review, and synchronize modifications to project assets and source code over time. While Git manages local repository histories on an individual computer, GitHub serves as the collaborative hub where those histories converge through pull requests, discussions, issue trackers, and automated workflows. In software engineering and data science, GitHub is encountered daily as the central clearinghouse for open-source ecosystems and enterprise software delivery. The single indispensable takeaway is that GitHub transforms solitary code revision into a transparent, multi-party social workflow where every proposed change is documented, vetted, and integrated without overwriting prior work.
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 02 THE CORE IDEA -->
+    <section class="section" id="core-idea">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary>
+        <div class="section-body">
+          <p class="lead">At its essence, GitHub functions as both a time machine and an editorial switchboard for digital collaboration.</p>
+
+          <p>Imagine writing an expansive reference book with fifty co-authors scattered across four continents. If everyone emailed revised Microsoft Word files named <code>chapter1_final_v2_reallyFinal.docx</code>, the project would rapidly devolve into chaos: edits would be overwritten, contradictory deletions would go unnoticed, and identifying who wrote a specific sentence three months ago would become impossible.</p>
+
+          <p><strong>The Mechanism:</strong> Underneath GitHub is <em>Git</em>, an engine that records snapshots of an entire folder over time. Instead of saving whole duplicate files, Git captures discrete checkpoints called <strong>commits</strong>, linked cryptographically into an immutable historical graph. <em>GitHub</em> takes this engine and places it onto high-availability cloud servers. It adds an accessible web interface, fine-grained access control, issue tracking, and an essential collaborative mechanism: the <strong>Pull Request (PR)</strong>.</p>
+
+          <div class="definition">
+            <strong>Analogy &amp; Boundary:</strong> Thinking of GitHub as <em>"Google Docs for programming code"</em> is intuitively helpful because multiple contributors share a single master document. However, the analogy breaks down fundamentally on synchronization: Google Docs synchronizes edits character-by-character in real time over a single live session. GitHub works <em>asynchronously</em>; contributors isolate their work on separate branches for hours or weeks, deliberately reconciling differences only when their work is complete, tested, and reviewed.
+          </div>
+
+          <p>The central relationship can be summarized as: <strong>Working Directory (Your Computer) &rarr; Git Commit (Local History) &rarr; GitHub Remote (Central Cloud) &rarr; Pull Request (Peer Review) &rarr; Production Deployment (Automated Pipelines).</strong></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 03 PROGRESSIVE LEVELS -->
+    <section class="section" id="progressive-levels">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary>
+        <div class="section-body">
+
+          <details class="card">
+            <summary>Level 1: Beginner — Definition, Purpose, and Everyday Use</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag green">Entry Level</span></div>
+              <dl class="theory-grid">
+                <dt>Definition</dt>
+                <dd>GitHub is a web-based hosting platform that stores Git repositories online, allowing developers to share project files and monitor updates across contributors.</dd>
+                <dt>Primary Purpose</dt>
+                <dd>Prevent lost work, provide safe backup copies, and allow multiple people to work on the same folder without stomping on each other's changes.</dd>
+                <dt>Everyday Example</dt>
+                <dd>A student builds a website portfolio on their laptop. They push their progress to GitHub so they can view it from university computers, share the link with hiring managers, and roll back if a redesign breaks their styles.</dd>
+                <dt>Core Takeaway</dt>
+                <dd>You do not need to memorize terminal commands to benefit from GitHub; you can drag and drop files and edit documents directly inside GitHub's web interface.</dd>
+              </dl>
+            </div>
+          </details>
+
+          <details class="card">
+            <summary>Level 2: Foundational — Core Components, Mechanisms, and Distinctions</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag">Foundational</span></div>
+              <dl class="theory-grid">
+                <dt>Git vs. GitHub</dt>
+                <dd><strong>Git</strong> is a localized command-line program installed on your machine. <strong>GitHub</strong> is a proprietary commercial cloud platform owned by Microsoft that hosts remote Git repositories and adds collaboration layers.</dd>
+                <dt>Key Components</dt>
+                <dd>
+                  <ul>
+                    <li><strong>Repository ("Repo"):</strong> The root container folder tracking files and full commit histories.</li>
+                    <li><strong>Branch:</strong> A parallel, lightweight pointer to a sequence of commits, allowing experimentation without destabilizing the main codebase.</li>
+                    <li><strong>Fork:</strong> A server-side copy of someone else's entire repository linked back to the original source.</li>
+                    <li><strong>Pull Request (PR):</strong> An explicit proposal asking repository maintainers to review, discuss, and merge code from your branch into their target branch.</li>
+                  </ul>
+                </dd>
+                <dt>Common Stumbling Block</dt>
+                <dd>Confusing <em>Git merge</em> (a local algorithm that integrates divergent commit trees) with a <em>Pull Request</em> (a GitHub-managed peer review workflow culminating in a merge).</dd>
+              </dl>
+            </div>
+          </details>
+
+          <details class="card">
+            <summary>Level 3: Intermediate — Principles, Collaborative Lifecycle, and Tradeoffs</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag gold">Intermediate</span></div>
+              <dl class="theory-grid">
+                <dt>The GitHub Flow</dt>
+                <dd>A lightweight, branch-based software engineering methodology: create a feature branch off <code>main</code> &rarr; commit changes locally &rarr; push to GitHub &rarr; open a Pull Request &rarr; discuss and review &rarr; deploy for verification &rarr; merge into <code>main</code>.</dd>
+                <dt>Merge Conflicts</dt>
+                <dd>Occurs when two divergent branches modify the exact same lines of code in different ways. Git halts automatic merging, requiring humans to manually declare which variation survives.</dd>
+                <dt>Structural Tradeoffs</dt>
+                <dd>
+                  <strong>Monorepo vs. Polyrepo:</strong> Storing all organization systems in one enormous repository simplifies cross-project refactoring but strains Git index performance; maintaining hundreds of tiny repositories isolates access but complicates dependency coordination.
+                </dd>
+              </dl>
+            </div>
+          </details>
+
+          <details class="card">
+            <summary>Level 4: Advanced — Technical Mechanics, Automation, and Security</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag red">Advanced</span></div>
+              <dl class="theory-grid">
+                <dt>GitHub Actions (CI/CD)</dt>
+                <dd>Event-driven containerized automation. Whenever an event occurs (such as a <code>git push</code> or a new PR), GitHub spins up a transient virtual machine (Linux, macOS, Windows) executing scripts defined in YAML format (linting, automated unit testing, artifact bundling).</dd>
+                <dt>Integrity &amp; Cryptography</dt>
+                <dd>Git relies on Directed Acyclic Graphs (DAGs) indexed by SHA hashes (SHA-1 or SHA-256). GitHub supports GPG (GNU Privacy Guard) and SSH signature verification to guarantee that commit author identities have not been spoofed.</dd>
+                <dt>Branch Protection Rules</dt>
+                <dd>Administrative policies blocking direct pushes to <code>main</code>, mandating linear commit histories, requiring passing automated test suites, and enforcing minimum peer reviews.</dd>
+              </dl>
+            </div>
+          </details>
+
+          <details class="card">
+            <summary>Level 5: Expert Perspective — Governance, Enterprise Resilience, and Systems Design</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag">Expert Perspective</span></div>
+              <dl class="theory-grid">
+                <dt>Governance Frameworks</dt>
+                <dd>Open-source maintenance models (Benevolent Dictator for Life, Steering Committees, Apache-style consensus) coordinated entirely via GitHub Issues, Discussions, and CODEOWNERS enforcement.</dd>
+                <dt>Supply Chain Security</dt>
+                <dd>Addressing software supply chain poisoning via GitHub Dependabot (vulnerability scanning), Secret Scanning (preventing committed API keys), and Software Bill of Materials (SBOM) generation.</dd>
+                <dt>Vendor Lock-in vs. Portability</dt>
+                <dd>While Git repository data remains 100% portable to GitLab, Bitbucket, or self-hosted Gitea, GitHub proprietary metadata (Issue comments, PR review histories, Project Boards, GitHub Actions cache) requires custom migration pipelines.</dd>
+              </dl>
+            </div>
+          </details>
+
+        </div>
+      </details>
+    </section>
+
+    <!-- 04 VISUAL LEARNING AIDS -->
+    <section class="section" id="visual-learning-aids">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary>
+        <div class="section-body">
+          <p>The diagrams below illustrate the architectural lifecycle of a GitHub contribution and the relational hierarchy between local storage and remote infrastructure.</p>
+
+          <figure class="figure">
+            <h3>Component Architecture: Local Machine to GitHub Remote</h3>
+            <svg class="svgwide" viewBox="0 0 850 320" role="img" aria-labelledby="fig1-title fig1-desc">
+              <title id="fig1-title">The Three Local Git Zones and GitHub Cloud Remote</title>
+              <desc id="fig1-desc">Flowchart demonstrating how files move from Working Directory through Staging Area and Local Git Database to GitHub Cloud via Git Push and Pull.</desc>
+              
+              <!-- Background zones -->
+              <rect x="20" y="20" width="530" height="280" rx="10" fill="#f0f6f8" stroke="#0d7c86" stroke-width="2" stroke-dasharray="4 4"/>
+              <text x="35" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#145a78">Your Local Machine (Git)</text>
+
+              <rect x="580" y="20" width="250" height="280" rx="10" fill="#eef7f5" stroke="#188d88" stroke-width="2"/>
+              <text x="600" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#188d88">GitHub Cloud (Remote)</text>
+
+              <!-- Local Box 1: Working Dir -->
+              <rect x="40" y="80" width="140" height="180" rx="8" fill="#ffffff" stroke="#d8e0e6" stroke-width="2"/>
+              <text x="55" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#17212b">1. Working Tree</text>
+              <text x="55" y="135" font-family="sans-serif" font-size="11" fill="#586875">Unstaged edits</text>
+              <text x="55" y="155" font-family="sans-serif" font-size="11" fill="#586875">Modified files</text>
+              <text x="55" y="220" font-family="monospace" font-size="11" fill="#0d7c86">git add</text>
+
+              <!-- Arrow 1 to 2 -->
+              <path d="M 180 170 L 210 170" stroke="#0d7c86" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <!-- Local Box 2: Staging Area -->
+              <rect x="215" y="80" width="140" height="180" rx="8" fill="#ffffff" stroke="#d8e0e6" stroke-width="2"/>
+              <text x="230" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#17212b">2. Staging Area</text>
+              <text x="230" y="135" font-family="sans-serif" font-size="11" fill="#586875">Index / Prepared</text>
+              <text x="230" y="155" font-family="sans-serif" font-size="11" fill="#586875">Ready to record</text>
+              <text x="230" y="220" font-family="monospace" font-size="11" fill="#0d7c86">git commit</text>
+
+              <!-- Arrow 2 to 3 -->
+              <path d="M 355 170 L 385 170" stroke="#0d7c86" stroke-width="2"/>
+
+              <!-- Local Box 3: Local Repo -->
+              <rect x="390" y="80" width="140" height="180" rx="8" fill="#ffffff" stroke="#d8e0e6" stroke-width="2"/>
+              <text x="405" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#17212b">3. Local Repo</text>
+              <text x="405" y="135" font-family="sans-serif" font-size="11" fill="#586875">.git database</text>
+              <text x="405" y="155" font-family="sans-serif" font-size="11" fill="#586875">Committed snapshots</text>
+
+              <!-- Connection to Remote: Push & Pull -->
+              <path d="M 530 140 L 595 140" stroke="#145a78" stroke-width="3"/>
+              <polygon points="595,140 585,134 585,146" fill="#145a78"/>
+              <text x="535" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#145a78">push</text>
+
+              <path d="M 595 200 L 530 200" stroke="#188d88" stroke-width="3"/>
+              <polygon points="530,200 540,194 540,206" fill="#188d88"/>
+              <text x="545" y="220" font-family="sans-serif" font-size="11" font-weight="bold" fill="#188d88">pull</text>
+
+              <!-- GitHub Box Content -->
+              <rect x="600" y="80" width="210" height="180" rx="8" fill="#ffffff" stroke="#d8e0e6" stroke-width="2"/>
+              <text x="615" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#145a78">GitHub Repository</text>
+              <text x="615" y="135" font-family="sans-serif" font-size="11" fill="#586875">• Remote Branches (main)</text>
+              <text x="615" y="155" font-family="sans-serif" font-size="11" fill="#586875">• Pull Request Engine</text>
+              <text x="615" y="175" font-family="sans-serif" font-size="11" fill="#586875">• Issues &amp; Discussions</text>
+              <text x="615" y="195" font-family="sans-serif" font-size="11" fill="#586875">• GitHub Actions CI/CD</text>
+              <text x="615" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b57922">origin / upstream</text>
+            </svg>
+            <figcaption><strong>Figure 1: Conceptual Structural Map.</strong> Notice that your local computer retains three internal stages. Edits do not reach GitHub directly from saving a file; they must be indexed (staged), recorded into the local commit history, and pushed to the remote server.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <h3>Process Map: The GitHub Feature Branch Workflow</h3>
+            <svg class="svgwide" viewBox="0 0 850 240" role="img" aria-labelledby="fig2-title fig2-desc">
+              <title id="fig2-title">The Feature Branch Lifecycle</title>
+              <desc id="fig2-desc">Timeline of a main branch spawning a feature branch, accumulating commits, and merging back via Pull Request.</desc>
+              
+              <!-- Main Branch Line -->
+              <line x1="60" y1="70" x2="780" y2="70" stroke="#145a78" stroke-width="4"/>
+              <text x="60" y="50" font-family="sans-serif" font-size="13" font-weight="bold" fill="#145a78">main branch</text>
+
+              <!-- Feature Branch Line -->
+              <path d="M 200 70 C 260 70, 250 160, 310 160 L 590 160 C 650 160, 640 70, 700 70" fill="none" stroke="#188d88" stroke-width="4" stroke-dasharray="6 3"/>
+              <text x="310" y="195" font-family="sans-serif" font-size="13" font-weight="bold" fill="#188d88">feature/auth branch</text>
+
+              <!-- Main Commit Nodes -->
+              <circle cx="100" cy="70" r="10" fill="#145a78"/>
+              <circle cx="200" cy="70" r="10" fill="#145a78"/>
+              <circle cx="700" cy="70" r="12" fill="#b57922"/>
+
+              <!-- Feature Commit Nodes -->
+              <circle cx="340" cy="160" r="10" fill="#188d88"/>
+              <circle cx="450" cy="160" r="10" fill="#188d88"/>
+              <circle cx="560" cy="160" r="10" fill="#188d88"/>
+
+              <!-- Labels -->
+              <text x="80" y="100" font-family="sans-serif" font-size="10" fill="#586875">Initial commit</text>
+              <text x="175" y="100" font-family="sans-serif" font-size="10" fill="#586875">Branch point</text>
+              <text x="310" y="140" font-family="sans-serif" font-size="10" fill="#188d88">Commit A</text>
+              <text x="420" y="140" font-family="sans-serif" font-size="10" fill="#188d88">Commit B</text>
+              <text x="530" y="140" font-family="sans-serif" font-size="10" fill="#188d88">Commit C</text>
+              <text x="470" y="95" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0d7c86">Pull Request &amp; Code Review</text>
+              <text x="660" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b57922">Merged into main</text>
+            </svg>
+            <figcaption><strong>Figure 2: The Branching and Merging Sequence.</strong> Development occurs safely on isolated lines of development. The main branch remains perpetually deployable while new logic undergoes automated testing and peer approval.</figcaption>
+          </figure>
+
+          <div class="legend">
+            <span><i style="background:#145a78"></i> Stable Trunk (Production)</span>
+            <span><i style="background:#188d88"></i> Work-in-Progress Feature</span>
+            <span><i style="background:#b57922"></i> Integration / Merge Event</span>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 05 INTERACTIVE OR DYNAMIC LEARNING ELEMENTS -->
+    <section class="section" id="interactive-learning">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary>
+        <div class="section-body">
+          <p>Test your understanding of command sequences and remote repository relationships with the interactive simulations below.</p>
+
+          <div class="interactive-panel">
+            <h3>Interactive Workflow Simulator: From Idea to Merged Code</h3>
+            <p class="small">Click each operational step in sequence to observe how file states change across the local workspace and GitHub's cloud platform.</p>
+            
+            <div class="interactive-controls">
+              <button class="btn" type="button" onclick="window.runSimStep(1)">1. Branch</button>
+              <button class="btn" type="button" onclick="window.runSimStep(2)">2. Edit &amp; Commit</button>
+              <button class="btn" type="button" onclick="window.runSimStep(3)">3. Push to Remote</button>
+              <button class="btn" type="button" onclick="window.runSimStep(4)">4. Open Pull Request</button>
+              <button class="btn" type="button" onclick="window.runSimStep(5)">5. Review &amp; Merge</button>
+              <button class="btn" type="button" onclick="window.resetSim()" style="background:#f5dee0; color:#8a303a; border-color:#d8e0e6;">Reset</button>
+            </div>
+
+            <div class="sim-stage" id="sim-output" aria-live="polite">
+              <strong>Current State:</strong> Ready. Click Step 1 to begin the collaboration lifecycle.
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Static Fallback Equivalent:</strong>
+            <ol>
+              <li><code>git checkout -b feature-update</code> creates an isolated branch locally.</li>
+              <li><code>git commit -am "Improve styles"</code> locks changes into your local revision tree.</li>
+              <li><code>git push origin feature-update</code> publishes the branch onto GitHub.</li>
+              <li>Opening a Pull Request on GitHub summons colleagues to review and triggers automated tests.</li>
+              <li>Merging incorporates the reviewed commits into the default <code>main</code> branch.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 06 WORKED EXAMPLES -->
+    <section class="section" id="worked-examples">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">6</span>Worked Examples</h2></summary>
+        <div class="section-body">
+
+          <!-- Example 1 -->
+          <details class="card">
+            <summary>Example 1: Initializing a Local Project and Publishing to GitHub</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag">Beginner Scenario</span></div>
+              <p><strong>Problem:</strong> You created a personal website in a local folder called <code>portfolio</code> on your laptop and need to back it up to a new GitHub repository.</p>
+              <p><strong>Stepwise Solution:</strong></p>
+              <pre class="code-block"><code># 1. Initialize Git in the local folder
+cd ~/projects/portfolio
+git init
+
+# 2. Stage all existing files and create the first commit
+git add .
+git commit -m "feat: initial commit of portfolio pages"
+
+# 3. Rename default branch to 'main'
+git branch -M main
+
+# 4. Link local repository to your newly created GitHub repository
+git remote add origin https://github.com/username/portfolio.git
+
+# 5. Push the commit history to GitHub
+git push -u origin main</code></pre>
+              <p><strong>Result:</strong> Your project files and entire revision history are replicated to GitHub. The <code>-u</code> flag establishes tracking so subsequent updates need only <code>git push</code>.</p>
+              <p><strong>Lesson &amp; Limits:</strong> Pushing requires proper network credentials (SSH key or Personal Access Token). Do not include API secret keys or password files in this initial commit, as commit histories are permanently stored.</p>
+            </div>
+          </details>
+
+          <!-- Example 2 -->
+          <details class="card">
+            <summary>Example 2: Contributing a Bug Fix via Fork and Pull Request</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag green">Standard Scenario</span></div>
+              <p><strong>Problem:</strong> You notice a typo and broken link in a popular open-source documentation library where you lack direct write permissions.</p>
+              <p><strong>Stepwise Solution:</strong></p>
+              <ol>
+                <li>Click <strong>Fork</strong> on GitHub's top header to clone their repository into your personal account space (<code>yourname/docs-repo</code>).</li>
+                <li>Clone your fork locally: <code>git clone https://github.com/yourname/docs-repo.git</code></li>
+                <li>Create an isolated branch: <code>git checkout -b fix-broken-links</code></li>
+                <li>Edit <code>readme.md</code> to fix the URL.</li>
+                <li>Stage and commit: <code>git commit -am "docs: fix broken link in installation section"</code></li>
+                <li>Push to your personal fork: <code>git push -u origin fix-broken-links</code></li>
+                <li>Navigate to the original upstream repository on GitHub; click <strong>Compare &amp; pull request</strong>.</li>
+                <li>Write a concise description detailing the bug, referencing relevant issue tickets.</li>
+              </ol>
+              <p><strong>Result:</strong> The upstream maintainers review the diff, comment with feedback, and click "Merge pull request", incorporating your fix into the official project.</p>
+              <p><strong>Key Lesson:</strong> Forks insulate open-source projects from unauthorized direct writes while providing a friction-free avenue for community contributions.</p>
+            </div>
+          </details>
+
+          <!-- Example 3 -->
+          <details class="card">
+            <summary>Example 3: Diagnosing and Resolving a Pull Request Merge Conflict</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag gold">Intermediate Scenario</span></div>
+              <p><strong>Problem:</strong> Both you and a teammate edited line 14 of <code>app.config</code> simultaneously. When you open your PR, GitHub announces: <em>"Can’t automatically merge. Don’t worry, you can still create the pull request."</em></p>
+              <p><strong>Stepwise Application:</strong></p>
+              <pre class="code-block"><code># 1. Fetch latest changes from the central remote
+git checkout main
+git pull origin main
+
+# 2. Switch to your feature branch and attempt to merge main into it
+git checkout feature-config
+git merge main
+# CONFLICT (content): Merge conflict in app.config
+# Automatic merge failed; fix conflicts and then commit the result.
+
+# 3. Open app.config in an editor. Locate the conflict markers:
+<<<<<<< HEAD (Your Branch)
+API_TIMEOUT = 5000
+=======
+API_TIMEOUT = 7500
+>>>>>>> main (Teammate's merged change)
+
+# 4. Reconcile differences: agree that 7500ms is needed for high-load clusters.
+# Delete conflict markers manually, leaving:
+API_TIMEOUT = 7500
+
+# 5. Stage the resolved file and commit the merge
+git add app.config
+git commit -m "fix: resolve timeout merge conflict with main"
+git push origin feature-config</code></pre>
+              <p><strong>Result:</strong> The GitHub PR updates automatically, the conflict indicator turns green, and the PR is ready for approval.</p>
+              <p><strong>Tradeoffs:</strong> Resolving conflicts via <code>git rebase</code> creates a cleaner, linear history than <code>git merge</code>, but rebase rewrites commit hashes, requiring care when sharing branches with other contributors.</p>
+            </div>
+          </details>
+
+          <!-- Example 4 -->
+          <details class="card">
+            <summary>Example 4: Building an Automated CI Test Pipeline with GitHub Actions</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag red">Advanced Scenario</span></div>
+              <p><strong>Problem:</strong> Ensure that no pull request is merged into <code>main</code> if unit tests fail or code style errors exist.</p>
+              <p><strong>Stepwise Solution:</strong> Create a configuration file at <code>.github/workflows/ci.yml</code>:</p>
+              <pre class="code-block"><code>name: Continuous Integration
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Project Dependencies
+        run: npm ci
+
+      - name: Run Test Suite
+        run: npm test</code></pre>
+              <p><strong>Result:</strong> Every time a developer opens or updates a Pull Request, GitHub boots a sterile Ubuntu environment, downloads dependencies, and executes <code>npm test</code>. A green checkmark or red "X" appears inline on the PR.</p>
+              <p><strong>Key Lesson:</strong> Continuous Integration eliminates the classic "it works on my machine" failure mode by enforcing automated verification in a standardized environment before human review.</p>
+            </div>
+          </details>
+
+        </div>
+      </details>
+    </section>
+
+    <!-- 07 PREREQUISITE KNOWLEDGE -->
+    <section class="section" id="prerequisites">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary>
+        <div class="section-body">
+          <p>Review the essential, helpful, and advanced concepts that accelerate mastery of GitHub:</p>
+
+          <div class="table-wrap">
+            <table class="matrix">
+              <caption>Prerequisite Knowledge Map</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Prerequisite Topic</th>
+                  <th scope="col">Why It Helps</th>
+                  <th scope="col">Recommended Starting Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="tag red">Essential</span></td>
+                  <td>File Systems &amp; Directory Paths</td>
+                  <td>Understanding paths (<code>cd ..</code>, <code>./</code>, absolute vs. relative) is vital for repository structuring and command navigation.</td>
+                  <td>Basic computer operating system navigation tutorials.</td>
+                </tr>
+                <tr>
+                  <td><span class="tag red">Essential</span></td>
+                  <td>Plain Text &amp; Markdown</td>
+                  <td>Repository documentation (<code>README.md</code>), issue tickets, and PR descriptions rely on Markdown syntax.</td>
+                  <td>Practice CommonMark basic syntax (headings, links, lists).</td>
+                </tr>
+                <tr>
+                  <td><span class="tag gold">Helpful</span></td>
+                  <td>Command Line Interface (CLI)</td>
+                  <td>While GitHub provides a GUI, professional efficiency requires standard terminal familiarity (Bash, Zsh, PowerShell).</td>
+                  <td>Learn 5 core commands: <code>cd</code>, <code>ls</code> (or <code>dir</code>), <code>mkdir</code>, <code>rm</code>, <code>cat</code>.</td>
+                </tr>
+                <tr>
+                  <td><span class="tag green">Optional</span></td>
+                  <td>YAML Configuration Syntax</td>
+                  <td>GitHub Actions workflows and issue templates are authored exclusively in structured YAML.</td>
+                  <td>Review basic key-value mappings, lists, and indentation rules.</td>
+                </tr>
+                <tr>
+                  <td><span class="tag green">Optional</span></td>
+                  <td>Public Key Cryptography (SSH/GPG)</td>
+                  <td>Enables secure, password-less authentication and cryptographic commit verification.</td>
+                  <td>Generate an Ed25519 SSH keypair on your local computer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 08 GLOSSARY -->
+    <section class="section" id="glossary">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">8</span>Glossary</h2></summary>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table class="matrix">
+              <caption>Core Technical Terms &amp; Definitions</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Term</th>
+                  <th scope="col">Plain-Language Meaning</th>
+                  <th scope="col">Technical Definition</th>
+                  <th scope="col">Connection to GitHub</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Repository ("Repo")</strong></td>
+                  <td>The project folder containing all documents and their revision memories.</td>
+                  <td>A collection of commits, branches, and tags managed in an internal <code>.git</code> database.</td>
+                  <td>The central organizational unit hosted on GitHub.</td>
+                </tr>
+                <tr>
+                  <td><strong>Commit</strong></td>
+                  <td>A saved milestone or checkpoint of your work.</td>
+                  <td>An immutable snapshot containing a tree hash, author, timestamp, commit message, and parent commit hash pointer.</td>
+                  <td>The building block of commit histories displayed in GitHub feeds.</td>
+                </tr>
+                <tr>
+                  <td><strong>Branch</strong></td>
+                  <td>A parallel workspace to draft changes without altering the main project.</td>
+                  <td>A movable, lightweight 40-character reference pointer to a commit hash.</td>
+                  <td>Allows parallel collaborative streams on GitHub without collision.</td>
+                </tr>
+                <tr>
+                  <td><strong>Pull Request (PR)</strong></td>
+                  <td>A formal invitation for others to review and accept your updates.</td>
+                  <td>A GitHub platform mechanism tracking diffs between two branches with discussion and review capabilities.</td>
+                  <td>The definitive venue for peer review, QA, and team discussions on GitHub.</td>
+                </tr>
+                <tr>
+                  <td><strong>Clone</strong></td>
+                  <td>Downloading an exact, functioning copy of a cloud project to your computer.</td>
+                  <td>Copying an entire Git repository, including all historical commits and branches, to a local disk.</td>
+                  <td>The initial command used to bring remote GitHub projects to a local workspace.</td>
+                </tr>
+                <tr>
+                  <td><strong>Fork</strong></td>
+                  <td>Creating your own independent online copy of someone else's GitHub project.</td>
+                  <td>A server-side repository clone tied via parent references to the original upstream project.</td>
+                  <td>The primary mechanism for contributing to third-party open-source projects.</td>
+                </tr>
+                <tr>
+                  <td><strong>Remote</strong></td>
+                  <td>The shared address on the internet where the team's code lives.</td>
+                  <td>A named URL shortcut (e.g., <code>origin</code>) pointing to an external repository instance.</td>
+                  <td>GitHub serves as the authoritative remote for local Git configurations.</td>
+                </tr>
+                <tr>
+                  <td><strong>Issue</strong></td>
+                  <td>A trackable digital sticky note for bugs, tasks, or proposals.</td>
+                  <td>An integrated ticket system supporting assignees, labels, milestones, and cross-commit linking.</td>
+                  <td>Project management and bug-tracking engine integrated into every GitHub repo.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 09 RELATED CONCEPTS -->
+    <section class="section" id="related-concepts">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary>
+        <div class="section-body">
+          <p>GitHub does not exist in isolation; it sits at the nexus of several foundational computing practices:</p>
+
+          <div class="grid">
+            <div class="stat">
+              <span class="tag">System Integration</span>
+              <h3>Continuous Integration &amp; Delivery (CI/CD)</h3>
+              <p class="small">GitHub acts as the triggering engine for automated testing and continuous deployment. Whenever code merges into <code>main</code>, pipelines can automatically compile assets, build Docker containers, and deploy to cloud providers like AWS, Azure, or Cloudflare.</p>
+            </div>
+            <div class="stat">
+              <span class="tag">Cultural Movement</span>
+              <h3>Open-Source Software (OSS)</h3>
+              <p class="small">GitHub standardized licensing, contribution guidelines (<code>CONTRIBUTING.md</code>), Codes of Conduct, and sponsor funding mechanisms, creating a global bazaar where millions of developers cooperate without formal corporate contracts.</p>
+            </div>
+            <div class="stat">
+              <span class="tag">Security Domain</span>
+              <h3>DevSecOps &amp; Supply Chain Safety</h3>
+              <p class="small">Because contemporary software relies on thousands of nested third-party packages, GitHub monitors software bills of materials (SBOMs), alerting maintainers when imported libraries suffer known security vulnerabilities (CVEs).</p>
+            </div>
+            <div class="stat">
+              <span class="tag">Knowledge Management</span>
+              <h3>Docs-as-Code &amp; Static Sites</h3>
+              <p class="small">Via <strong>GitHub Pages</strong>, repositories can compile plain text Markdown directly into live public websites using static generators (Jekyll, Hugo, Docusaurus), bridging the gap between raw documentation and published websites.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 10 COMMON MISUNDERSTANDINGS -->
+    <section class="section" id="misunderstandings">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary>
+        <div class="section-body">
+
+          <div class="callout warn">
+            <strong>Misconception 1: "Git and GitHub are the same thing."</strong>
+            <p><strong>Correction:</strong> Git is a localized, open-source version control utility created in 2005 that runs on your terminal with zero internet connection required. GitHub is a commercial web hosting service founded in 2008 (acquired by Microsoft in 2018) that provides remote hosting for Git repositories. You can use Git indefinitely without ever creating a GitHub account, and you can switch from GitHub to alternatives like GitLab, Bitbucket, or Codeberg while retaining your entire Git history.</p>
+          </div>
+
+          <div class="callout warn">
+            <strong>Misconception 2: "Commits save only the differences (diffs) between files."</strong>
+            <p><strong>Correction:</strong> Unlike older systems (like SVN or CVS) that stored delta-differences, Git conceptually stores a full snapshot of all project files at every single commit. To maintain space efficiency, if a file has not changed in a given commit, Git does not store it again; it simply stores an internal pointer linking to the previously recorded identical file object (blob).</p>
+          </div>
+
+          <div class="callout warn">
+            <strong>Misconception 3: "Making a repository Public places it in the Public Domain."</strong>
+            <p><strong>Correction:</strong> Publishing code publicly to GitHub makes it viewable, cloneable, and forkable (per GitHub Terms of Service), but under international copyright law, you retain full exclusive copyright by default. Unless you deliberately attach an open-source license (such as MIT, Apache 2.0, or GNU GPL), other people have <em>no legal right</em> to reuse, modify, or distribute your software in their own projects.</p>
+          </div>
+
+          <div class="callout warn">
+            <strong>Misconception 4: "Deleting an API key or password in a new commit removes it from GitHub."</strong>
+            <p><strong>Correction:</strong> Git preserves the entire historical record. If you commit an AWS secret key or database password in commit #1 and delete it in commit #2, the key remains visible and downloadable forever in commit #1's history. Leaked credentials must be revoked immediately in your cloud provider, and histories must be purged using tools like <code>git-filter-repo</code>.</p>
+          </div>
+
+        </div>
+      </details>
+    </section>
+
+    <!-- 11 PRACTICAL APPLICATIONS -->
+    <section class="section" id="practical-applications">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">11</span>Practical Applications</h2></summary>
+        <div class="section-body">
+          <p>GitHub skills apply far beyond writing traditional software applications:</p>
+
+          <ol class="recommend">
+            <li>
+              <strong>Scientific Research &amp; Reproducibility:</strong> Academic researchers publish Jupyter Notebooks, R statistical scripts, and empirical datasets to GitHub alongside academic papers. This allows global peers to verify calculations, re-run simulations, and inspect raw data pipelines, supporting the scientific method.
+            </li>
+            <li>
+              <strong>Collaborative Technical Writing &amp; Publishing:</strong> Book publishers, technical documentation squads, and policy teams use GitHub repositories to write manuals and legal frameworks. Through Pull Requests, editors suggest wordings, fix errors, and track change histories with granular line-by-line attribution.
+            </li>
+            <li>
+              <strong>Infrastructure as Code (IaC):</strong> Modern system administrators define cloud architectures (virtual servers, subnets, firewall rules) in declarative configuration files (Terraform, Ansible). Pushing changes to GitHub triggers automated deployments, replacing error-prone manual server configuration.
+            </li>
+            <li>
+              <strong>Personal Career Portfolios:</strong> Software engineering hiring managers regularly inspect GitHub profiles to gauge real-world problem-solving abilities, communication quality during code reviews, and consistency of contributions across team projects.
+            </li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <!-- 12 KNOWLEDGE CHECK -->
+    <section class="section" id="knowledge-check">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">12</span>Knowledge Check</h2></summary>
+        <div class="section-body">
+          <p>Answer the following conceptual and scenario-based questions to verify your understanding:</p>
+
+          <h4>Foundational &amp; Conceptual Questions</h4>
+          <ol>
+            <li>What is the fundamental difference between <code>git add</code> and <code>git commit</code>?</li>
+            <li>Why would a team choose to mandate Pull Requests rather than letting developers push directly to the <code>main</code> branch?</li>
+            <li>If you execute <code>git commit</code> while your computer has no internet access, will the command succeed or fail? Why?</li>
+            <li>What is the difference between <em>forking</em> a repository on GitHub versus <em>cloning</em> it?</li>
+          </ol>
+
+          <h4>Application &amp; Analysis Scenarios</h4>
+          <ol start="5">
+            <li><strong>Scenario:</strong> Developer Maya clones an open-source tool, modifies 3 files, and immediately tries to run <code>git push origin main</code>. Her terminal prints <code>403: Permission to upstream-org/tool.git denied</code>. What caused this error, and what exact sequence of actions should Maya take to submit her improvements properly?</li>
+            <li><strong>Analysis:</strong> A team lead notices that merge conflicts are occurring multiple times a day across their 6 engineers, causing lost productivity. Based on version control best practices, what operational habits and architectural adjustments should the team implement?</li>
+          </ol>
+
+          <details class="card">
+            <summary>Click to Reveal Answer Key &amp; Explanations</summary>
+            <div class="card-body">
+              <div class="theory-meta"><span class="tag green">Model Solutions</span></div>
+              
+              <p><strong>1. git add vs. git commit:</strong> <code>git add</code> places chosen file modifications into the Staging Area (index), curating what belongs in the next release. <code>git commit</code> packages whatever is currently staged into a permanent, cryptographically identified snapshot with an explanatory message.</p>
+
+              <p><strong>2. Rationale for Mandated Pull Requests:</strong> Bypassing direct pushes to <code>main</code> prevents broken or unvetted code from compromising production. PRs create a documented audit trail, trigger automated test suites, allow security reviews, and mentor junior developers through peer feedback.</p>
+
+              <p><strong>3. Committing Offline:</strong> It will succeed completely. Git is a fully distributed version control system; your local repository on disk holds the full history. Internet connection is required only when transferring commits to or from a remote server via <code>git push</code>, <code>git pull</code>, or <code>git fetch</code>.</p>
+
+              <p><strong>4. Fork vs. Clone:</strong> A <em>Fork</em> is a server-side duplication residing on GitHub’s cloud infrastructure linked to your personal profile. A <em>Clone</em> is a local copy downloaded onto your personal machine's hard drive.</p>
+
+              <p><strong>5. Maya's 403 Solution:</strong> The error occurred because Maya lacks write permissions to the upstream organization's official repository. She must: (1) Fork the repository on GitHub to her personal account; (2) Set her fork as a remote (or clone her fork); (3) Create a feature branch; (4) Commit and push to her personal fork; (5) Open a Pull Request from her fork's branch into the upstream project's <code>main</code> branch.</p>
+
+              <p><strong>6. Reducing Merge Conflicts:</strong>
+                <ul>
+                  <li><strong>Pull early, pull often:</strong> Developers should integrate updates from <code>main</code> into their local feature branches daily.</li>
+                  <li><strong>Small, short-lived branches:</strong> Break large multi-week features into bite-sized PRs merged within 24–48 hours.</li>
+                  <li><strong>Modular architecture:</strong> Decouple monolithic files so developers aren't altering the exact same configuration files or functions simultaneously.</li>
+                </ul>
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </details>
+    </section>
+
+    <!-- 13 FINAL SUMMARY -->
+    <section class="section" id="final-summary">
+      <details class="section-disclosure">
+        <summary><h2><span class="num">13</span>Final Summary</h2></summary>
+        <div class="section-body">
+          <p class="lead"><strong>Central Thesis:</strong> GitHub unites local distributed version control with cloud-scale collaboration, transforming isolated source code files into a transparent, verifiable, and automated software supply chain.</p>
+
+          <h3>Key Takeaways</h3>
+          <ul>
+            <li><strong>Local Git vs. Cloud GitHub:</strong> Git records the snapshots on your computer; GitHub hosts those snapshots for team review and pipeline execution.</li>
+            <li><strong>Nonlinear Development:</strong> Branches enable teams to pursue simultaneous experimental features without endangering operational stability.</li>
+            <li><strong>The Pull Request Paradigm:</strong> Quality control in modern software centers around asynchronous peer discussion and automated test validation inside PRs.</li>
+            <li><strong>Continuous Verification:</strong> Automated pipelines (GitHub Actions) eliminate human oversight errors by evaluating code against automated test suites before merging.</li>
+            <li><strong>Permanent History:</strong> Git snapshots are cumulative; never commit sensitive passwords or credentials expecting later commits to erase them.</li>
+          </ul>
+
+          <div class="callout">
+            <strong>If you remember only one thing:</strong>
+            <em>GitHub is not just a backup storage drive for code; it is a collaborative operating system that protects team progress through branch isolation, peer-reviewed pull requests, and automated validation.</em>
+          </div>
+
+          <h3>Next Learning Steps</h3>
+          <p>Create a free GitHub account, install the official <code>git</code> command line tool or GitHub Desktop, and complete the "GitHub Hello World" tutorial by building your first repository, creating a branch, committing a change, and opening your first Pull Request.</p>
+
+          <hr style="border: 0; border-top: 1px solid var(--line); margin: 1.5rem 0;">
+
+          <h3>Sources and verification notes</h3>
+          <ul class="refs">
+            <li><strong>Git Official Documentation:</strong> Chacon, S., &amp; Straub, B. <em>Pro Git</em> (2nd ed.). Apress / Open Access. Canonical reference for Git internal mechanics, object storage (blobs, trees, commits), and distributed workflows.</li>
+            <li><strong>GitHub Docs:</strong> Official documentation suite (docs.github.com) covering GitHub Flow, branch protection rules, GitHub Actions syntax, and repository access governance.</li>
+            <li><strong>Software Engineering Consensus:</strong> Standard practices regarding Continuous Integration (Fowler, M., <em>Continuous Integration</em>), Trunk-Based Development vs. Feature Branching models, and open-source contribution patterns.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+  let printStates = [];
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  const markdownInline = (node) => {
+    if (!node) return '';
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+      return href ? `[${label}](${href})` : label;
+    }
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+    return content;
+  };
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+    if (!rows.length) return '';
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+      return parts.join('\n\n');
+    }
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+    return cleanText(markdownInline(node));
+  };
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+
+  /* Enhanced Progressive Simulation Script */
+  window.runSimStep = function(step) {
+    const out = document.getElementById('sim-output');
+    if (!out) return;
+    switch(step) {
+      case 1:
+        out.innerHTML = "<strong>Step 1: Branch Created (Local)</strong><br><code>$ git checkout -b feature/login</code><br>&rarr; A lightweight pointer is created. Your production branch (<code>main</code>) is completely safe and unchanged.";
+        break;
+      case 2:
+        out.innerHTML = "<strong>Step 2: Changes Staged &amp; Committed (Local)</strong><br><code>$ git add src/auth.js<br>$ git commit -m 'feat: implement OAuth login'</code><br>&rarr; A cryptographic snapshot hash (e.g. <code>a7f82e1</code>) is appended to your local Git history graph.";
+        break;
+      case 3:
+        out.innerHTML = "<strong>Step 3: Pushed to GitHub (Remote)</strong><br><code>$ git push -u origin feature/login</code><br>&rarr; Commits upload to GitHub's cloud servers. The remote tracking branch <code>origin/feature/login</code> is created.";
+        break;
+      case 4:
+        out.innerHTML = "<strong>Step 4: Pull Request Opened (GitHub Cloud)</strong><br>&rarr; GitHub detects the branch and creates an interactive review page. Automated CI tests execute via GitHub Actions, and teammates are tagged for code review.";
+        break;
+      case 5:
+        out.innerHTML = "<strong>Step 5: Code Reviewed &amp; Merged (Main)</strong><br>&rarr; Reviewers approve the pull request. GitHub executes an integration merge into <code>main</code>, closing the PR and updating the production codebase.";
+        break;
+    }
+  };
+  window.resetSim = function() {
+    const out = document.getElementById('sim-output');
+    if (out) out.innerHTML = "<strong>Current State:</strong> Ready. Click Step 1 to begin the collaboration lifecycle.";
+  };
+</script>
+</body>
+</html>
+```

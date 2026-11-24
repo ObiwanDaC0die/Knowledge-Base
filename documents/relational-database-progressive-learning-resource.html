@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relational Databases: Progressive Learning Resource</title>
+<meta name="tags" content="relational databases, SQL, primary keys, foreign keys, normalization, database design, joins">
+<meta name="prompt-type" content="general-knowledge">
+<style>:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.58 var(--sans); }
+a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--blue2); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 100; padding: .6rem; background: #fff; border: 2px solid var(--blue); }
+.site { max-width: var(--max); margin: auto; padding: 0 var(--space-4); }
+.header { background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%); color: white; padding: var(--space-6) 0 var(--space-5); border-bottom: 6px solid var(--gold); }
+.eyebrow, .meta-label { font-size: .76rem; text-transform: uppercase; letter-spacing: .11em; font-weight: 800; }
+.eyebrow { color: #cce7eb; margin: 0 0 .5rem; }
+.header h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.05; margin: 0; max-width: 950px; letter-spacing: -.02em; }
+.subtitle { font-size: 1.15rem; max-width: 840px; margin: 1rem 0 1.35rem; color: #e2f2f4; }
+.metadata { display: flex; gap: 1rem 2rem; flex-wrap: wrap; border-top: 1px solid rgba(255, 255, 255, .25); padding-top: 1rem; font-size: .88rem; }
+.metadata strong { display: block; color: #b9e1e3; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.toolbar { background: #102f43; color: #fff; padding: .55rem 0; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 10px rgba(0, 0, 0, .16); }
+.toolbar .site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.toolbar a { color: #e8f5f5; font-size: .9rem; text-decoration: none; }
+.toolbar a:hover { text-decoration: underline; }
+.btn { cursor: pointer; border: 1px solid #bfe3e2; background: #fff; color: #123d59; border-radius: 7px; padding: .42rem .68rem; font: 700 .83rem var(--sans); }
+.btn:hover { background: #dff2f1; }
+.layout { display: grid; grid-template-columns: 255px minmax(0, 1fr); gap: var(--space-5); margin: var(--space-5) auto; }
+.toc { position: sticky; top: 3.6rem; align-self: start; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+.toc h2 { font-size: .84rem; margin: 0 0 .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: .34rem 0; }
+.toc a { font-size: .84rem; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.content { min-width: 0; }
+.section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.2rem, 3vw, 2.25rem); margin-bottom: var(--space-4); scroll-margin-top: 4.2rem; }
+.section h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.15rem); margin: 0 0 1rem; padding-bottom: .7rem; border-bottom: 2px solid var(--pale); line-height: 1.15; }
+.section h3 { font-size: 1.1rem; margin: 1.55rem 0 .6rem; color: #173f57; }
+.section h4 { font-size: .98rem; margin: 1.1rem 0 .3rem; }
+.num { display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--blue); color: #fff; font: 800 .83rem var(--sans); vertical-align: middle; margin-right: .5rem; }
+.lead { font-size: 1.08rem; }
+.callout { border-left: 5px solid var(--blue2); padding: 1rem 1.1rem; background: var(--pale); border-radius: 0 8px 8px 0; margin: 1rem 0; }
+.callout.warn { border-color: var(--gold); background: var(--pale3); }
+.callout strong { color: #133d55; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stat { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; background: #fff; }
+.stat .n { font: 800 1.75rem/1 var(--serif); color: var(--blue); }
+.stat .k { font-size: .78rem; text-transform: uppercase; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: .4rem; }
+.tag, .ev { display: inline-block; border-radius: 999px; padding: .18rem .55rem; font-size: .72rem; font-weight: 800; letter-spacing: .025em; white-space: nowrap; }
+.tag { background: #dceff3; color: #145a78; }
+.tag.green { background: #ddf0e9; color: #176353; }
+.tag.gold { background: #f6e8cb; color: #795312; }
+.tag.red { background: #f5dee0; color: #8a303a; }
+.ev.high { background: #dcefe8; color: #14604e; }
+.ev.med { background: #f8ecd4; color: #795312; }
+.ev.low { background: #f5e0e1; color: #8b333a; }
+.definition { border: 1px solid var(--line); border-radius: 10px; background: #fbfcfd; padding: .85rem 1rem; margin: .65rem 0; }
+.definition strong { color: var(--blue); }
+.card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #fff; }
+.card summary { cursor: pointer; list-style: none; padding: 1rem 1.1rem; background: #f8fbfc; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-weight: 800; color: #163d54; }
+.card summary::-webkit-details-marker { display: none; }
+.card summary:after { content: '+'; font-size: 1.3rem; color: var(--blue); }
+.card[open] summary:after { content: '–'; }
+.card-body { padding: 1rem 1.1rem 1.2rem; }
+.theory-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin: .3rem 0 .8rem; }
+.theory-grid { display: grid; grid-template-columns: 155px 1fr; gap: .4rem 1rem; margin: 0; }
+.theory-grid dt { font-weight: 800; color: #31556b; }
+.theory-grid dd { margin: 0; }
+.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 9px; margin: 1rem 0; }
+.matrix { width: 100%; border-collapse: collapse; font-size: .87rem; min-width: 760px; }
+.matrix th, .matrix td { padding: .7rem .75rem; vertical-align: top; border-bottom: 1px solid var(--line); text-align: left; }
+.matrix th { background: #eaf3f6; color: #183e54; font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
+.matrix tr:last-child td { border-bottom: 0; }
+.matrix tbody tr:nth-child(even) { background: #fbfcfd; }
+.figure { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; margin: 1rem 0; background: #fff; overflow: auto; }
+.figure h3 { margin: .1rem 0 .55rem; }
+.figure figcaption { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .75rem; padding-top: .65rem; }
+.svgwide { display: block; width: 100%; min-width: 680px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .8rem; color: var(--muted); margin: .3rem 0; }
+.legend i { width: .75rem; height: .75rem; border-radius: 2px; display: inline-block; vertical-align: -.08rem; margin-right: .25rem; }
+.evidence-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1rem; border-bottom: 1px solid var(--line); padding: .7rem 0; }
+.evidence-row:last-child { border: 0; }
+.small { font-size: .88rem; color: var(--muted); }
+.footnote { font-size: .79rem; color: var(--muted); }
+.refs { padding-left: 1.2rem; }
+.refs li { margin: .8rem 0; }
+.recommend { counter-reset: recommend; }
+.recommend li { list-style: none; position: relative; padding: .85rem 1rem .85rem 3.1rem; background: #f8fbfc; border: 1px solid var(--line); border-radius: 9px; margin: .65rem 0; }
+.recommend li:before { counter-increment: recommend; content: counter(recommend); position: absolute; left: .8rem; top: .78rem; width: 1.55rem; height: 1.55rem; display: grid; place-items: center; background: var(--blue); color: #fff; border-radius: 50%; font: 800 .76rem var(--sans); }
+.print-note { display: none; }
+@media(max-width:900px) { .layout { grid-template-columns: 1fr; } .toc { position: relative; top: auto; } .toc ol { columns: 2; column-gap: 2rem; } .grid.three { grid-template-columns: 1fr 1fr; } }
+@media(max-width:620px) { .site { padding: 0 1rem; } .header { padding: 2.5rem 0 2rem; } .layout { margin: 1.25rem auto; } .section { padding: 1.15rem; } .grid, .grid.three { grid-template-columns: 1fr; } .toc ol { columns: 1; } .metadata { gap: .8rem 1.2rem; } .evidence-row { grid-template-columns: 1fr; } .toolbar .site { padding: 0 1rem; } .toolbar a { display: none; } }
+@media print { body { background: #fff; font-size: 10.5pt; } .header { padding: 1.5rem 0; background: #fff !important; color: #000; border-bottom: 3px solid #000; } .header .eyebrow, .header .subtitle, .metadata strong { color: #222; } .toolbar, .toc, .btn { display: none; } .layout { display: block; margin: 0; } .section { box-shadow: none; border: 0; padding: 0; margin: 0 0 1rem; break-inside: avoid; } .section h2 { break-after: avoid; } .card { break-inside: avoid; } .card summary { background: #fff; } .card:not([open]) .card-body { display: block; } .figure { break-inside: avoid; } .print-note { display: block; } .content { width: 100%; } a { color: #000; text-decoration: none; } .table-wrap { overflow: visible; } .matrix { min-width: 0; font-size: 8pt; } .svgwide { min-width: 0; } }
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to learning content</a>
+<header class="header"><div class="site"><p class="eyebrow">Progressive Learning Resource</p><h1>Relational Databases: From Tables to Trustworthy Information</h1><p class="subtitle">Learn how relational databases organize related facts, protect data quality, and answer questions with Structured Query Language (SQL). This comprehensive, beginner-oriented resource moves from familiar examples to design tradeoffs.</p><div class="metadata"><span><strong>Topic</strong> Relational Database</span><span><strong>Knowledge Level</strong> Beginner</span><span><strong>Purpose</strong> General understanding</span><span><strong>Depth</strong> Comprehensive</span><span><strong>Prepared</strong> November 24, 2026</span><span><strong>Evidence</strong> Foundational sources listed; syntax is illustrative</span></div></div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout"><nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol><li><a href="#executive-summary">Executive Summary</a></li><li><a href="#core-idea">The Core Idea</a></li><li><a href="#progressive-levels">Progressive Levels</a></li><li><a href="#visual-learning-aids">Visual Learning Aids</a></li><li><a href="#interactive-learning">Interactive Learning</a></li><li><a href="#worked-examples">Worked Examples</a></li><li><a href="#prerequisites">Prerequisite Knowledge</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#related-concepts">Related Concepts</a></li><li><a href="#misunderstandings">Misunderstandings</a></li><li><a href="#practical-applications">Practical Applications</a></li><li><a href="#knowledge-check">Knowledge Check</a></li><li><a href="#final-summary">Final Summary</a></li></ol></nav><div class="content">
+
+<section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">1</span>Executive Summary</h2></summary><div class="section-body"><div class="callout"><p class="lead"><strong>A relational database</strong> stores information as related tables and uses defined relationships to keep facts organized and meaningful. It matters because most systems need to answer questions across many facts—such as which customer placed which order—without copying the same information repeatedly. You encounter it in online stores, school systems, health-care administration, logistics, finance, and internal business applications. The indispensable takeaway: a table is useful, but a <em>well-defined relationship</em> between tables is what lets a database represent a real-world system consistently.</p><p class="small"><strong>Assumptions:</strong> This resource uses everyday examples and illustrative SQL. It focuses on relational concepts rather than one product; individual database management systems (DBMSs) differ in syntax, defaults, performance behavior, and administrative features.</p></div></div></details></section>
+
+<section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body"><p>Think of a relational database as a set of carefully coordinated spreadsheets. Each table describes one kind of thing—customers, products, or orders. Instead of typing a customer’s name and address into every order row, the order stores a stable customer identifier. The database uses that identifier to connect the order to the customer record.</p><div class="definition"><strong>Central mechanism:</strong> a <em>key</em> identifies a row, and a <em>foreign key</em> records a permitted link to a row in another table. Queries combine linked tables when a question requires information from more than one table.</div><p><strong>Concrete illustration:</strong> A library may keep <code>Members</code>, <code>Books</code>, and <code>Loans</code> tables. A loan row points to one member and one book. Updating a member’s email once updates the fact for future use; it does not require editing every historical loan.</p><p><strong>Useful analogy—and its limit:</strong> Tables are like labeled filing drawers and keys are like cross-reference numbers on index cards. The analogy breaks down because a database can enforce rules, execute queries, coordinate concurrent changes, and manage storage; a paper filing system generally cannot.</p></div></details></section>
+
+<section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary><div class="section-body"><p class="small">Open each level in order. The same idea becomes more precise as more design and operational concerns are introduced.</p>
+<details class="card"><summary>Beginner — tables answer different kinds of questions</summary><div class="card-body"><div class="theory-meta"><span class="tag">Orientation</span></div><dl class="theory-grid"><dt>Definition</dt><dd>A relational database is a collection of tables whose rows can be connected through shared values.</dd><dt>Purpose</dt><dd>Keep facts organized, reduce unnecessary repetition, and make questions answerable.</dd><dt>Example</dt><dd>An <code>Orders</code> table stores the order date and customer ID; a <code>Customers</code> table stores the customer’s name.</dd><dt>Takeaway</dt><dd>Separate different kinds of facts, then link them deliberately.</dd></dl></div></details>
+<details class="card"><summary>Foundational — rows, columns, keys, and constraints</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Core building blocks</span></div><dl class="theory-grid"><dt>Rows and columns</dt><dd>A row is one record; a column is one attribute of that record. A table has a defined set of columns.</dd><dt>Primary key</dt><dd>A value (or combination of values) that uniquely identifies each row, such as <code>customer_id</code>.</dd><dt>Foreign key</dt><dd>A column whose allowed values refer to keys in another table, such as <code>orders.customer_id</code> referring to <code>customers.customer_id</code>.</dd><dt>Constraint</dt><dd>A rule the DBMS can enforce, such as “this field cannot be empty” or “this order must reference an existing customer.”</dd><dt>Common misconception</dt><dd>A column named “ID” is not automatically a reliable key; uniqueness and null-handling must be explicitly designed and enforced.</dd></dl></div></details>
+<details class="card"><summary>Intermediate — design for correct change and useful queries</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Design tradeoffs</span></div><dl class="theory-grid"><dt>Normalization</dt><dd>A family of design methods that separates facts so one fact has one authoritative place. It reduces update anomalies but can create more tables and joins.</dd><dt>Join</dt><dd>An operation that combines rows from tables according to a matching condition. It answers questions such as “show each order with its customer name.”</dd><dt>Case</dt><dd>A retailer stores products once in <code>Products</code>, order headers in <code>Orders</code>, and purchased quantities in <code>OrderItems</code>.</dd><dt>Tradeoff</dt><dd>Highly normalized schemas improve consistency; selected, documented duplication may be used for reporting or performance after measurement.</dd><dt>Boundary</dt><dd>A relational design does not by itself make data correct. The organization must define valid meanings, processes, permissions, and review practices.</dd></dl></div></details>
+<details class="card"><summary>Advanced — integrity, transactions, and physical implementation</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Technical depth</span><span class="tag">Context dependent</span></div><dl class="theory-grid"><dt>Relational model vs. SQL systems</dt><dd>The formal relational model is a theory of relations and operations. Production SQL products implement useful approximations and extensions, including null behavior and vendor-specific data types.</dd><dt>Transactions</dt><dd>A transaction groups changes so the database can preserve defined consistency rules even when multiple operations are involved.</dd><dt>Indexes</dt><dd>Indexes are additional access structures that can make reads faster, but they consume space and can make writes more costly. They are not the same thing as keys.</dd><dt>Edge cases</dt><dd>Many-to-many relationships need an associative table; real-world “unknown” information requires deliberate null and status semantics; identifiers can be natural or surrogate depending on stability and meaning.</dd><dt>Uncertainty</dt><dd>The best schema depends on query patterns, update patterns, scale, data governance, regulatory obligations, and the capabilities of the selected DBMS.</dd></dl></div></details>
+<details class="card"><summary>Expert Perspective — modeling decisions are operational decisions</summary><div class="card-body"><div class="theory-meta"><span class="tag">Professional practice</span></div><dl class="theory-grid"><dt>Frameworks</dt><dd>Conceptual, logical, and physical data models separate business meaning from implementation choices. Data governance assigns ownership, definitions, quality expectations, and access rules.</dd><dt>Decisions</dt><dd>Professionals choose identifiers, cardinalities, constraints, transaction boundaries, indexes, retention practices, and audit approaches based on explicit requirements and observed workloads.</dd><dt>Adjacent disciplines</dt><dd>Database engineering overlaps with security, privacy, application design, analytics, distributed systems, records management, and human workflow design.</dd><dt>Signs of mastery</dt><dd>You can translate a business rule into a testable model constraint, explain its exceptions, write a query that matches the question, and identify the cost of relaxing the rule.</dd></dl></div></details></div></details></section>
+
+<section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary><div class="section-body"><figure class="figure"><h3>Conceptual diagram: an order connects customers and products</h3><svg class="svgwide" viewBox="0 0 950 350" role="img" aria-labelledby="diagram-title diagram-desc"><title id="diagram-title">Conceptual relational database diagram for customers, orders, order items, and products</title><desc id="diagram-desc">Four rectangles represent tables. Customers link to Orders through customer ID. Orders link to Order Items through order ID. Products link to Order Items through product ID. Lines show the direction of each reference.</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#188d88"/></marker></defs><rect x="35" y="55" width="190" height="145" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="3"/><text x="55" y="90" font-family="system-ui" font-weight="700" fill="#145a78">Customers</text><text x="55" y="122" font-family="system-ui" fill="#17212b">PK customer_id</text><text x="55" y="150" font-family="system-ui" fill="#17212b">name</text><text x="55" y="178" font-family="system-ui" fill="#17212b">email</text><rect x="310" y="55" width="190" height="145" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="3"/><text x="330" y="90" font-family="system-ui" font-weight="700" fill="#145a78">Orders</text><text x="330" y="122" font-family="system-ui" fill="#17212b">PK order_id</text><text x="330" y="150" font-family="system-ui" fill="#17212b">FK customer_id</text><text x="330" y="178" font-family="system-ui" fill="#17212b">order_date</text><rect x="585" y="55" width="190" height="145" rx="10" fill="#eef7f5" stroke="#188d88" stroke-width="3"/><text x="605" y="90" font-family="system-ui" font-weight="700" fill="#176353">OrderItems</text><text x="605" y="122" font-family="system-ui" fill="#17212b">FK order_id</text><text x="605" y="150" font-family="system-ui" fill="#17212b">FK product_id</text><text x="605" y="178" font-family="system-ui" fill="#17212b">quantity</text><rect x="585" y="250" width="190" height="75" rx="10" fill="#f6e8cb" stroke="#b57922" stroke-width="3"/><text x="605" y="280" font-family="system-ui" font-weight="700" fill="#795312">Products</text><text x="605" y="307" font-family="system-ui" fill="#17212b">PK product_id • price</text><line x1="225" y1="130" x2="308" y2="130" stroke="#188d88" stroke-width="4" marker-end="url(#arrow)"/><line x1="500" y1="130" x2="583" y2="130" stroke="#188d88" stroke-width="4" marker-end="url(#arrow)"/><line x1="680" y1="250" x2="680" y2="202" stroke="#188d88" stroke-width="4" marker-end="url(#arrow)"/><text x="247" y="113" font-family="system-ui" font-size="15" fill="#586875">one customer → many orders</text><text x="517" y="113" font-family="system-ui" font-size="15" fill="#586875">one order → many items</text><text x="700" y="235" font-family="system-ui" font-size="15" fill="#586875">one product → many items</text></svg><div class="legend"><span><i style="background:#145a78"></i>blue: core entities</span><span><i style="background:#188d88"></i>teal: references and relationships</span><span><i style="background:#b57922"></i>gold: product facts used by transactions</span></div><p><strong>What to notice:</strong> <code>OrderItems</code> does not duplicate the customer’s name or product description. It records the particular relationship—this order includes this product in this quantity—by holding foreign keys to both parent tables.</p><figcaption><span class="ev high">Conceptual illustration</span> This diagram is a teaching model, not an empirical chart. “PK” means primary key; “FK” means foreign key. A schema may use different names, additional fields, or a different structure depending on requirements. It is consistent with standard SQL constraint concepts described in the PostgreSQL and SQLite documentation listed in Section 13.</figcaption></figure>
+<div class="table-wrap"><table class="matrix"><caption>Relationship patterns and the table structure that usually represents them</caption><thead><tr><th scope="col">Pattern</th><th scope="col">Meaning</th><th scope="col">Typical implementation</th><th scope="col">What to watch</th></tr></thead><tbody><tr><td>One-to-one</td><td>One row relates to at most one row in another table.</td><td>Foreign key plus a uniqueness rule, or a shared primary key.</td><td>Ask whether the split protects sensitive data, isolates optional attributes, or simply adds complexity.</td></tr><tr><td>One-to-many</td><td>One parent can relate to many child rows.</td><td>Foreign key in the child table, such as <code>Orders.customer_id</code>.</td><td>Decide what happens if the parent is changed or deleted.</td></tr><tr><td>Many-to-many</td><td>Each side can relate to many rows on the other side.</td><td>Associative table, such as <code>Enrollment(student_id, course_id)</code>.</td><td>The associative table often has meaningful attributes, such as enrollment date or role.</td></tr></tbody></table></div><p class="small"><strong>Limitation:</strong> Cardinality diagrams make relationships easier to see, but they do not show every business rule, data type, authorization rule, index, or transaction boundary.</p></div></details></section>
+
+<section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body"><p><strong>Prediction exercise:</strong> Read the situation, commit to a choice, then open the reveal. The content remains usable without JavaScript.</p><details class="card"><summary>Predict: where should a customer’s email be stored?</summary><div class="card-body"><div class="theory-meta"><span class="tag">Prediction / reveal</span></div><p><strong>Situation:</strong> A store has 4,000 orders. A customer changes an email address. Which design is safer?</p><ol><li>Store the email in every order row.</li><li>Store the email once in <code>Customers</code>; store <code>customer_id</code> in each order.</li></ol><details class="card"><summary>Reveal and reasoning</summary><div class="card-body"><p><strong>Choice 2</strong> is generally safer for a current customer-contact fact. The update occurs once, reducing the chance that some order rows retain an old value. If historical records must preserve the email used at the time of purchase, the requirement may justify a separate snapshot field with a clear name and retention purpose.</p><p class="small">Why the result can change: database design follows the meaning and time scope of a fact, not a blanket rule to eliminate every duplicate.</p></div></details></div></details>
+<details class="card"><summary>Mini quiz: identify the relationship</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Self-check</span></div><p>A student may enroll in many courses, and a course may include many students. Which structure best represents this?</p><form id="relationshipQuiz"><label><input type="radio" name="relationship" value="one"> Put <code>course_id</code> directly in <code>Students</code>.</label><br><label><input type="radio" name="relationship" value="many"> Create <code>Enrollments(student_id, course_id)</code>.</label><br><label><input type="radio" name="relationship" value="copy"> Copy each student row into every course table.</label><br><button class="btn" type="button" id="checkRelationship">Check my answer</button><p id="relationshipFeedback" aria-live="polite" class="small"></p></form><details class="card"><summary>Static answer and explanation</summary><div class="card-body"><p><strong>Create <code>Enrollments(student_id, course_id)</code>.</strong> This associative table turns the many-to-many relationship into two one-to-many relationships and provides a place for relationship-specific attributes such as enrollment date, status, or grade.</p></div></details></div></details><p class="small"><strong>Demonstration limits:</strong> These exercises illustrate modeling choices; they do not calculate storage cost or prove that one schema is optimal for every workload.</p></div></details></section>
+
+<section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">6</span>Worked Examples</h2></summary><div class="section-body">
+<details class="card"><summary>Example 1 — a household address book</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical</span><span class="tag green">Entry level</span></div><dl class="theory-grid"><dt>Situation</dt><dd>You want names, phone numbers, and groups such as “family” or “neighbors.” One person may belong to several groups.</dd><dt>Inputs and assumptions</dt><dd>Invented example: a person has one primary contact record; group membership is many-to-many.</dd><dt>Steps</dt><dd>1. Create <code>People(person_id, name, phone)</code>. 2. Create <code>Groups(group_id, group_name)</code>. 3. Create <code>PersonGroups(person_id, group_id)</code> with foreign keys to both tables.</dd><dt>Result</dt><dd>Changing a phone number occurs once; adding a group does not require adding a new column to <code>People</code>.</dd><dt>Lesson and limit</dt><dd>Associative tables represent memberships. A real address book may need multiple phone numbers, privacy settings, or history, which would change the model.</dd></dl></div></details>
+<details class="card"><summary>Example 2 — a small online order</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical</span><span class="tag">SQL illustration</span></div><p><strong>Situation:</strong> Record one order containing two products without repeating product descriptions in the order record.</p><pre><code class="language-sql">CREATE TABLE Customers (
+  customer_id INTEGER PRIMARY KEY,
+  customer_name TEXT NOT NULL
+);
+
+CREATE TABLE Orders (
+  order_id INTEGER PRIMARY KEY,
+  customer_id INTEGER NOT NULL REFERENCES Customers(customer_id),
+  order_date DATE NOT NULL
+);
+
+CREATE TABLE OrderItems (
+  order_id INTEGER NOT NULL REFERENCES Orders(order_id),
+  product_id INTEGER NOT NULL,
+  quantity INTEGER NOT NULL CHECK (quantity &gt; 0),
+  PRIMARY KEY (order_id, product_id)
+);</code></pre><ol><li><strong>Relevant inputs:</strong> customer 42, order 9001, products 7 and 9, quantities 2 and 1. These values are invented.</li><li><strong>Application:</strong> Insert the customer once; insert the order with <code>customer_id = 42</code>; insert two <code>OrderItems</code> rows with <code>order_id = 9001</code>.</li><li><strong>Result:</strong> The order is linked to the customer, and each line item is linked to its order. A query can join tables to display a readable invoice.</li></ol><p><strong>Key lesson:</strong> The composite primary key in this simple example prevents the same product from appearing twice on one order. <strong>Alternative:</strong> If duplicate lines must be allowed or each line needs its own identifier, use an <code>order_item_id</code> instead.</p></div></details>
+<details class="card"><summary>Example 3 — course registration with a business rule</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">More realistic</span></div><dl class="theory-grid"><dt>Situation</dt><dd>A school needs students, courses, sections, and enrollments. Students enroll in sections, not merely in abstract courses.</dd><dt>Inputs and assumptions</dt><dd>Hypothetical: a section has a capacity; a student may not hold two active enrollments in the same section.</dd><dt>Steps</dt><dd>1. Model <code>Students</code>, <code>Courses</code>, and <code>Sections</code>. 2. Model <code>Enrollments(student_id, section_id, status, enrolled_at)</code>. 3. Enforce the no-duplicate rule with a uniqueness constraint on <code>(student_id, section_id)</code>. 4. Handle capacity in a transaction or controlled application workflow to avoid two concurrent registrations taking the last seat.</dd><dt>Result</dt><dd>The schema represents the core relationship; the operational workflow handles a time-sensitive rule.</dd><dt>Lesson and limit</dt><dd>Not all rules are simple row-level checks. Some require transaction design, authorization, and exception processes.</dd></dl></div></details>
+<details class="card"><summary>Example 4 — reporting tradeoff: current price versus price paid</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Time and meaning</span></div><p><strong>Situation:</strong> A product’s current catalog price changes, but past invoices must show the price actually charged.</p><p><strong>Application:</strong> Keep the current list price in <code>Products</code>; store a clearly named <code>unit_price_at_sale</code> on each <code>OrderItems</code> row. This is intentional duplication because the two values mean different things at different times.</p><p><strong>Result:</strong> Reports can show both current catalog information and historical transaction facts.</p><p><strong>Key lesson:</strong> “Avoid duplication” is a useful introductory principle, not an absolute. Store separate values when they represent distinct, required facts.</p></div></details>
+</div></details></section>
+
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary><div class="section-body"><p>No specialized prerequisite is required to begin. Basic comfort with organized lists and everyday record keeping is enough for the early sections.</p><div class="table-wrap"><table class="matrix"><caption>Suggested starting knowledge for relational databases</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite Topic</th><th scope="col">Why It Helps</th><th scope="col">Recommended Starting Point</th></tr></thead><tbody><tr><td>Essential</td><td>Rows, columns, and simple lists</td><td>Tables build on the idea that each row is one record and each column has a consistent meaning.</td><td>Create a five-row list of books with title, author, and year.</td></tr><tr><td>Essential</td><td>Unique identifiers</td><td>Keys are easier to understand when you can distinguish a name from a stable identifier.</td><td>Compare two people with the same name but different library-card numbers.</td></tr><tr><td>Helpful</td><td>Basic logic: and, or, not</td><td>Queries and constraints often express conditions with logical operators.</td><td>Write a rule such as “quantity must be positive and a customer must exist.”</td></tr><tr><td>Helpful</td><td>SQL reading</td><td>SQL is a common language for defining and querying relational data.</td><td>Start with <code>SELECT</code>, <code>WHERE</code>, and a simple <code>JOIN</code>.</td></tr><tr><td>Optional / Advanced</td><td>Transactions, indexing, and normalization forms</td><td>These support deeper mastery of correctness and performance tradeoffs.</td><td>Study a schema change and ask how it affects concurrent updates and common queries.</td></tr></tbody></table></div></div></details></section>
+
+<section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">8</span>Glossary</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Key relational database terms</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language definition</th><th scope="col">Technical connection</th></tr></thead><tbody><tr><td>Attribute</td><td>A named property of a thing, such as an email address.</td><td>Usually represented by a column in a table.</td></tr><tr><td>Constraint</td><td>A rule that limits what data is allowed.</td><td>Examples include <code>NOT NULL</code>, <code>UNIQUE</code>, <code>CHECK</code>, primary keys, and foreign keys.</td></tr><tr><td>Database management system (DBMS)</td><td>Software that stores, organizes, secures, and retrieves database data.</td><td>Examples include PostgreSQL and SQLite; product behavior can differ.</td></tr><tr><td>Foreign key</td><td>A stored value that points to a valid row in another table.</td><td>Enforces a referential relationship when the DBMS is configured to enforce it.</td></tr><tr><td>Join</td><td>A way to combine related information from separate tables in a result.</td><td>A query operation that matches rows using a condition.</td></tr><tr><td>Normalization</td><td>Organizing facts to reduce avoidable repetition and inconsistent updates.</td><td>A set of formal and practical design approaches; it is not merely “make more tables.”</td></tr><tr><td>Primary key</td><td>The official unique label for a row.</td><td>Typically requires uniqueness and non-null values.</td></tr><tr><td>Relation</td><td>A set of facts organized by common attributes.</td><td>In the relational model, a table is a common practical representation of a relation, though implementation details may differ.</td></tr><tr><td>Schema</td><td>The database’s blueprint.</td><td>Defines tables, columns, data types, constraints, and relationships.</td></tr><tr><td>Structured Query Language (SQL)</td><td>A language used to define, query, and change data in many relational DBMSs.</td><td>SQL dialects share ideas but have product-specific features.</td></tr><tr><td>Transaction</td><td>A coordinated unit of work.</td><td>Used to make related changes succeed or fail together according to DBMS rules and application design.</td></tr></tbody></table></div></div></details></section>
+
+<section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary><div class="section-body"><div class="grid"><div class="stat"><div class="n">Data modeling</div><div class="k">Before tables</div><p>Data modeling asks what entities, attributes, relationships, and rules exist in the real-world domain. It matters because a technically valid schema can still represent the wrong business concept.</p></div><div class="stat"><div class="n">Entity–relationship diagrams</div><div class="k">A visual bridge</div><p>Entity–relationship diagrams (ERDs) make entities and cardinalities visible before implementation. They connect stakeholder language to a logical schema.</p></div><div class="stat"><div class="n">Data integrity</div><div class="k">Correctness by design</div><p>Constraints protect structural integrity, while process controls and validation protect semantic quality. Both are needed: a valid ID can still refer to a wrongly selected customer.</p></div><div class="stat"><div class="n">Nonrelational databases</div><div class="k">Contrast, not replacement</div><p>Document, key-value, graph, and other database models can be useful for particular access patterns or data shapes. Relational systems remain especially strong when consistent relationships and flexible querying are central.</p></div></div><h3>Why these connections matter</h3><p>Relational databases are not isolated tables plus SQL. They sit between <strong>meaning</strong> (what facts represent), <strong>rules</strong> (what is allowed), and <strong>operations</strong> (how people and software safely create, change, secure, and use the facts).</p></div></details></section>
+
+<section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Misconceptions and corrections</caption><thead><tr><th scope="col">Likely misconception</th><th scope="col">Accurate correction</th><th scope="col">Why the difference matters</th><th scope="col">Counterexample or nuance</th></tr></thead><tbody><tr><td>“A relational database is just a spreadsheet.”</td><td>Both use rows and columns, but a relational DBMS adds schemas, relationships, constraints, queries, concurrent access controls, and administration.</td><td>It changes how you design for shared use and reliable change.</td><td>A spreadsheet may copy a customer name into hundreds of rows; a relational schema can reference one customer row.</td></tr><tr><td>“Every table must have a column named ID.”</td><td>Each table needs a deliberate way to identify rows when the model requires it; the key can be composite or use a meaningful stable value.</td><td>Names do not create uniqueness or stability.</td><td>An enrollment might use a composite key of student ID plus section ID.</td></tr><tr><td>“Foreign keys automatically solve data quality.”</td><td>They can enforce that a referenced row exists, but they cannot confirm that the referenced row is semantically correct or authorized.</td><td>Human process and validation still matter.</td><td>An order can reference a real customer record while still being assigned to the wrong real customer.</td></tr><tr><td>“Normalization means never duplicate data.”</td><td>Normalization distinguishes repeated copies of the same fact from intentionally stored facts with different meanings or time scopes.</td><td>Overcorrecting can erase required historical evidence or complicate useful reporting.</td><td>Current list price and sale-time price are different facts.</td></tr><tr><td>“Indexes and primary keys are the same.”</td><td>A primary key is a logical integrity rule; an index is a physical access structure. Products may use indexes to support keys, but the concepts are distinct.</td><td>Performance tuning should not silently redefine business identity.</td><td>You can create a non-unique index on a frequently filtered column.</td></tr></tbody></table></div><p class="small"><strong>Introductory simplification:</strong> Saying “a table represents one kind of thing” is useful at the beginning. More precisely, some tables represent relationships, events, permissions, or measured observations rather than a standalone physical object.</p></div></details></section>
+
+<section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body"><div class="evidence-row"><div><strong>Everyday services</strong><br><span class="small">accounts, orders, reservations, subscriptions</span></div><div>Relationships connect people to events, products, and permissions while keeping core facts in one managed place.</div><div><strong>Benefits / risks:</strong> consistent updates and flexible support queries; risk of exposing personal data if access controls, retention, and audit practices are weak.</div></div><div class="evidence-row"><div><strong>Organizations</strong><br><span class="small">inventory, training, maintenance, finance, human resources</span></div><div>A schema clarifies identifiers, statuses, dependencies, and accountability for operational records.</div><div><strong>Benefits / tradeoffs:</strong> traceability and reporting; requires data stewardship, change control, and system-specific security design.</div></div><div class="evidence-row"><div><strong>Science and engineering</strong><br><span class="small">observations, samples, equipment, experiments</span></div><div>Keys and provenance fields can connect measured results to instruments, runs, samples, and methods.</div><div><strong>Benefits / limits:</strong> supports reproducibility and structured analysis; scientific validity still depends on collection methods, calibration, and interpretation.</div></div><div class="evidence-row"><div><strong>Policy and public services</strong><br><span class="small">case management, benefits, inspections, program evaluation</span></div><div>Relational records can link cases, activities, decisions, and outcomes subject to authorized access and records requirements.</div><div><strong>Ethics / caution:</strong> matching records can improve services but also heightens privacy, fairness, minimization, and misuse concerns.</div></div><div class="callout warn"><p><strong>Professional judgment note:</strong> A database design lesson does not substitute for security, privacy, legal, records-management, accessibility, safety, financial, or operational review. Apply the policies and authorities appropriate to the data and mission context.</p></div></div></details></section>
+
+<section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body"><ol><li>What problem does a foreign key help prevent?</li><li>Why might an order system separate <code>Orders</code> from <code>OrderItems</code>?</li><li>Give one difference between a primary key and an index.</li><li>What is a many-to-many relationship, and how is it commonly represented?</li><li>Why is “never duplicate data” an incomplete design rule?</li><li><strong>Application:</strong> A clinic schedules appointments between patients and providers. Identify likely tables and explain where the relationship belongs. Do not include real health information.</li><li><strong>Analysis:</strong> A team stores a current employee email in every project-assignment row. What update risk follows, and what question would you ask before changing the design?</li></ol><details class="card"><summary>Answer Key — model answers and acceptable alternatives</summary><div class="card-body"><div class="theory-meta"><span class="tag">Closed by default</span></div><ol><li><strong>Foreign key:</strong> It helps prevent a child row from referring to a non-existent parent row, when enforcement is enabled and the constraint is defined. It does not prove that the chosen parent is semantically correct.</li><li><strong>Orders and order items:</strong> One order can contain several products, each with its own quantity and possibly sale price. Separating them avoids a fixed set of repeating columns such as <code>product_1</code>, <code>product_2</code>, and so on.</li><li><strong>Primary key vs. index:</strong> A primary key states a logical identity and integrity rule. An index is a physical structure that may improve lookup performance. A DBMS may support a primary key with an index, but the concepts differ.</li><li><strong>Many-to-many:</strong> Many rows on either side can relate to many on the other, such as students and courses. Use an associative table such as <code>Enrollments(student_id, course_id)</code>.</li><li><strong>Duplication:</strong> Repeated copies of the same current fact are risky; intentionally preserving a different fact, such as price at sale, can be appropriate. Meaning and time scope decide the design.</li><li><strong>Clinic scheduling:</strong> Likely tables include <code>Patients</code>, <code>Providers</code>, and <code>Appointments</code>. The <code>Appointments</code> table holds foreign keys to a patient and provider plus the scheduled time and status. Acceptable alternatives may include separate location or appointment-type tables. Real implementations require privacy, security, records, and workflow review.</li><li><strong>Employee email:</strong> A changed email may be updated in some assignment rows but not others, producing inconsistency. Before redesigning, ask whether project assignments need a historical contact snapshot or only the employee’s current contact value.</li></ol></div></details></div></details></section>
+
+<section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body"><p class="lead"><strong>Central idea:</strong> A relational database represents related facts in separate, structured tables and connects them through defined keys and rules.</p><ul><li>Tables should have clear meanings; each column should represent a defined attribute.</li><li>Primary keys identify rows; foreign keys express and can enforce relationships.</li><li>Joins answer cross-table questions without requiring every fact to be stored everywhere.</li><li>Normalization reduces avoidable duplication, but intentional historical or domain-specific facts may belong in more than one place when their meanings differ.</li><li>Constraints protect structural integrity; they complement—not replace—good processes, governance, security, and review.</li><li>Transactions and indexes address operational correctness and performance, respectively, and require product- and workload-specific choices.</li></ul><p><strong>Specific next learning step:</strong> Sketch a three-table model for a familiar process (for example, books, borrowers, and loans). Name a primary key for each table, add foreign keys for the relationships, and write one question that requires a join.</p><div class="callout"><p><strong>If you remember only one thing:</strong> Store a fact where it has one clear meaning, then use keys and constraints to connect that fact to the rest of the system.</p></div><h3>Sources and verification notes</h3><p class="small">Foundational and product-documentation sources were consulted for core concepts. Links are provided so readers can locate the material. The learning examples, diagrams, and SQL snippets in this resource are illustrative; they are not copied schemas or verified production guidance. Product behavior and SQL details should be checked against the documentation for the DBMS in use.</p><ol class="refs"><li>E. F. Codd, “A Relational Model of Data for Large Shared Data Banks,” <em>Communications of the ACM</em>, 13(6), 1970, DOI: <a href="https://dl.acm.org/doi/10.1145/362384.362685">10.1145/362384.362685</a>. Foundational presentation of the relational model and data independence.</li><li>PostgreSQL Global Development Group, <a href="https://www.postgresql.org/docs/17/ddl-constraints.html">PostgreSQL 17 Documentation, “Constraints”</a>. Consulted for primary-key and foreign-key constraint concepts and examples.</li><li>SQLite Project, <a href="https://sqlite.org/foreignkeys.html">“SQLite Foreign Key Support”</a>. Consulted for foreign-key terminology, enforcement considerations, and implementation caveats.</li></ol><p class="footnote">Verification status: sources were located through public publisher and official documentation pages on November 24, 2026. This document does not assert that the examples match every database product, configuration, or version.</p></div></details></section>
+
+</div></main>
+<script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script>
+<script>
+  (() => {
+    const button = document.getElementById('checkRelationship');
+    const feedback = document.getElementById('relationshipFeedback');
+    if (!button || !feedback) return;
+    button.addEventListener('click', () => {
+      const choice = document.querySelector('input[name="relationship"]:checked');
+      if (!choice) {
+        feedback.textContent = 'Choose an option, then check your answer.';
+      } else if (choice.value === 'many') {
+        feedback.textContent = 'Correct. An Enrollments table represents the many-to-many relationship and can carry facts about the enrollment itself.';
+      } else {
+        feedback.textContent = 'Not quite. A direct course_id in Students only represents one course per student. Use an associative Enrollments table for the many-to-many relationship.';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

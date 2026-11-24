@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creating a Population Heatmap in QGIS</title>
+<meta name="tags" content="QGIS, population heatmap, kernel density estimation, census data, spatial analysis, raster symbology">
+<meta name="prompt-type" content="step-by-step-tutorial">
+<style>
+:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.58 var(--sans);
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blue2);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: .6rem;
+  background: #fff;
+  border: 2px solid var(--blue);
+}
+
+.site {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 var(--space-4);
+}
+
+.header {
+  background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%);
+  color: white;
+  padding: var(--space-6) 0 var(--space-5);
+  border-bottom: 6px solid var(--gold);
+}
+
+.eyebrow, .meta-label {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-weight: 800;
+}
+
+.eyebrow {
+  color: #cce7eb;
+  margin: 0 0 .5rem;
+}
+
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 950px;
+  letter-spacing: -.02em;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  max-width: 840px;
+  margin: 1rem 0 1.35rem;
+  color: #e2f2f4;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 1rem;
+  font-size: .88rem;
+}
+
+.metadata strong {
+  display: block;
+  color: #b9e1e3;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.toolbar {
+  background: #102f43;
+  color: #fff;
+  padding: .55rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .16);
+}
+
+.toolbar .site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar a {
+  color: #e8f5f5;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.toolbar a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid #bfe3e2;
+  background: #fff;
+  color: #123d59;
+  border-radius: 7px;
+  padding: .42rem .68rem;
+  font: 700 .83rem var(--sans);
+}
+
+.btn:hover {
+  background: #dff2f1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: var(--space-5) auto;
+}
+
+.toc {
+  position: sticky;
+  top: 3.6rem;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.toc h2 {
+  font-size: .84rem;
+  margin: 0 0 .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.toc li {
+  margin: .34rem 0;
+}
+
+.toc a {
+  font-size: .84rem;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  min-width: 0;
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: 4.2rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--pale);
+  line-height: 1.15;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin: 1.55rem 0 .6rem;
+  color: #173f57;
+}
+
+.section h4 {
+  font-size: .98rem;
+  margin: 1.1rem 0 .3rem;
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font: 800 .83rem var(--sans);
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.lead {
+  font-size: 1.08rem;
+}
+
+.callout {
+  border-left: 5px solid var(--blue2);
+  padding: 1rem 1.1rem;
+  background: var(--pale);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+
+.callout.warn {
+  border-color: var(--gold);
+  background: var(--pale3);
+}
+
+.callout strong {
+  color: #133d55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.stat .n {
+  font: 800 1.75rem/1 var(--serif);
+  color: var(--blue);
+}
+
+.stat .k {
+  font-size: .78rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-top: .4rem;
+}
+
+.tag, .ev {
+  display: inline-block;
+  border-radius: 999px;
+  padding: .18rem .55rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+.tag {
+  background: #dceff3;
+  color: #145a78;
+}
+
+.tag.green {
+  background: #ddf0e9;
+  color: #176353;
+}
+
+.tag.gold {
+  background: #f6e8cb;
+  color: #795312;
+}
+
+.tag.red {
+  background: #f5dee0;
+  color: #8a303a;
+}
+
+.ev.high {
+  background: #dcefe8;
+  color: #14604e;
+}
+
+.ev.med {
+  background: #f8ecd4;
+  color: #795312;
+}
+
+.ev.low {
+  background: #f5e0e1;
+  color: #8b333a;
+}
+
+.definition {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: .85rem 1rem;
+  margin: .65rem 0;
+}
+
+.definition strong {
+  color: var(--blue);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.1rem;
+  background: #f8fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 800;
+  color: #163d54;
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+}
+
+.card summary:after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.card[open] summary:after {
+  content: '–';
+}
+
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.theory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .3rem 0 .8rem;
+}
+
+.theory-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+}
+
+.theory-grid dt {
+  font-weight: 800;
+  color: #31556b;
+}
+
+.theory-grid dd {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 1rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+  min-width: 760px;
+}
+
+.matrix th, .matrix td {
+  padding: .7rem .75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.matrix th {
+  background: #eaf3f6;
+  color: #183e54;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.matrix tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrix tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+
+.figure {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fff;
+  overflow: auto;
+}
+
+.figure h3 {
+  margin: .1rem 0 .55rem;
+}
+
+.figure figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: .75rem;
+  padding-top: .65rem;
+}
+
+.svgwide {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--muted);
+  margin: .3rem 0;
+}
+
+.legend i {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -.08rem;
+  margin-right: .25rem;
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+}
+
+.evidence-row:last-child {
+  border: 0;
+}
+
+.small {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.footnote {
+  font-size: .79rem;
+  color: var(--muted);
+}
+
+.refs {
+  padding-left: 1.2rem;
+}
+
+.refs li {
+  margin: .8rem 0;
+}
+
+.recommend {
+  counter-reset: recommend;
+}
+
+.recommend li {
+  list-style: none;
+  position: relative;
+  padding: .85rem 1rem .85rem 3.1rem;
+  background: #f8fbfc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: .65rem 0;
+}
+
+.recommend li:before {
+  counter-increment: recommend;
+  content: counter(recommend);
+  position: absolute;
+  left: .8rem;
+  top: .78rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  font: 800 .76rem var(--sans);
+}
+
+.print-note {
+  display: none;
+}
+
+@media(max-width:900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    position: relative;
+    top: auto;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:620px) {
+  .site {
+    padding: 0 1rem;
+  }
+  .header {
+    padding: 2.5rem 0 2rem;
+  }
+  .layout {
+    margin: 1.25rem auto;
+  }
+  .section {
+    padding: 1.15rem;
+  }
+  .grid, .grid.three {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+  .metadata {
+    gap: .8rem 1.2rem;
+  }
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+  .toolbar .site {
+    padding: 0 1rem;
+  }
+  .toolbar a {
+    display: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+  .header {
+    padding: 1.5rem 0;
+    background: #fff !important;
+    color: #000;
+    border-bottom: 3px solid #000;
+  }
+  .header .eyebrow, .header .subtitle, .metadata strong {
+    color: #222;
+  }
+  .toolbar, .toc, .btn {
+    display: none;
+  }
+  .layout {
+    display: block;
+    margin: 0;
+  }
+  .section {
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    break-inside: avoid;
+  }
+  .section h2 {
+    break-after: avoid;
+  }
+  .card {
+    break-inside: avoid;
+  }
+  .card summary {
+    background: #fff;
+  }
+  .card:not([open]) .card-body {
+    display: block;
+  }
+  .figure {
+    break-inside: avoid;
+  }
+  .print-note {
+    display: block;
+  }
+  .content {
+    width: 100%;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .matrix {
+    min-width: 0;
+    font-size: 8pt;
+  }
+  .svgwide {
+    min-width: 0;
+  }
+}
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to tutorial content</a>
+<header class="header"><div class="site"><p class="eyebrow">Decision-Based Technical Tutorial</p><h1>Creating a Population Heatmap in QGIS</h1><p class="subtitle">Turn a point dataset with population values into an interpretable kernel-density raster, then style, validate, and document it.</p><div class="metadata"><span><strong>Topic</strong> Population heatmap in QGIS</span><span><strong>Audience</strong> Motivated beginner</span><span><strong>Outcome</strong> A styled, saved population-density heatmap</span><span><strong>Assumptions</strong> Authorized point or polygon population data; desktop QGIS</span><span><strong>Prepared</strong> November 24, 2026</span></div></div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to tutorial</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout"><nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol><li><a href="#overview">Overview / Goal</a></li><li><a href="#prerequisites">Required Information &amp; Prerequisites</a></li><li><a href="#choose-path">Choose Your Path</a></li><li><a href="#instructions">Step-by-Step Instructions</a></li><li><a href="#troubleshooting">Troubleshooting / Common Issues</a></li><li><a href="#resources">Related Links &amp; Video Resources</a></li><li><a href="#completion">Completion Checklist / Quick Reference</a></li></ol></nav><div class="content">
+<section class="section" id="overview"><details class="section-disclosure"><summary><h2><span class="num">1</span>Overview / Goal</h2></summary><div class="section-body">
+<p class="lead">Use this tutorial to create a heatmap that depicts the <em>estimated spatial concentration of population</em>, not a literal count at each pixel. The default route uses point features with a numeric population field and QGIS’s <strong>Heatmap (Kernel Density Estimation)</strong> processing tool.</p>
+<div class="callout warn"><strong>Stop condition — do not continue yet:</strong> Pause if your data contain household-level, personally identifiable, sensitive facility, or otherwise restricted locations and you lack approval to display or aggregate them. Aggregate, mask, or obtain an approved public/authorized dataset before mapping. Also pause if you cannot identify the layer’s coordinate reference system (CRS), because a radius in degrees is not a meaningful distance.</div>
+<div class="grid three"><div class="stat"><div class="n">Input</div><div class="k">Point locations + population weight, or polygons to convert</div></div><div class="stat"><div class="n">Process</div><div class="k">Kernel density estimation (KDE) into a raster</div></div><div class="stat"><div class="n">Output</div><div class="k">Styled raster, saved project, documented parameters</div></div></div>
+<div class="definition"><strong>Population heatmap / KDE:</strong> a raster surface created by spreading each input point’s influence over a selected search radius. Nearby influence is combined; optional weights let a larger population value contribute more than a smaller one.</div>
+<h3>Scope and success criteria</h3>
+<ul><li><strong>In scope:</strong> preparing data, selecting a route, generating a population-weighted or unweighted KDE raster, styling it, checking for misleading results, and saving reproducible settings.</li><li><strong>Out of scope:</strong> estimating a statistically valid population surface from incomplete data, publishing sensitive locations, or treating KDE output as a census count without validation.</li><li><strong>Success:</strong> the map has a documented projected CRS, an appropriate weight choice, a radius and pixel size expressed in usable linear units, an understandable legend, and a saved raster/project that another analyst can reproduce.</li></ul>
+<p>Start with <a href="#choose-path">Section 3 — Choose Your Path</a>. The recommended default is <strong>Path A</strong> when you already have point features and a numeric population field. QGIS documentation describes the heatmap algorithm as creating a density raster from point features; its radius and output pixel size are in the layer’s map units. <a href="#resources">See the official references in Section 6</a>.</p>
+</div></details></section>
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">2</span>Required Information &amp; Prerequisites</h2></summary><div class="section-body">
+<p>Confirm the following before analysis. A heatmap can look polished while being analytically invalid if locations, weights, CRS, or scale are wrong.</p>
+<div class="table-wrap"><table class="matrix"><caption>Requirements and verification options</caption><thead><tr><th scope="col">Requirement</th><th scope="col">Why It Matters</th><th scope="col">Required for Which Path</th><th scope="col">How to Obtain or Verify It</th><th scope="col">Alternative if Unavailable</th></tr></thead><tbody>
+<tr><td>Desktop QGIS with the Processing framework available</td><td>The default tool is delivered through Processing.</td><td>A, B, C</td><td>Open <strong>Processing ▸ Toolbox</strong>; search for “Heatmap (Kernel Density Estimation).”</td><td>Enable the built-in Processing plugin if allowed; otherwise pause and use an approved GIS workflow.</td></tr>
+<tr><td>Authorized spatial data</td><td>Controls legitimacy, privacy, and release risk.</td><td>A, B, C</td><td>Confirm ownership, use, and sharing limits with the data steward.</td><td>Use an approved aggregated/public dataset or stop.</td></tr>
+<tr><td>Known CRS in linear units</td><td>KDE radius and pixel size depend on map units.</td><td>A, B, C</td><td>Inspect Layer Properties or project CRS. Prefer a suitable local projected CRS whose units are metres or feet.</td><td>Reproject a copy of the working layer; do not guess a CRS.</td></tr>
+<tr><td>Point locations</td><td>KDE takes a point layer as input.</td><td>A, C</td><td>Open attribute table and identify geometry type; inspect a small sample on the map.</td><td>Use Path B to convert representative polygons to points, with limitations documented.</td></tr>
+<tr><td>Numeric population field</td><td>Lets the heatmap represent weighted population rather than equal event locations.</td><td>A, B</td><td>Review field type and ranges in the attribute table; verify blanks, zeros, and negative values.</td><td>Use an unweighted heatmap only when the question is location concentration, not population concentration.</td></tr>
+<tr><td>Study-area boundary (optional but recommended)</td><td>Helps set extent and judge edge effects.</td><td>A, B, C</td><td>Use an authorized boundary layer or a documented analysis extent.</td><td>Set output extent deliberately and state the limitation.</td></tr>
+</tbody></table></div>
+<div class="callout"><strong>Checkpoint — data quality:</strong> Examine a few records before analysis. Longitude/latitude columns should be numeric; population values should be nonnegative and comparable across records; duplicate locations and null values should be understood rather than silently ignored.</div>
+<details class="card"><summary>Minimum CSV structure for a point-data route</summary><div class="card-body"><p>A typical file has a header row and columns such as <code>location_id,longitude,latitude,population</code>. Import it through <strong>Layer ▸ Add Layer ▸ Add Delimited Text Layer</strong>, specify the X and Y fields, and select the CRS that actually describes those coordinates. Do not select a CRS merely because it makes the points appear near your basemap.</p></div></details>
+</div></details></section>
+<section class="section" id="choose-path"><details class="section-disclosure"><summary><h2><span class="num">3</span>Choose Your Path</h2></summary><div class="section-body">
+<p>Choose only the route that matches the geometry and analytical question. Do not create artificial point locations when the original polygon pattern is important.</p>
+<div class="table-wrap"><table class="matrix"><caption>Population heatmap route matrix</caption><thead><tr><th scope="col">Path</th><th scope="col">Choose This When</th><th scope="col">Required Inputs / Tools</th><th scope="col">Main Tradeoff</th><th scope="col">Continue At</th></tr></thead><tbody>
+<tr><td><span class="tag green">Path A — default</span></td><td>You have point features and a numeric population field, such as settlement points, grid centroids, or approved address aggregates.</td><td>Point layer; population field; projected CRS; Processing.</td><td>Fast and direct, but output reflects the point representation and selected smoothing scale.</td><td><a href="#step-2a-1">Step 2A.1</a></td></tr>
+<tr><td><span class="tag gold">Path B</span></td><td>You have population polygons (for example, census areas) but need a generalized visual surface.</td><td>Polygon layer; population field; a justified point-conversion method; Processing.</td><td>A polygon centroid/point-on-surface is a representation, not the true distribution inside each polygon.</td><td><a href="#step-2b-1">Step 2B.1</a></td></tr>
+<tr><td><span class="tag red">Path C — stop / alternative</span></td><td>You only have total population for an entire region, or you cannot justify locations, weights, CRS, or use permissions.</td><td>Data stewardship decision, improved data, or a different cartographic method.</td><td>A heatmap would imply spatial detail unsupported by the evidence.</td><td><a href="#step-2c-1">Step 2C.1</a></td></tr>
+</tbody></table></div>
+<figure class="figure"><h3>Conceptual route map</h3><svg class="svgwide" role="img" aria-labelledby="route-title route-desc" viewBox="0 0 960 240"><title id="route-title">Decision flow for a population heatmap</title><desc id="route-desc">A decision tree begins with authorized population data and a known coordinate reference system. Point data proceeds to Path A, polygon data proceeds to Path B, and data without defensible locations or weights stops at Path C.</desc><rect x="20" y="80" width="230" height="70" rx="10" fill="#eaf3f6" stroke="#145a78"/><text x="135" y="108" text-anchor="middle" font-family="system-ui" font-size="18" fill="#17212b">Authorized data +</text><text x="135" y="132" text-anchor="middle" font-family="system-ui" font-size="18" fill="#17212b">known CRS?</text><path d="M250 115 H360" stroke="#145a78" stroke-width="3"/><text x="305" y="105" text-anchor="middle" font-family="system-ui" font-size="14">Yes</text><path d="M135 150 V205 H840" stroke="#a83f46" stroke-width="3" fill="none"/><text x="150" y="192" font-family="system-ui" font-size="14">No</text><rect x="360" y="80" width="220" height="70" rx="10" fill="#eef7f5" stroke="#188d88"/><text x="470" y="108" text-anchor="middle" font-family="system-ui" font-size="18">Geometry type?</text><text x="470" y="132" text-anchor="middle" font-family="system-ui" font-size="14">inspect the layer</text><path d="M580 98 H670" stroke="#188d88" stroke-width="3"/><path d="M580 132 H670" stroke="#b57922" stroke-width="3"/><text x="625" y="91" text-anchor="middle" font-family="system-ui" font-size="14">Points</text><text x="625" y="150" text-anchor="middle" font-family="system-ui" font-size="14">Polygons</text><rect x="670" y="55" width="250" height="50" rx="10" fill="#ddf0e9" stroke="#176353"/><text x="795" y="86" text-anchor="middle" font-family="system-ui" font-size="17">Path A: weighted KDE</text><rect x="670" y="125" width="250" height="50" rx="10" fill="#f6e8cb" stroke="#795312"/><text x="795" y="156" text-anchor="middle" font-family="system-ui" font-size="17">Path B: represent polygons</text><rect x="700" y="180" width="220" height="45" rx="10" fill="#f5dee0" stroke="#8a303a"/><text x="810" y="208" text-anchor="middle" font-family="system-ui" font-size="16">Path C: pause / alternative</text></svg><figcaption>Conceptual, not empirical. The route map does not decide whether a dataset is suitable; the analyst must validate data authority, CRS, and whether the represented location supports the intended claim.</figcaption></figure>
+<p class="small">Recommendation: choose Path A if a point layer and validated population field are available. It minimizes transformation while preserving the ability to use a weight field.</p>
+</div></details></section>
+<section class="section" id="instructions"><details class="section-disclosure"><summary><h2><span class="num">4</span>Step-by-Step Instructions</h2></summary><div class="section-body">
+<h3 id="step-1">Step 1 — Define the map claim and create a safe working copy</h3>
+<p><strong>Action:</strong> Write a one-sentence purpose, for example: “Show generalized population concentration from authorized 2025 settlement estimates within the study area.”</p><p><strong>Inputs:</strong> source dataset, intended audience, permitted area of interest.</p><p><strong>Exact instructions:</strong> Create a new QGIS project; save it in a clearly named working folder. Add the original layer without editing it. If transformations are needed, save outputs with new names such as <code>population_points_projected.gpkg</code> and <code>population_kde_500m.tif</code>.</p><p><strong>Expected result:</strong> a saved project and an unmodified source layer.</p><p><strong>Verification:</strong> In the Layers panel, identify the source layer and project filename; open the attribute table to confirm the expected records are present.</p><p><strong>If unsuccessful:</strong> stop and correct access, file path, or data-source issues before making analysis outputs.</p>
+<div class="callout warn"><strong>Warning — misleading precision:</strong> A heatmap is not evidence that every location within a bright area has the displayed population. It is a modeled surface based on input locations, weights, radius, and pixel size. Keep the map title, legend, and methods note consistent with that limitation.</div>
+<h3 id="step-2">Step 2 — Inspect geometry, population weights, and CRS</h3>
+<p><strong>Action:</strong> determine the viable route and validate the key inputs.</p><p><strong>Exact instructions:</strong> In QGIS, select the source layer. Check its geometry type and CRS in its layer information/properties. Open the attribute table; find the candidate population field; confirm it is numeric and investigate null, negative, or unexpectedly large values. Record the current CRS and units.</p><p><strong>Expected result:</strong> you can answer: point or polygon; which field is population; whether the layer uses usable linear units.</p><p><strong>Verification:</strong> Zoom to several known features. If coordinates or geometry appear far from the intended area, stop and resolve the CRS rather than changing it by guesswork.</p>
+<h3 id="step-2a-1">Step 2A.1 — Path A: prepare a point layer in a suitable projected CRS</h3>
+<p><strong>Action:</strong> use the existing point layer, or make a projected working copy.</p><p><strong>Inputs:</strong> authorized point layer, numeric population field.</p><p><strong>Exact instructions:</strong> If the layer’s CRS is geographic (typically degrees), run <strong>Reproject layer</strong> from Processing and choose a CRS appropriate to the study area with linear units. Save the output as a new file. If the existing CRS is already an appropriate projected CRS, retain it. Continue at <a href="#step-3">Step 3</a>.</p><p><strong>Expected result:</strong> a point layer whose map units make the proposed KDE radius meaningful.</p><p><strong>Verification:</strong> Inspect the output layer CRS and confirm the geometry overlays expected reference data.</p><p><strong>If unsuccessful:</strong> do not proceed using degrees. Consult the data steward or GIS specialist for the authoritative CRS.</p>
+<h3 id="step-2b-1">Step 2B.1 — Path B: create a documented point representation of polygon population</h3>
+<p><strong>Action:</strong> make a point representation for each polygon only if it supports the map’s intended generalization.</p><p><strong>Inputs:</strong> authorized polygon population layer, numeric population field, projected CRS.</p><p><strong>Exact instructions:</strong> First create a projected working copy if required. Then run either <strong>Centroids</strong> or <strong>Point on surface</strong> from Processing. Prefer <strong>Point on surface</strong> where a centroid could fall outside an irregular polygon. Carry the population field into the result and save it as a new layer. Continue at <a href="#step-3">Step 3</a>.</p><p><strong>Expected result:</strong> one representative point for each source polygon, with the population field retained.</p><p><strong>Verification:</strong> Compare feature counts and population-field values between source polygons and output points.</p><p><strong>If unsuccessful:</strong> revert to a choropleth or seek a gridded/disaggregated dataset. Do not imply within-polygon distribution you cannot support.</p>
+<h3 id="step-2c-1">Step 2C.1 — Path C: stop or select a more defensible map</h3>
+<p><strong>Action:</strong> do not create KDE output when the input does not support a spatial-concentration claim.</p><p><strong>Exact instructions:</strong> Document the gap: missing locations, unknown CRS, unavailable permissions, or only a region-wide total. Request approved aggregate points/grids or use a map that matches the evidence, such as a regional total table or authorized polygon choropleth.</p><p><strong>Terminal result:</strong> no heatmap is produced until a defensible location-based dataset and necessary approvals are available.</p>
+<h3 id="step-3">Step 3 — Choose initial KDE parameters</h3>
+<p><strong>Action:</strong> select an initial radius, pixel size, and weighting choice that match the decision scale.</p><p><strong>Exact instructions:</strong> Decide the smallest spatial pattern that should be visible to the audience. Set the <strong>radius</strong> larger than typical location uncertainty and smaller than the full study area. Set a pixel size substantially smaller than the radius so the surface is not blocky, while avoiding unnecessary file size. Select the numeric population field as the weight field if the purpose is population concentration; leave it unweighted only when every point intentionally represents one equal event.</p><p><strong>Expected result:</strong> written initial values and a reason for each. Example only: a 1,000-metre radius with a 100-metre pixel size is a starting test for a city-scale analysis; it is not a universal setting.</p><p><strong>Verification:</strong> Ask: “Can I explain this radius in plain language to the intended audience?” If not, revise it before processing.</p>
+<div class="callout"><strong>Tip — parameter sensitivity:</strong> Create at least two trial surfaces with different plausible radii. If a conclusion changes materially, report the sensitivity or use a scale that is more defensible. Do not select a radius solely because it produces a dramatic pattern.</div>
+<h3 id="step-4">Step 4 — Run Heatmap (Kernel Density Estimation)</h3>
+<p><strong>Action:</strong> generate a raster surface from the prepared point layer.</p><p><strong>Inputs:</strong> projected point layer; selected radius and pixel size; optional population weight field; deliberate extent; output filename.</p><p><strong>Exact instructions:</strong></p><ol><li>Open <strong>Processing ▸ Toolbox</strong> and search for <strong>Heatmap (Kernel Density Estimation)</strong>.</li><li>Select the prepared point layer as the input.</li><li>Enter the search radius in the layer’s linear map units.</li><li>Set the output raster pixel size in the same units.</li><li>Select the population field under the optional weight-field setting for a population-weighted result.</li><li>Choose an output extent that covers the study area and enough surrounding area to inspect edge effects; avoid silently accepting an irrelevant project-wide extent.</li><li>Save the output to a descriptive raster filename and run the algorithm.</li></ol><p><strong>Expected result:</strong> a new raster layer appears, with higher cell values where weighted point influence is concentrated.</p><p><strong>Verification:</strong> Overlay the original points temporarily. Higher values should be plausibly associated with clusters and/or larger weights. Open raster layer properties and confirm the output CRS and extent.</p><p><strong>If unsuccessful:</strong> record the exact Processing error. Check that the input is a point layer, the radius/pixel size are positive, the weight field is numeric, and the output location is writable. Return to <a href="#step-2">Step 2</a> if the CRS or field is uncertain.</p>
+<h3 id="step-5">Step 5 — Style the raster without overstating the result</h3>
+<p><strong>Action:</strong> use a sequential color ramp and a readable value range.</p><p><strong>Exact instructions:</strong> Select the raster and open the Layer Styling panel. Use a single-band pseudocolor or another appropriate continuous-raster renderer. Select a perceptually ordered sequential ramp with light low values and darker high values. Set a transparent or very light treatment for zero/no-data only after confirming what those pixels mean. Add a legend label such as “Population-weighted KDE (relative intensity)” unless units and normalization have been separately validated.</p><p><strong>Expected result:</strong> low-to-high values are visually ordered; bright/dark areas are distinguishable; the legend does not claim unverified people-per-area units.</p><p><strong>Verification:</strong> Toggle the raster off/on and compare it with input points and boundaries. Ensure the styling does not hide large no-data areas or make an isolated high-weight point look like a broad region.</p>
+<h3 id="step-6">Step 6 — Check the result for analytical and visual errors</h3>
+<p><strong>Action:</strong> test whether the surface is fit for the stated purpose.</p><p><strong>Exact instructions:</strong> Review the map at the intended display scale. Check edge areas, water/uninhabitable areas, jurisdiction boundaries, and known clusters. Create a second plausible-radius output and compare the qualitative pattern. Add a source/method note listing dataset date, point representation, weight field, CRS, radius, pixel size, and any masking or exclusions.</p><p><strong>Expected result:</strong> a documented result whose limitations are apparent.</p><p><strong>Verification checkpoint:</strong> A reviewer can identify the input data, parameters, scale, and whether the map shows relative modeled intensity rather than exact population counts.</p>
+<h3 id="step-7">Step 7 — Save reproducible outputs</h3>
+<p><strong>Action:</strong> preserve the QGIS project and analysis artifacts.</p><p><strong>Exact instructions:</strong> Save the project. Retain the prepared point layer, heatmap raster, and a short methods note. For a shareable map, create a layout with title, legend, scale/context, data source, date, and limitations appropriate to the authorization and release rules that apply to the work.</p><p><strong>Expected result:</strong> a colleague with authorized access can reproduce the map or inspect its settings.</p><p><strong>Verification:</strong> Close and reopen the project (when operationally appropriate) and verify the paths resolve and the heatmap renders.</p>
+</div></details></section>
+<section class="section" id="troubleshooting"><details class="section-disclosure"><summary><h2><span class="num">5</span>Troubleshooting / Common Issues</h2></summary><div class="section-body">
+<div class="table-wrap"><table class="matrix"><caption>Diagnostics and corrective actions</caption><thead><tr><th scope="col">Symptom</th><th scope="col">Likely Cause</th><th scope="col">How to Check</th><th scope="col">Corrective Action</th><th scope="col">Relevant Step / Path</th></tr></thead><tbody>
+<tr><td>Heatmap tool is not found</td><td>Processing is disabled or unavailable in the installation.</td><td>Open Processing Toolbox; search for the full algorithm name.</td><td>Enable the built-in Processing plugin if permitted. If it remains unavailable, stop and use an approved alternate GIS environment.</td><td><a href="#step-4">Step 4</a></td></tr>
+<tr><td>Output appears tiny, huge, or in the wrong place</td><td>CRS is missing, incorrectly assigned, or inappropriate for the data.</td><td>Compare layer CRS, coordinates, and position against authoritative reference data.</td><td>Return to the source; establish the authoritative CRS; reproject a working copy. Do not “fix” it by selecting a convenient CRS at random.</td><td><a href="#step-2">Step 2</a></td></tr>
+<tr><td>Heatmap is nearly uniform or entirely blank</td><td>Radius/extent is unsuitable, points fall outside extent, or weights are null/zero.</td><td>Inspect input points; review selected extent and field values; run without a weight field as a diagnostic only.</td><td>Correct the extent, radius, pixel size, or data values. Retain a documented reason for the final settings.</td><td><a href="#step-3">Step 3</a>, <a href="#step-4">Step 4</a></td></tr>
+<tr><td>Processing rejects the weight field</td><td>Field is text, contains nonnumeric values, or is not a valid population measure.</td><td>Check field type and sample values in the attribute table.</td><td>Use a valid numeric field; create a documented numeric copy only if conversion rules are known and approved. Do not coerce unknown text values.</td><td><a href="#step-2">Step 2</a></td></tr>
+<tr><td>Sharp isolated “hotspots” dominate the map</td><td>Very large weights, duplicate points, or radius too small.</td><td>Sort the population field; inspect duplicates and compare a larger plausible radius.</td><td>Validate outliers, aggregate duplicates only when justified, and conduct a sensitivity comparison. Do not cap values without documenting the method and impact.</td><td><a href="#step-3">Step 3</a>, <a href="#step-6">Step 6</a></td></tr>
+<tr><td>Raster spills across water or outside inhabited land</td><td>KDE smooths spatially without barriers.</td><td>Overlay land/water or other constraint polygons.</td><td>Explain the limitation, clip/mask only with a defensible and documented boundary, or use a method designed for constrained movement/distribution.</td><td><a href="#step-6">Step 6</a></td></tr>
+<tr><td>Map implies an exact count or rate</td><td>Legend/title uses unsupported units or language.</td><td>Read the map without the methods note; ask what a viewer would infer.</td><td>Use “relative intensity” or another accurate description unless units have been independently derived and validated.</td><td><a href="#step-5">Step 5</a></td></tr>
+<tr><td>Sensitive locations are visible</td><td>Input resolution exceeds what can be released or displayed.</td><td>Review points, labels, basemap context, and export scale against handling rules.</td><td>Stop distribution. Consult the data steward; use approved aggregation, suppression, or a different product. Do not rely on a heatmap alone as anonymization.</td><td><a href="#step-1">Step 1</a>, <a href="#step-7">Step 7</a></td></tr>
+</tbody></table></div>
+</div></details></section>
+<section class="section" id="resources"><details class="section-disclosure"><summary><h2><span class="num">6</span>Related Links &amp; Video Resources</h2></summary><div class="section-body">
+<p>These resources were selected for direct relevance to the workflow. Verify menu wording against your installed QGIS release; QGIS documentation changes over time.</p>
+<ul class="refs">
+<li><strong>Interpolation — QGIS Documentation</strong>, QGIS Project. Official processing-algorithm reference for <em>Heatmap (Kernel Density Estimation)</em>; explains point input, search radius, pixel size, optional weight field, kernel choices, and output value options. Version-specific page located in QGIS 3.4 documentation; consulted November 24, 2026. <a href="https://docs.qgis.org/3.4/bg/docs/user_manual/processing_algs/qgis/interpolation.html">Open official documentation</a></li>
+<li><strong>Opening Data — QGIS Documentation</strong>, QGIS Project. Official guidance for importing delimited text data and creating a point layer from coordinate fields. Testing documentation; consulted November 24, 2026. <a href="https://docs.qgis.org/testing/en/docs/user_manual/managing_data_source/opening_data.html">Open official documentation</a></li>
+<li><strong>Calculating the Forest Parameters — QGIS Training Manual</strong>, QGIS Project. Official worked example that includes importing a CSV as point coordinates and choosing a CRS. Consulted November 24, 2026. <a href="https://docs.qgis.org/latest/en/docs/training_manual/forestry/parameters_calculation.html">Open official training manual</a></li>
+<li><strong>Changing Raster Symbology — QGIS Training Manual</strong>, QGIS Project. Official introduction to raster styling via the Layer Styling panel. Consulted November 24, 2026. <a href="https://docs.qgis.org/latest/en/docs/training_manual/rasters/changing_symbology.html">Open official training manual</a></li>
+</ul>
+<div class="callout"><strong>Video guidance:</strong> No video is included because a specific current, official video matching the installed QGIS release was not verified for this tutorial. Suggested search terms: <code>QGIS Heatmap Kernel Density Estimation official QGIS</code> and <code>QGIS raster pseudocolor styling official</code>. Check the video’s QGIS version and whether it distinguishes event-density from population-weighted density before relying on it.</div>
+</div></details></section>
+<section class="section" id="completion"><details class="section-disclosure"><summary><h2><span class="num">7</span>Completion Checklist / Quick Reference</h2></summary><div class="section-body">
+<p>Declare the task complete only when the applicable route has reached a verifiable result and the following checks are satisfied.</p>
+<ul class="recommend"><li><strong>Input authority and sensitivity:</strong> I used data I am authorized to analyze and display; any sensitive-location handling or aggregation requirement has been addressed.</li><li><strong>CRS and scale:</strong> The input/output CRS is known, appropriate to the study area, and uses meaningful linear units for the selected radius and pixel size.</li><li><strong>Population representation:</strong> I documented whether the heatmap was population-weighted; if polygons were converted to points, I documented the representation and its limitation.</li><li><strong>Parameters:</strong> The radius, pixel size, kernel/other options, output extent, and weight field are recorded. I can explain why the parameters fit the intended scale.</li><li><strong>Visual validation:</strong> I checked the raster against input points, boundaries, no-data areas, and at least one plausible alternative radius where the decision is consequential.</li><li><strong>Map communication:</strong> Title, legend, source, date, and methods note accurately describe a modeled relative-density surface and do not imply unsupported exact counts.</li><li><strong>Artifacts:</strong> The QGIS project, prepared point layer (if created), heatmap raster, and methods note are saved with understandable names; original input is preserved.</li><li><strong>Route result:</strong> Path A produces a direct point-based KDE; Path B produces a documented point-representation KDE; Path C correctly produces no heatmap until deficiencies are resolved.</li></ul>
+<div class="callout warn"><strong>Final release check:</strong> Before sharing, use your organization’s access, handling, need-to-know, records, security, and release processes. This tutorial does not authorize uploading, publishing, or distributing a particular dataset or map.</div>
+<p class="small">Common next actions: create an approved print layout; compare results by time period using consistent parameters; summarize areas of relative concentration with boundaries; or select a different method (for example, a choropleth) if the available data are area-based rather than point-represented.</p>
+</div></details></section>
+</div></main>
+<script>
+  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script>
+</body>
+</html>

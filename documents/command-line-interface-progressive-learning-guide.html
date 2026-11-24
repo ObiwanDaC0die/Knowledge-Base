@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Command Line Interface: A Progressive Learning Guide</title><meta name="tags" content="command line interface, shell, terminal, command syntax, file paths, PowerShell, Bash, automation"><meta name="prompt-type" content="general-knowledge"><style>:root {
+  --ink: #17212b;
+  --muted: #586875;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --line: #d8e0e6;
+  --blue: #145a78;
+  --blue2: #0d7c86;
+  --teal: #188d88;
+  --gold: #b57922;
+  --red: #a83f46;
+  --purple: #625b9c;
+  --pale: #eaf3f6;
+  --pale2: #eef7f5;
+  --pale3: #fbf4e7;
+  --radius: 12px;
+  --shadow: 0 4px 18px rgba(20, 39, 52, .08);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+  --space-1: .35rem;
+  --space-2: .65rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.58 var(--sans); }
+a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--blue2); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 100; padding: .6rem; background: #fff; border: 2px solid var(--blue); }
+.site { max-width: var(--max); margin: auto; padding: 0 var(--space-4); }
+.header { background: linear-gradient(123deg, #123d59 0%, #145a78 52%, #0f776f 100%); color: white; padding: var(--space-6) 0 var(--space-5); border-bottom: 6px solid var(--gold); }
+.eyebrow, .meta-label { font-size: .76rem; text-transform: uppercase; letter-spacing: .11em; font-weight: 800; }
+.eyebrow { color: #cce7eb; margin: 0 0 .5rem; }
+.header h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.05; margin: 0; max-width: 950px; letter-spacing: -.02em; }
+.subtitle { font-size: 1.15rem; max-width: 840px; margin: 1rem 0 1.35rem; color: #e2f2f4; }
+.metadata { display: flex; gap: 1rem 2rem; flex-wrap: wrap; border-top: 1px solid rgba(255, 255, 255, .25); padding-top: 1rem; font-size: .88rem; }
+.metadata strong { display: block; color: #b9e1e3; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.toolbar { background: #102f43; color: #fff; padding: .55rem 0; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 10px rgba(0, 0, 0, .16); }
+.toolbar .site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.toolbar a { color: #e8f5f5; font-size: .9rem; text-decoration: none; }
+.toolbar a:hover { text-decoration: underline; }
+.btn { cursor: pointer; border: 1px solid #bfe3e2; background: #fff; color: #123d59; border-radius: 7px; padding: .42rem .68rem; font: 700 .83rem var(--sans); }
+.btn:hover { background: #dff2f1; }
+.layout { display: grid; grid-template-columns: 255px minmax(0, 1fr); gap: var(--space-5); margin: var(--space-5) auto; }
+.toc { position: sticky; top: 3.6rem; align-self: start; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+.toc h2 { font-size: .84rem; margin: 0 0 .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: .34rem 0; }
+.toc a { font-size: .84rem; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.content { min-width: 0; }
+.section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.2rem, 3vw, 2.25rem); margin-bottom: var(--space-4); scroll-margin-top: 4.2rem; }
+.section h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.15rem); margin: 0 0 1rem; padding-bottom: .7rem; border-bottom: 2px solid var(--pale); line-height: 1.15; }
+.section h3 { font-size: 1.1rem; margin: 1.55rem 0 .6rem; color: #173f57; }
+.section h4 { font-size: .98rem; margin: 1.1rem 0 .3rem; }
+.num { display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--blue); color: #fff; font: 800 .83rem var(--sans); vertical-align: middle; margin-right: .5rem; }
+.lead { font-size: 1.08rem; }
+.callout { border-left: 5px solid var(--blue2); padding: 1rem 1.1rem; background: var(--pale); border-radius: 0 8px 8px 0; margin: 1rem 0; }
+.callout.warn { border-color: var(--gold); background: var(--pale3); }
+.callout strong { color: #133d55; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stat { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; background: #fff; }
+.stat .n { font: 800 1.75rem/1 var(--serif); color: var(--blue); }
+.stat .k { font-size: .78rem; text-transform: uppercase; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: .4rem; }
+.tag, .ev { display: inline-block; border-radius: 999px; padding: .18rem .55rem; font-size: .72rem; font-weight: 800; letter-spacing: .025em; white-space: nowrap; }
+.tag { background: #dceff3; color: #145a78; }
+.tag.green { background: #ddf0e9; color: #176353; }
+.tag.gold { background: #f6e8cb; color: #795312; }
+.tag.red { background: #f5dee0; color: #8a303a; }
+.ev.high { background: #dcefe8; color: #14604e; }
+.ev.med { background: #f8ecd4; color: #795312; }
+.ev.low { background: #f5e0e1; color: #8b333a; }
+.definition { border: 1px solid var(--line); border-radius: 10px; background: #fbfcfd; padding: .85rem 1rem; margin: .65rem 0; }
+.definition strong { color: var(--blue); }
+.card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #fff; }
+.card summary { cursor: pointer; list-style: none; padding: 1rem 1.1rem; background: #f8fbfc; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-weight: 800; color: #163d54; }
+.card summary::-webkit-details-marker { display: none; }
+.card summary:after { content: '+'; font-size: 1.3rem; color: var(--blue); }
+.card[open] summary:after { content: '–'; }
+.card-body { padding: 1rem 1.1rem 1.2rem; }
+.theory-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin: .3rem 0 .8rem; }
+.theory-grid { display: grid; grid-template-columns: 155px 1fr; gap: .4rem 1rem; margin: 0; }
+.theory-grid dt { font-weight: 800; color: #31556b; }
+.theory-grid dd { margin: 0; }
+.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 9px; margin: 1rem 0; }
+.matrix { width: 100%; border-collapse: collapse; font-size: .87rem; min-width: 760px; }
+.matrix th, .matrix td { padding: .7rem .75rem; vertical-align: top; border-bottom: 1px solid var(--line); text-align: left; }
+.matrix th { background: #eaf3f6; color: #183e54; font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
+.matrix tr:last-child td { border-bottom: 0; }
+.matrix tbody tr:nth-child(even) { background: #fbfcfd; }
+.figure { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; margin: 1rem 0; background: #fff; overflow: auto; }
+.figure h3 { margin: .1rem 0 .55rem; }
+.figure figcaption { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .75rem; padding-top: .65rem; }
+.svgwide { display: block; width: 100%; min-width: 680px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .8rem; color: var(--muted); margin: .3rem 0; }
+.legend i { width: .75rem; height: .75rem; border-radius: 2px; display: inline-block; vertical-align: -.08rem; margin-right: .25rem; }
+.evidence-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1rem; border-bottom: 1px solid var(--line); padding: .7rem 0; }
+.evidence-row:last-child { border: 0; }
+.small { font-size: .88rem; color: var(--muted); }
+.footnote { font-size: .79rem; color: var(--muted); }
+.refs { padding-left: 1.2rem; }
+.refs li { margin: .8rem 0; }
+.recommend { counter-reset: recommend; }
+.recommend li { list-style: none; position: relative; padding: .85rem 1rem .85rem 3.1rem; background: #f8fbfc; border: 1px solid var(--line); border-radius: 9px; margin: .65rem 0; }
+.recommend li:before { counter-increment: recommend; content: counter(recommend); position: absolute; left: .8rem; top: .78rem; width: 1.55rem; height: 1.55rem; display: grid; place-items: center; background: var(--blue); color: #fff; border-radius: 50%; font: 800 .76rem var(--sans); }
+.print-note { display: none; }
+@media(max-width:900px) { .layout { grid-template-columns: 1fr; } .toc { position: relative; top: auto; } .toc ol { columns: 2; column-gap: 2rem; } .grid.three { grid-template-columns: 1fr 1fr; } }
+@media(max-width:620px) { .site { padding: 0 1rem; } .header { padding: 2.5rem 0 2rem; } .layout { margin: 1.25rem auto; } .section { padding: 1.15rem; } .grid, .grid.three { grid-template-columns: 1fr; } .toc ol { columns: 1; } .metadata { gap: .8rem 1.2rem; } .evidence-row { grid-template-columns: 1fr; } .toolbar .site { padding: 0 1rem; } .toolbar a { display: none; } }
+@media print { body { background: #fff; font-size: 10.5pt; } .header { padding: 1.5rem 0; background: #fff !important; color: #000; border-bottom: 3px solid #000; } .header .eyebrow, .header .subtitle, .metadata strong { color: #222; } .toolbar, .toc, .btn { display: none; } .layout { display: block; margin: 0; } .section { box-shadow: none; border: 0; padding: 0; margin: 0 0 1rem; break-inside: avoid; } .section h2 { break-after: avoid; } .card { break-inside: avoid; } .card summary { background: #fff; } .card:not([open]) .card-body { display: block; } .figure { break-inside: avoid; } .print-note { display: block; } .content { width: 100%; } a { color: #000; text-decoration: none; } .table-wrap { overflow: visible; } .matrix { min-width: 0; font-size: 8pt; } .svgwide { min-width: 0; } }
+
+/* Shared design system v1.0 — additive accessibility and compact section disclosure rules */
+.section { padding: 0; overflow: clip; margin-bottom: .9rem; }
+.section-disclosure > summary { display: block; cursor: pointer; list-style: none; padding: clamp(.8rem, 1.5vw, 1.1rem); }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary h2 { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: clamp(1.2rem, 2.2vw, 1.65rem); line-height: 1.2; }
+.section-disclosure > summary h2::after { content: '+'; float: right; color: var(--blue); font: 700 1.2rem var(--sans); }
+.section-disclosure[open] > summary h2::after { content: '−'; }
+.section-disclosure > summary .num { width: 1.65rem; height: 1.65rem; margin-right: .4rem; }
+.section-body { padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); }
+.section-disclosure[open] > summary { padding-bottom: .7rem; }
+.section-disclosure[open] > summary h2 { border-bottom: 2px solid var(--pale); padding-bottom: .55rem; }
+:where(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.toolbar .site { flex-wrap: wrap; }
+.toolbar .actions { display: flex; flex-wrap: wrap; gap: .45rem; }
+.toc { max-height: calc(100vh - 5rem); overflow-y: auto; }
+.figure svg { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 620px) { .section-disclosure > summary { padding: .75rem .9rem; } .section-disclosure > summary h2 { font-size: 1.2rem; } .section-body { padding: 0 .9rem .9rem; } .toolbar .site { gap: .5rem; } .btn { min-height: 40px; } }
+@media print { .section { overflow: visible; } .section-disclosure > summary, .section-body { padding: 0; } .section-disclosure > summary h2::after { content: none; } .section-disclosure:not([open]) > .section-body { display: block !important; } .section-disclosure > summary h2 { border-bottom: 1px solid #aaa; margin-bottom: .7rem; } }
+</style></head>
+<body>
+<a class="skip" href="#main">Skip to learning content</a>
+<header class="header"><div class="site"><p class="eyebrow">Progressive Learning Resource</p><h1>Command Line Interface: A Progressive Learning Guide</h1><p class="subtitle">Learn how text commands become actions, how to read command structure safely, and how to progress from simple navigation to repeatable automation.</p><div class="metadata"><span><strong>Topic</strong> Command Line Interface</span><span><strong>Knowledge Level</strong> Beginner</span><span><strong>Purpose</strong> General understanding</span><span><strong>Depth</strong> Comprehensive</span><span><strong>Prepared</strong> November 24, 2026</span><span><strong>Evidence</strong> Official documentation; platform-specific behavior varies</span></div></div></header>
+<div class="toolbar"><div class="site"><a href="#main">Jump to learning resource</a><div class="actions"><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="exportMarkdown" type="button">Export Markdown</button><button class="btn" id="printReport" type="button">Print / Save as PDF</button></div></div></div>
+<main id="main" class="site layout"><nav class="toc" aria-label="Table of contents"><h2>On This Page</h2><ol><li><a href="#executive-summary">Executive Summary</a></li><li><a href="#core-idea">The Core Idea</a></li><li><a href="#progressive-levels">Progressive Levels</a></li><li><a href="#visual-learning-aids">Visual Learning Aids</a></li><li><a href="#interactive-learning">Interactive Learning</a></li><li><a href="#worked-examples">Worked Examples</a></li><li><a href="#prerequisites">Prerequisite Knowledge</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#related-concepts">Related Concepts</a></li><li><a href="#misunderstandings">Common Misunderstandings</a></li><li><a href="#practical-applications">Practical Applications</a></li><li><a href="#knowledge-check">Knowledge Check</a></li><li><a href="#final-summary">Final Summary</a></li></ol></nav><div class="content">
+<section class="section" id="executive-summary"><details class="section-disclosure"><summary><h2><span class="num">1</span>Executive Summary</h2></summary><div class="section-body"><div class="callout"><p class="lead"><strong>A command line interface (CLI)</strong> is a text-based way to communicate with a computer: you type a command, the system interprets it, and it returns a result or changes something. You encounter CLIs in operating-system terminals, developer tools, cloud administration, data work, networking, and troubleshooting. The same high-level idea appears across Unix-like shells, Windows Command Prompt, and PowerShell, but their commands and rules are not interchangeable. The indispensable takeaway is to read a command as a structured request—command, options, arguments, input, output—not as a magic sentence.</p><p class="small">Assumptions: this resource uses everyday file-management examples and focuses on concepts rather than a particular operating system. Commands shown are illustrative; verify syntax and effects in your own shell before using them on important data.</p></div></div></details></section>
+<section class="section" id="core-idea"><details class="section-disclosure"><summary><h2><span class="num">2</span>The Core Idea — Explain It Simply</h2></summary><div class="section-body"><p>A graphical interface offers buttons and menus. A CLI offers a prompt where you express the same kind of request in text. A <strong>shell</strong>—the program receiving that text—separates it into pieces, interprets special characters, finds a command, runs it, and reports an outcome. POSIX describes this general shell sequence as token recognition, command execution, and an exit status; exact behavior depends on the shell.</p><div class="definition"><strong>Central relationship:</strong> <code>your typed text → shell interpretation → command program → output / changed state → exit status</code>.</div><p><strong>Analogy:</strong> a CLI is like a concise order form. The command is the item requested, options are instructions about how to prepare it, and arguments identify what the request applies to. The analogy breaks down because a shell also interprets quoting, variables, wildcards, redirection, and pipelines before a program receives its arguments.</p><p><strong>Concrete illustration:</strong> in many Unix-like shells, <code>ls -l reports</code> asks the <code>ls</code> program to list a target named <code>reports</code>, using its long-format option. In Windows PowerShell, <code>Get-ChildItem -Path reports</code> expresses a similar goal but uses different command names and parameter conventions.</p></div></details></section>
+<section class="section" id="progressive-levels"><details class="section-disclosure"><summary><h2><span class="num">3</span>Progressive Levels of Understanding</h2></summary><div class="section-body">
+<details class="card"><summary>Beginner — a precise way to ask the computer for work</summary><div class="card-body"><div class="theory-meta"><span class="tag">Orientation</span><span class="ev high">Established convention</span></div><dl class="theory-grid"><dt>Definition</dt><dd>A CLI is an interface in which people enter textual commands and read textual responses.</dd><dt>Purpose</dt><dd>It enables direct, repeatable actions without navigating menus.</dd><dt>Example</dt><dd><code>pwd</code> commonly prints the current working directory in Unix-like shells; <code>cd</code> changes location in many shells.</dd><dt>Takeaway</dt><dd>Start by asking “Where am I?” and “What will this command act on?”</dd></dl></div></details>
+<details class="card"><summary>Foundational — command structure, files, and feedback</summary><div class="card-body"><div class="theory-meta"><span class="tag green">Core mechanics</span></div><dl class="theory-grid"><dt>Parts</dt><dd>A command line often contains a command name, zero or more options, and one or more arguments. An option changes behavior; an argument supplies a target or value.</dd><dt>Working directory</dt><dd>Relative paths are interpreted from the current working directory; absolute paths name a location from a filesystem root or drive context.</dd><dt>Feedback</dt><dd>Standard output carries ordinary results; standard error carries diagnostics. An exit status conventionally signals success or failure to scripts.</dd><dt>Misconception</dt><dd>Pressing Enter does not make a command universal. The active shell defines much of the language around the command.</dd></dl></div></details>
+<details class="card"><summary>Intermediate — composition and repeatability</summary><div class="card-body"><div class="theory-meta"><span class="tag">Transferable principle</span></div><dl class="theory-grid"><dt>Pipeline</dt><dd>A pipeline connects one command’s output to another command’s input. It supports small, composable steps rather than one giant command.</dd><dt>Variables and quoting</dt><dd>Shells can replace variable references and interpret special characters. Quoting controls when characters are treated literally; details vary by shell.</dd><dt>Realistic case</dt><dd>To inspect a project, a user may list files, filter names, and save results. This is efficient only after they understand what data each step receives and emits.</dd><dt>Tradeoff</dt><dd>Concise commands can be faster and more reproducible, but a one-character option or an unquoted space can substantially change meaning.</dd></dl></div></details>
+<details class="card"><summary>Advanced — shell languages are similar, not identical</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Context-dependent</span></div><dl class="theory-grid"><dt>Portability</dt><dd>POSIX specifies a portable shell language baseline, while Bash, zsh, fish, PowerShell, and cmd.exe add distinct features and syntax. A script written for one may not run correctly in another.</dd><dt>Parsing order</dt><dd>Expansion, quoting, globbing, redirection, and command lookup can occur before the called program sees arguments. This is why copying a command without understanding its shell context is risky.</dd><dt>Edge cases</dt><dd>Filenames can contain spaces, wildcard characters, or leading dashes. Robust scripts deliberately handle these cases rather than relying on ordinary-looking names.</dd><dt>Uncertainty</dt><dd>Documentation and installed versions are the authority for a specific system; do not infer support for an option merely because it exists elsewhere.</dd></dl></div></details>
+<details class="card"><summary>Expert Perspective — designing safe, reviewable command workflows</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Professional judgment</span></div><dl class="theory-grid"><dt>Framework</dt><dd>Professionals separate discovery from change: inspect state, test on a limited scope, make the change, verify the result, and retain a reviewable record when needed.</dd><dt>Decisions</dt><dd>Choose between an interactive command, a script, a configuration-management tool, or a graphical tool based on repeatability, error tolerance, permissions, audit needs, and the consequence of failure.</dd><dt>Adjacent disciplines</dt><dd>CLI work connects to operating systems, programming, cybersecurity, data engineering, automation, and human factors.</dd><dt>Signs of mastery</dt><dd>You can predict likely inputs and outputs, explain the effect of each component, read documentation, and build reversible or testable steps.</dd></dl></div></details>
+</div></details></section>
+<section class="section" id="visual-learning-aids"><details class="section-disclosure"><summary><h2><span class="num">4</span>Visual Learning Aids</h2></summary><div class="section-body"><figure class="figure"><h3>From typed command to observable result</h3><div class="legend"><span><i style="background:#145a78"></i>Structure/components</span><span><i style="background:#188d88"></i>Process</span><span><i style="background:#b57922"></i>Conditions/cautions</span></div><svg class="svgwide" viewBox="0 0 920 270" role="img" aria-labelledby="cli-flow-title cli-flow-desc"><title id="cli-flow-title">Conceptual flow of a command line request</title><desc id="cli-flow-desc">A learner types a command at a terminal. The shell parses the command, applies shell rules such as quoting and expansion, locates and starts a command, then results return as standard output, standard error, and an exit status.</desc><rect x="25" y="85" width="150" height="82" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="100" y="118" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#17212b">Typed text</text><text x="100" y="143" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">command + options + args</text><path d="M175 126H230" stroke="#188d88" stroke-width="5" marker-end="url(#arrow)"/><rect x="230" y="65" width="175" height="122" rx="10" fill="#eef7f5" stroke="#188d88" stroke-width="2"/><text x="317" y="103" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#17212b">Shell</text><text x="317" y="127" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">parses, expands,</text><text x="317" y="148" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">redirects, locates</text><path d="M405 126H465" stroke="#188d88" stroke-width="5" marker-end="url(#arrow)"/><rect x="465" y="85" width="165" height="82" rx="10" fill="#eaf3f6" stroke="#145a78" stroke-width="2"/><text x="547" y="118" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#17212b">Command/program</text><text x="547" y="143" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">does the requested work</text><path d="M630 126H690" stroke="#188d88" stroke-width="5" marker-end="url(#arrow)"/><rect x="690" y="42" width="195" height="168" rx="10" fill="#fbf4e7" stroke="#b57922" stroke-width="2"/><text x="787" y="78" text-anchor="middle" font-family="system-ui" font-weight="700" fill="#17212b">Observable result</text><text x="787" y="108" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">standard output</text><text x="787" y="134" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">standard error</text><text x="787" y="160" text-anchor="middle" font-family="system-ui" font-size="14" fill="#586875">exit status</text><text x="787" y="188" text-anchor="middle" font-family="system-ui" font-size="12" fill="#795312">Check results before next step</text><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#188d88"/></marker></defs></svg><figcaption><strong>Classification:</strong> conceptual diagram, not an empirical chart. Notice that the shell sits between your text and the program; this explains why shell syntax matters. Simplified: a real command can invoke built-ins, functions, scripts, or external programs, and shell evaluation order differs by shell.</figcaption></figure>
+<div class="table-wrap"><table class="matrix"><caption>How common command-line pieces differ by role</caption><thead><tr><th scope="col">Piece</th><th scope="col">Typical purpose</th><th scope="col">Illustrative form</th><th scope="col">What to inspect</th></tr></thead><tbody><tr><td>Command</td><td>Names an action or tool</td><td><code>ls</code>, <code>Get-ChildItem</code></td><td>Which shell or operating system provides it?</td></tr><tr><td>Option / parameter</td><td>Changes mode or behavior</td><td><code>-l</code>, <code>-Path</code></td><td>Exact spelling, scope, and whether it changes data</td></tr><tr><td>Argument</td><td>Supplies a target or value</td><td><code>reports</code></td><td>Does it identify the intended file, directory, host, or value?</td></tr><tr><td>Redirection / pipeline</td><td>Routes data between commands or files</td><td><code>command &gt; output.txt</code>, <code>a | b</code></td><td>What data is sent where, and could existing output be replaced?</td></tr></tbody></table></div><p class="small">Classification: comparative teaching table. Command examples are illustrative and not a substitute for the local help or manual page.</p></div></details></section>
+<section class="section" id="interactive-learning"><details class="section-disclosure"><summary><h2><span class="num">5</span>Interactive or Dynamic Learning Elements</h2></summary><div class="section-body"><p>Use these native prediction-and-reveal activities before running anything. They work without JavaScript and are deliberately conceptual: the exact result can differ by shell, configuration, permissions, and files present.</p><details class="card"><summary>Prediction 1 — Which part names the target?</summary><div class="card-body"><p><strong>Prompt:</strong> In the illustrative Unix-like command <code>ls -l reports</code>, predict which part identifies the directory to list.</p><p><strong>Static worked illustration:</strong> <code>ls</code> is the command; <code>-l</code> is an option; <code>reports</code> is the argument/target.</p><div class="callout"><p><strong>Reveal:</strong> <code>reports</code> is the target. The option changes how the list is displayed, not the location being listed. This distinction helps you notice when a command may be aimed at the wrong object.</p></div></div></details><details class="card"><summary>Prediction 2 — What does a pipeline connect?</summary><div class="card-body"><p><strong>Prompt:</strong> Read <code>producer | consumer</code>. Before revealing the explanation, state what you think the vertical bar does.</p><p><strong>Static worked illustration:</strong> the output stream from <code>producer</code> becomes the input stream for <code>consumer</code>.</p><div class="callout"><p><strong>Reveal:</strong> A pipeline composes steps. It does not automatically prove that the consumer understands the producer’s output. Check formats, errors, and behavior of each command.</p></div></div></details><details class="card"><summary>Decision check — Run, inspect, or stop?</summary><div class="card-body"><p><strong>Situation:</strong> You found a copied command that includes a deletion operation and a wildcard. Choose the safest first move: run it, inspect its documentation and target expansion, or add more privileges.</p><div class="callout warn"><p><strong>Reasoned answer:</strong> inspect the command, its shell context, and exactly what the wildcard matches. Prefer a harmless listing or preview first when one exists. More privilege does not make an unclear command safer.</p></div><p class="small">Limit: some tools have no preview option. In those cases, use a limited test scope or a copy of noncritical data when authorized.</p></div></details></div></details></section>
+<section class="section" id="worked-examples"><details class="section-disclosure"><summary><h2><span class="num">6</span>Worked Examples</h2></summary><div class="section-body">
+<details class="card"><summary>Example 1 — Locate yourself before acting</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical</span><span class="tag green">Entry-level</span></div><p><strong>Situation:</strong> You opened a terminal and want to know where relative paths will start.</p><ol><li>Use the shell’s current-location command. In many Unix-like shells this is <code>pwd</code>; in PowerShell, <code>Get-Location</code> is common.</li><li>Read the returned path as context, not merely decoration.</li><li>Only then use a relative path such as <code>reports</code>.</li></ol><p><strong>Result:</strong> You reduce the chance of acting on a similarly named folder in a different location.</p><p><strong>Key lesson:</strong> the current working directory is an input to many commands.</p><p class="small"><strong>Limit/alternative:</strong> graphical file managers show location visually; a CLI makes you request or retain that context explicitly.</p></div></details>
+<details class="card"><summary>Example 2 — Read a listing as a structured request</summary><div class="card-body"><div class="theory-meta"><span class="tag">Hypothetical</span><span class="tag">Structure</span></div><p><strong>Situation:</strong> You want a detailed view of a directory named <code>reports</code> in a Unix-like shell.</p><pre><code class="language-sh">ls -l reports</code></pre><dl class="theory-grid"><dt>Command</dt><dd><code>ls</code> requests a listing.</dd><dt>Option</dt><dd><code>-l</code> requests long-format output in common implementations.</dd><dt>Argument</dt><dd><code>reports</code> names the target.</dd><dt>Expected result</dt><dd>A formatted listing, or an error if the target does not exist or is inaccessible.</dd></dl><p><strong>Key lesson:</strong> identify each token before you run a command.</p><p class="small"><strong>Limit/alternative:</strong> option behavior can vary. Check <code>man ls</code>, <code>ls --help</code>, or a platform’s own help system where available.</p></div></details>
+<details class="card"><summary>Example 3 — Compare analogous goals across shells</summary><div class="card-body"><div class="theory-meta"><span class="tag gold">Cross-platform caution</span></div><p><strong>Situation:</strong> You need to display items in a folder named <code>reports</code>.</p><div class="table-wrap"><table class="matrix"><caption>Illustrative equivalents—not interchangeable syntax</caption><thead><tr><th scope="col">Environment</th><th scope="col">Illustrative command</th><th scope="col">Interpretation</th></tr></thead><tbody><tr><td>Unix-like shell</td><td><code>ls reports</code></td><td>List a target directory.</td></tr><tr><td>PowerShell</td><td><code>Get-ChildItem -Path reports</code></td><td>Retrieve child items from a path.</td></tr><tr><td>Windows Command Prompt</td><td><code>dir reports</code></td><td>Display a directory listing.</td></tr></tbody></table></div><p><strong>Key lesson:</strong> similar purposes do not guarantee identical names, quoting, options, output objects, or error handling.</p><p class="small"><strong>Limit:</strong> availability and output depend on installed versions and the active shell.</p></div></details>
+<details class="card"><summary>Example 4 — Build a safer repeatable task</summary><div class="card-body"><div class="theory-meta"><span class="tag red">Workflow discipline</span></div><p><strong>Situation:</strong> A hypothetical user needs a repeatable report of filenames. They are considering a command that sends output into a file.</p><ol><li><strong>Inspect:</strong> list the target directory first; confirm location and scope.</li><li><strong>Choose output behavior:</strong> understand whether the redirection form creates, replaces, or appends to the output file.</li><li><strong>Test narrowly:</strong> use a noncritical directory or a temporary output name when authorized.</li><li><strong>Verify:</strong> inspect the generated file and confirm expected contents.</li><li><strong>Document:</strong> record the command, shell, assumptions, and purpose if another person must repeat it.</li></ol><p><strong>Result:</strong> the command becomes a controlled procedure rather than an opaque shortcut.</p><p class="small"><strong>Limit:</strong> a command’s safety also depends on permissions, data sensitivity, organizational procedures, and the tool’s own behavior.</p></div></details>
+</div></details></section>
+<section class="section" id="prerequisites"><details class="section-disclosure"><summary><h2><span class="num">7</span>Prerequisite Knowledge</h2></summary><div class="section-body"><p>No formal prerequisites are required to begin. Basic awareness of files, folders, and the operating system is enough; deeper mastery benefits from programming and operating-system concepts.</p><div class="table-wrap"><table class="matrix"><caption>Prerequisites for learning command line interfaces</caption><thead><tr><th scope="col">Priority</th><th scope="col">Prerequisite Topic</th><th scope="col">Why It Helps</th><th scope="col">Recommended Starting Point</th></tr></thead><tbody><tr><td>Essential</td><td>Files, folders, and paths</td><td>Commands frequently act on filesystem locations.</td><td>Practice identifying a folder, a filename, and a full path in your operating system.</td></tr><tr><td>Essential</td><td>Basic text entry</td><td>Commands are sensitive to characters, spaces, and spelling.</td><td>Type short commands manually rather than pasting them at first.</td></tr><tr><td>Helpful</td><td>Processes and permissions</td><td>Explains why a command may run, fail, wait, or be denied.</td><td>Learn the distinction between a program, a running process, and access rights.</td></tr><tr><td>Helpful</td><td>Simple programming logic</td><td>Supports variables, conditions, loops, and scripts.</td><td>Practice input, output, variables, and if/then reasoning.</td></tr><tr><td>Optional/Advanced</td><td>Operating-system interfaces and standards</td><td>Helps assess portability and shell-specific behavior.</td><td>Read a shell manual and compare POSIX concepts with a chosen shell.</td></tr></tbody></table></div></div></details></section>
+<section class="section" id="glossary"><details class="section-disclosure"><summary><h2><span class="num">8</span>Glossary</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Command line interface glossary</caption><thead><tr><th scope="col">Term</th><th scope="col">Plain-language definition</th><th scope="col">Connection to CLI work</th></tr></thead><tbody><tr><td>Argument</td><td>A value supplied to a command, often a file, path, or search term.</td><td>Identifies what the command should act on.</td></tr><tr><td>CLI</td><td>Command line interface: a text-based interaction method.</td><td>The overall interface described in this resource.</td></tr><tr><td>Command</td><td>A named instruction or program invoked by the shell.</td><td>The action portion of a request.</td></tr><tr><td>Current working directory</td><td>The location from which relative paths are resolved.</td><td>Hidden context for many file commands.</td></tr><tr><td>Exit status</td><td>A code returned when a command finishes, conventionally used to indicate success or failure.</td><td>Lets scripts make decisions about prior commands.</td></tr><tr><td>Option / parameter</td><td>An additional command component that changes behavior or provides a named setting.</td><td>Often the most consequential small part of a command.</td></tr><tr><td>Path</td><td>A textual address for a file or directory.</td><td>Commonly appears as an argument.</td></tr><tr><td>Pipeline</td><td>A connection that sends one command’s output to another command’s input.</td><td>Supports composition of small operations.</td></tr><tr><td>Redirection</td><td>Routing input or output away from its normal destination.</td><td>Can save output to a file or feed a command from a file.</td></tr><tr><td>Shell</td><td>A command language interpreter and environment for entering commands.</td><td>Interprets command text before it reaches many programs.</td></tr><tr><td>Standard error</td><td>A stream commonly used for diagnostics.</td><td>Helps distinguish normal results from problems.</td></tr><tr><td>Standard output</td><td>A stream commonly used for ordinary command results.</td><td>Can be read, redirected, or piped onward.</td></tr></tbody></table></div></div></details></section>
+<section class="section" id="related-concepts"><details class="section-disclosure"><summary><h2><span class="num">9</span>Related Concepts and Connections</h2></summary><div class="section-body"><div class="grid"><div class="stat"><div class="n">Shell scripting</div><div class="k">From one command to repeatable logic</div><p>Scripts preserve a sequence of CLI steps as a program. This matters when a task must be repeated, reviewed, or run consistently; it also raises the need for testing and error handling.</p></div><div class="stat"><div class="n">Graphical interfaces</div><div class="k">Same goals, different interaction model</div><p>Many GUI actions ultimately request operations similar to CLI actions. The CLI exposes the textual structure more directly, while a GUI can make discovery easier for beginners.</p></div><div class="stat"><div class="n">Application programming interfaces</div><div class="k">Automation at another boundary</div><p>An API lets software exchange structured requests; a CLI lets people or scripts invoke tools through text. Both need clear inputs, outputs, errors, and version-aware documentation.</p></div><div class="stat"><div class="n">Operating systems</div><div class="k">Files, processes, and permissions</div><p>CLI behavior reflects underlying operating-system concepts. Understanding processes and permissions explains why commands can fail even when their spelling is correct.</p></div></div><h3>Why these connections matter</h3><p>A CLI is not merely a list of commands. It is a bridge between human intent, a shell language, programs, and operating-system resources. Learning this bridge makes unfamiliar tools easier to approach: identify the interface, read its help, map inputs and outputs, and test a small case.</p></div></details></section>
+<section class="section" id="misunderstandings"><details class="section-disclosure"><summary><h2><span class="num">10</span>Common Misunderstandings</h2></summary><div class="section-body"><div class="table-wrap"><table class="matrix"><caption>Misunderstandings and corrections</caption><thead><tr><th scope="col">Likely misconception</th><th scope="col">Accurate correction</th><th scope="col">Why the difference matters</th><th scope="col">Counterexample / note</th></tr></thead><tbody><tr><td>“A command is one universal language.”</td><td>Shells and platforms overlap but have distinct syntax and tools.</td><td>Copying a command across environments can fail or do something different.</td><td><code>ls</code>, <code>dir</code>, and <code>Get-ChildItem</code> can serve analogous purposes.</td></tr><tr><td>“If it printed nothing, it did nothing.”</td><td>Some successful commands are quiet; some errors appear on standard error.</td><td>You need exit status, changed state, and diagnostics—not just visible text.</td><td>A file operation may succeed with no ordinary output.</td></tr><tr><td>“Options are minor details.”</td><td>Options can substantially alter scope, recursion, deletion, overwriting, or formatting.</td><td>Small tokens can have large consequences.</td><td>A command name may be harmless in one mode and destructive in another.</td></tr><tr><td>“Quotes are cosmetic.”</td><td>Quoting can control how a shell treats spaces and special characters.</td><td>It prevents unintended splitting or interpretation.</td><td>A filename containing a space may be treated as two arguments when unquoted.</td></tr><tr><td>“The CLI is only for experts.”</td><td>Basic navigation and help are accessible skills; expertise comes from careful reasoning and practice.</td><td>This encourages measured learning instead of blind copying.</td><td>An introductory location check is useful even without writing scripts.</td></tr></tbody></table></div><p class="small">Introductory simplification: it is useful to say “the shell runs a command,” but technically the shell may execute a built-in, a function, a script, or an external program and can transform the text first.</p></div></details></section>
+<section class="section" id="practical-applications"><details class="section-disclosure"><summary><h2><span class="num">11</span>Practical Applications</h2></summary><div class="section-body"><div class="evidence-row"><div><strong>Everyday file work</strong><br><span class="small">Locate, list, copy, and organize files.</span></div><div>CLI concepts clarify target paths and make repetitive file tasks quicker.</div><div><span class="ev med">Context-dependent</span><br>Benefit: repeatability. Risk: acting on the wrong path or overwriting data. Use previews, narrow scope, and verification.</div></div><div class="evidence-row"><div><strong>Software development</strong><br><span class="small">Build, test, version control, dependency tools.</span></div><div>Developers use commands to run standardized project tasks and automate checks.</div><div><span class="ev high">Established practice</span><br>Benefit: consistent workflows. Tradeoff: commands depend on project tooling, versions, and environment variables.</div></div><div class="evidence-row"><div><strong>Systems and network administration</strong><br><span class="small">Inspect status, configure services, collect diagnostics.</span></div><div>A CLI can expose detailed system information and support automation at scale.</div><div><span class="ev med">High consequence</span><br>Risk: privilege and configuration errors. Follow organizational procedures and authorized access rules; an educational guide is not operational approval.</div></div><div class="evidence-row"><div><strong>Data analysis</strong><br><span class="small">Transform text files, run tools, document analytical steps.</span></div><div>Pipelines and scripts can make transformations repeatable and reviewable.</div><div><span class="ev med">Context-dependent</span><br>Risk: silent assumptions about formats, encodings, missing values, or input scope. Validate outputs and preserve provenance.</div></div><div class="evidence-row"><div><strong>Accessibility and remote work</strong><br><span class="small">Keyboard-first interaction and low-bandwidth administration.</span></div><div>Text commands can be effective when graphical access is limited or automation is preferable.</div><div><span class="ev med">Context-dependent</span><br>Tradeoff: discoverability can be lower than in a GUI; documentation and command history can help.</div></div></div></details></section>
+<section class="section" id="knowledge-check"><details class="section-disclosure"><summary><h2><span class="num">12</span>Knowledge Check</h2></summary><div class="section-body"><ol><li>What role does a shell play between typed text and a program?</li><li>In <code>ls -l reports</code>, which part is the command, option, and argument?</li><li>Why should you check the current working directory before relying on a relative path?</li><li>What is the difference between standard output and standard error in general terms?</li><li>Why are quotes sometimes important in a command line?</li><li><strong>Application:</strong> You need to reuse a command from a teammate on a different operating system. What should you verify before running it?</li><li><strong>Analysis:</strong> A command’s name seems harmless, but it includes an unfamiliar option and output redirection. Describe a safe reasoning sequence before execution.</li></ol><details class="card"><summary>Answer Key — model answers and reasoning</summary><div class="card-body"><ol><li><strong>Shell role:</strong> it reads and interprets command text, applying its own language rules, then invokes an appropriate built-in, function, script, or program and returns results. “It runs commands” is an acceptable introductory answer if it recognizes that the shell interprets the text.</li><li><strong>Structure:</strong> <code>ls</code> is the command, <code>-l</code> is an option, and <code>reports</code> is the argument. Exact option semantics depend on the implementation.</li><li><strong>Working directory:</strong> a relative path is resolved from that location. Checking it prevents accidental work in a different folder with a similar name.</li><li><strong>Output vs. error:</strong> standard output is ordinarily for normal results; standard error is ordinarily for diagnostics. A tool can still choose how it uses both streams.</li><li><strong>Quotes:</strong> they influence whether the shell treats characters such as spaces or wildcard symbols literally or specially. Rules differ across shells.</li><li><strong>Reuse across systems:</strong> identify the active shell, command availability, version, syntax, paths, permissions, input/output assumptions, and whether the command changes data. Consult local official help or manual pages.</li><li><strong>Safe sequence:</strong> parse the command into its parts; look up the unfamiliar option; determine whether redirection replaces or appends to a file; confirm the target and working directory; test on limited noncritical scope if authorized; execute only when the behavior is understood; then verify the actual result. Other answers are acceptable if they include inspection, limited testing, and verification.</li></ol></div></details></div></details></section>
+<section class="section" id="final-summary"><details class="section-disclosure"><summary><h2><span class="num">13</span>Final Summary</h2></summary><div class="section-body"><p class="lead"><strong>Central idea:</strong> a command line interface turns structured text into computer actions through a shell, so safe and transferable use depends on understanding each component and its context.</p><ul><li>A CLI is a text-based interface, not a single universal command language.</li><li>Read commands as command + options/parameters + arguments, plus possible redirection or pipelines.</li><li>The shell interprets text before many programs receive it; quoting and special characters matter.</li><li>Current directory, paths, permissions, and the active shell are often invisible but important inputs.</li><li>Use documentation, inspect before changing, test narrowly where appropriate, and verify results.</li><li>Move from one-off commands to scripts only when you can explain and test the steps.</li></ul><p><strong>Specific next learning step:</strong> open a terminal in a noncritical folder and practice only three discovery tasks: identify the current location, list its contents, and read the local help for one listing command. Compare the exact syntax with this guide rather than assuming it matches.</p><div class="callout"><p><strong>If you remember only one thing:</strong> before pressing Enter, be able to say what program will run, what every option means, what object it will act on, and how you will know whether it worked.</p></div><h3>Sources and verification notes</h3><p>Sources were consulted for general shell and platform terminology. They document concepts, not a guarantee that a specific command or option is installed on a reader’s device. Verify local syntax with the active shell’s own documentation.</p><ol class="refs"><li>The Open Group, <em>POSIX.1-2024 Shell Command Language</em>, sections on shell introduction, token recognition, command search/execution, quoting, and exit status. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html">Official online publication</a>.</li><li>GNU Project, <em>Bash Reference Manual</em>, edition 5.3 (manual page notes date May 18, 2025), especially basic shell features and shell syntax. <a href="https://www.gnu.org/software/bash/manual/html_node/index.html">Official manual</a>.</li><li>Microsoft Learn, <em>Windows commands</em>, overview of Command shell and PowerShell. <a href="https://learn.microsoft.com/windows-server/administration/windows-commands/windows-commands">Official documentation</a>.</li><li>Microsoft Learn, <em>What is PowerShell?</em>, overview of PowerShell as a cross-platform command-line shell and scripting solution. <a href="https://learn.microsoft.com/powershell/scripting/overview?view=powershell-7.6">Official documentation</a>.</li></ol><p class="footnote">Verification limitation: this resource was prepared from published documentation and conceptual examples; it was not tested against your local shell, filesystem, permissions, or organizational environment.</p></div></details></section>
+</div></main>
+<script>  const detailElements = Array.from(document.querySelectorAll('details.card, details.section-disclosure'));
+  const openTargetSection = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    const section = target?.closest('section.section');
+    const disclosure = section?.querySelector(':scope > details.section-disclosure');
+    if (disclosure) disclosure.open = true;
+  };
+  window.addEventListener('hashchange', openTargetSection);
+  openTargetSection();
+  document.getElementById('printReport')?.addEventListener('click', () => window.print());
+
+  document.getElementById('expandAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  document.getElementById('collapseAll')?.addEventListener('click', () => {
+    detailElements.forEach((detail) => {
+      detail.open = false;
+    });
+  });
+
+  let printStates = [];
+
+  window.addEventListener('beforeprint', () => {
+    printStates = detailElements.map((detail) => detail.open);
+    detailElements.forEach((detail) => {
+      detail.open = true;
+    });
+  });
+
+  window.addEventListener('afterprint', () => {
+    detailElements.forEach((detail, index) => {
+      detail.open = printStates[index];
+    });
+  });
+
+  const markdownEscape = (value = '') =>
+    String(value)
+      .replace(/\r\n?/g, '\n')
+      .replace(/([\\`])/g, '\\$1');
+
+  const cleanText = (value = '') =>
+    String(value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const markdownInline = (node) => {
+    if (!node) return '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      return markdownEscape(node.nodeValue);
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const content = Array.from(node.childNodes).map(markdownInline).join('');
+
+    if (tag === 'br') return '\n';
+    if (tag === 'strong' || tag === 'b') return `**${content.trim()}**`;
+    if (tag === 'em' || tag === 'i') return `*${content.trim()}*`;
+    if (tag === 'del' || tag === 's') return `~~${content.trim()}~~`;
+    if (tag === 'code' && node.parentElement?.tagName.toLowerCase() !== 'pre') {
+      return `\`${content.trim().replace(/`/g, '\\`')}\``;
+    }
+
+    if (tag === 'a') {
+      const label = cleanText(content) || cleanText(node.getAttribute('href')) || 'Link';
+      const href = node.getAttribute('href') || '';
+
+      if (href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        const targetHeading = target?.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+        const headingText = cleanText(targetHeading?.textContent || target?.textContent || href.slice(1));
+        return headingText ? `[[#${headingText}|${label}]]` : label;
+      }
+
+      return href ? `[${label}](${href})` : label;
+    }
+
+    if (tag === 'img') {
+      const alt = cleanText(node.getAttribute('alt')) || 'Image';
+      const src = node.getAttribute('src') || '';
+      return src ? `![${alt}](${src})` : alt;
+    }
+
+    return content;
+  };
+
+  const tableToMarkdown = (table) => {
+    const rows = Array.from(table.querySelectorAll('tr'))
+      .map((row) =>
+        Array.from(row.querySelectorAll(':scope > th, :scope > td'))
+          .map((cell) => cleanText(markdownInline(cell)).replace(/\|/g, '\\|').replace(/\n+/g, '<br>'))
+      )
+      .filter((cells) => cells.length);
+
+    if (!rows.length) return '';
+
+    const columnCount = Math.max(...rows.map((row) => row.length));
+    const normalizedRows = rows.map((row) =>
+      Array.from({ length: columnCount }, (_, index) => row[index] || '')
+    );
+
+    const header = normalizedRows[0];
+    const body = normalizedRows.slice(1);
+
+    return [
+      `| ${header.join(' | ')} |`,
+      `| ${header.map(() => '---').join(' | ')} |`,
+      ...body.map((row) => `| ${row.join(' | ')} |`)
+    ].join('\n');
+  };
+
+  const listToMarkdown = (list, depth = 0) => {
+    const ordered = list.tagName.toLowerCase() === 'ol';
+    const items = Array.from(list.children).filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    return items.map((item, index) => {
+      const prefix = ordered ? `${index + 1}. ` : '- ';
+      const indent = '  '.repeat(depth);
+      const clone = item.cloneNode(true);
+
+      Array.from(clone.querySelectorAll(':scope > ul, :scope > ol')).forEach((nestedList) => {
+        nestedList.remove();
+      });
+
+      let text = cleanText(markdownInline(clone));
+      const checkbox = item.querySelector(':scope > input[type="checkbox"]');
+
+      if (checkbox) {
+        text = `${checkbox.checked ? '[x]' : '[ ]'} ${text.replace(/^\[[ xX]\]\s*/, '')}`;
+      }
+
+      const nestedLists = Array.from(item.children)
+        .filter((child) => ['ul', 'ol'].includes(child.tagName?.toLowerCase()))
+        .map((nestedList) => listToMarkdown(nestedList, depth + 1))
+        .filter(Boolean)
+        .join('\n');
+
+      return `${indent}${prefix}${text}${nestedLists ? `\n${nestedLists}` : ''}`;
+    }).join('\n');
+  };
+
+  const blockToMarkdown = (node) => {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const tag = node.tagName.toLowerCase();
+    const classList = node.classList;
+
+    if (
+      node.matches('.toolbar, .toc, .skip, button, script, style, noscript, template, .print-note') ||
+      node.closest('.toolbar, .toc')
+    ) {
+      return '';
+    }
+
+    if (tag === 'h1') return `# ${cleanText(markdownInline(node))}`;
+    if (tag === 'h2') return `## ${cleanText(markdownInline(node))}`;
+    if (tag === 'h3') return `### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h4') return `#### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h5') return `##### ${cleanText(markdownInline(node))}`;
+    if (tag === 'h6') return `###### ${cleanText(markdownInline(node))}`;
+
+    if (tag === 'p') return cleanText(markdownInline(node));
+    if (tag === 'hr') return '---';
+
+    if (tag === 'pre') {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      const language = node.querySelector('code')?.className.match(/language-([\w-]+)/)?.[1] || '';
+      return `\`\`\`${language}\n${code}\n\`\`\``;
+    }
+
+    if (tag === 'blockquote') {
+      return cleanText(markdownInline(node))
+        .split('\n')
+        .map((line) => `> ${line}`)
+        .join('\n');
+    }
+
+    if (tag === 'ul' || tag === 'ol') return listToMarkdown(node);
+
+    if (tag === 'table') {
+      const caption = cleanText(node.querySelector('caption')?.textContent);
+      const tableMarkdown = tableToMarkdown(node);
+      return caption ? `**${caption}**\n\n${tableMarkdown}` : tableMarkdown;
+    }
+
+    if (tag === 'figure') {
+      const title = cleanText(node.querySelector('h3, h4')?.textContent);
+      const svg = node.querySelector('svg');
+      const svgTitle = cleanText(svg?.querySelector('title')?.textContent);
+      const svgDescription = cleanText(svg?.querySelector('desc')?.textContent);
+      const caption = cleanText(node.querySelector('figcaption')?.textContent);
+      const image = node.querySelector('img');
+      const parts = [];
+
+      if (title) parts.push(`### ${title}`);
+      if (image) parts.push(markdownInline(image));
+      if (svgTitle) parts.push(`**Diagram:** ${svgTitle}`);
+      if (svgDescription) parts.push(svgDescription);
+      if (caption) parts.push(`*${caption}*`);
+
+      return parts.join('\n\n');
+    }
+
+    if (tag === 'details' && classList.contains('section-disclosure')) {
+      const heading = node.querySelector(':scope > summary > h2');
+      const headingText = cleanText(heading?.textContent || 'Section');
+      const content = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown).filter(Boolean).join('\n\n');
+      return `## ${headingText}\n\n${content}`;
+    }
+
+    if (tag === 'details') {
+      const summary = cleanText(node.querySelector(':scope > summary')?.textContent) || 'Additional details';
+      const body = Array.from(node.children)
+        .filter((child) => child.tagName?.toLowerCase() !== 'summary')
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!info]- ${summary}`,
+        ...body.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (classList.contains('callout')) {
+      const calloutType = classList.contains('warn') ? 'warning' : 'note';
+      const content = Array.from(node.children)
+        .filter((child) => !child.classList?.contains('tag') && !child.classList?.contains('ev'))
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+
+      return [
+        `> [!${calloutType}]`,
+        ...content.split('\n').map((line) => `> ${line}`)
+      ].join('\n');
+    }
+
+    if (tag === 'section' || tag === 'article' || tag === 'main' || tag === 'div') {
+      return Array.from(node.children)
+        .map(blockToMarkdown)
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    return cleanText(markdownInline(node));
+  };
+
+  const filenameFromTitle = (title) =>
+    (title || 'export')
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'export';
+
+  const exportObsidianMarkdown = () => {
+    const main = document.getElementById('main');
+    const title = cleanText(document.querySelector('header h1')?.textContent || document.title || 'Untitled Document');
+
+    if (!main) {
+      window.alert('Markdown export could not find the main document content.');
+      return;
+    }
+
+    const content = Array.from(main.children)
+      .filter((child) => !child.matches('.toc, nav'))
+      .map(blockToMarkdown)
+      .filter(Boolean)
+      .join('\n\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+    const markdown = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      'source_type: "generated learning resource"',
+      'exported_from: "HTML"',
+      '---',
+      '',
+      `# ${title}`,
+      '',
+      content
+    ].join('\n').replace(/\n{3,}/g, '\n\n');
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = `${filenameFromTitle(title)}.md`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  document.getElementById('exportMarkdown')?.addEventListener('click', exportObsidianMarkdown);
+</script></body></html>
